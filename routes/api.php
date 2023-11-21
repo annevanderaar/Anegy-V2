@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Favorite\FavoriteAllController;
 use App\Http\Controllers\Favorite\FavoriteDeleteController;
 use App\Http\Controllers\Favorite\FavoriteStoreController;
 use App\Http\Controllers\TMDB\DetailsController;
@@ -36,6 +37,7 @@ Route::prefix('search')->group(static function () {
 });
 
 Route::prefix('favorites')->group(static function () {
+    Route::patch('{id}', FavoriteAllController::class)->name('api.favorites.all');
+    Route::delete('{id}', FavoriteDeleteController::class)->name('api.favorites.delete');
     Route::post('', FavoriteStoreController::class)->name('api.favorites.store');
-    Route::delete('', FavoriteDeleteController::class)->name('api.favorites.delete');
 });

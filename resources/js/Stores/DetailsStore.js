@@ -21,7 +21,7 @@ export const DetailsStore = defineStore('detail', {
   }),
 
   actions: {
-    getDetails (url: string) {
+    getDetails (url) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -42,7 +42,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getLinks (url: string) {
+    getLinks (url) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -55,7 +55,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getProviders (url: string) {
+    getProviders (url) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -68,7 +68,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getCredits (url: string) {
+    getCredits (url) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -81,7 +81,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getCollection (url: string) {
+    getCollection (url) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -94,7 +94,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getSeasonDetails (url: string) {
+    getSeasonDetails (url) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -107,7 +107,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getVideos (url: string) {
+    getVideos (url) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -120,7 +120,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getReviews (url: string) {
+    getReviews (url) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -133,7 +133,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getSimilar (url: string) {
+    getSimilar (url) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -146,7 +146,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getPersonMovies (id: number) {
+    getPersonMovies (id) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -159,7 +159,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getPersonSeries (id: number) {
+    getPersonSeries (id) {
       axios({
         method: 'POST',
         url: route('api.details'),
@@ -172,7 +172,7 @@ export const DetailsStore = defineStore('detail', {
       });
     },
 
-    getImages (id: number) {
+    getImages (id) {
       axios({
         method: 'POST',
         url: route('api.details'),

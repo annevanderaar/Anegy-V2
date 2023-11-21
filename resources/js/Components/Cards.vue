@@ -42,12 +42,20 @@
           {{ $t('cards.more') }}
         </v-btn>
 
-        <!--        <IconButton variant="plain" icon="mdi-heart"/>-->
-        <!--        <IconButton-->
-        <!--          class="ml-2"-->
-        <!--          variant="plain"-->
-        <!--          icon="mdi-heart-outline"-->
-        <!--        />-->
+        <v-btn
+          class="ml-1"
+          variant="text"
+          icon="mdi-heart"
+          color="secondary"
+        />
+
+        <v-btn
+          class="ml-1"
+          variant="text"
+          icon="mdi-heart-outline"
+          color="secondary"
+          @click="createFavorite(item.id, item.video, item.known_for_department, item.first_air_date)"
+        />
       </v-card>
     </v-card>
   </div>
@@ -55,19 +63,29 @@
 
 <script>
 import { defineComponent } from 'vue';
-// import IconButton from '@/Components/IconButton.vue';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { usePage } from '@inertiajs/vue3';
 
 export default defineComponent({
   name: 'Cards',
-
-  components: {
-    // IconButton,
-  },
 
   props: {
     results: {
       type: Object,
       required: true,
+    },
+  },
+
+  data () {
+    return {
+      msType: '',
+      favoriteStore: FavoriteStore(),
+    };
+  },
+
+  computed: {
+    user () {
+      return usePage().props.auth.user;
     },
   },
 
@@ -119,6 +137,18 @@ export default defineComponent({
       } else if (item.overview) {
         return item.overview;
       }
+    },
+
+    createFavorite (id, video, known, air) {
+      if (!video) {
+        this.msType = 'movie';
+      } else if (known) {
+        this.msType = 'person';
+      } else if (air) {
+        this.msType = 'tv';
+      }
+
+      this.favoriteStore.createFavorite(this.user.id, id, this.msType);
     },
   },
 });

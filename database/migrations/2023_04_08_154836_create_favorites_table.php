@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->integer('ms_id');
             $table->string('type');
-            $table->string('fave');
+            $table->timestamps();
         });
     }
 

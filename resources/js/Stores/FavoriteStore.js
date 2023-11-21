@@ -46,5 +46,28 @@ export const FavoriteStore = defineStore('favorite', {
         this.data.push(res.data);
       });
     },
+
+    createFavorite (userId, msId, msType) {
+      axios({
+        method: 'POST',
+        url: route('api.favorites.store'),
+        data: {
+          user_id: userId,
+          ms_id: msId,
+          type: msType,
+        },
+      }).then(res => {
+        console.log(res);
+      });
+    },
+
+    deleteFavorite (id) {
+      axios({
+        method: 'DELETE',
+        url: route('api.favorites.store', { id }),
+      }).then(res => {
+        console.log(res);
+      });
+    },
   },
 });

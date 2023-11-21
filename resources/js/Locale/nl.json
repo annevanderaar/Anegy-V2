@@ -1,0 +1,143 @@
+{
+    "appbar": {
+        "movies_discover": "Ontdek Films",
+        "search": "Zoeken",
+        "series_discover": "Ontdek Series"
+    },
+    "auth": {
+        "confirm_password": {
+            "confirm": "Bevestig",
+            "secure": "Dit is een beveiligd deel van de applicatie. Bevestig uw wachtwoord voordat u verder gaat.",
+            "title": "Bevestig Wachtwoord"
+        },
+        "dashboard": {
+            "edit_profile": "Bewerk profiel",
+            "favorites": "Favorieten",
+            "title": "Dashboard",
+            "welcome": "Welkom {name}! We zijn blij om je hier op Anegy te hebben",
+            "your_information": "Jouw information"
+        },
+        "forgot_password": {
+            "forgot": "Je wachtwoord vergeten? Geen probleem. Laat ons je e-mailadres weten en we sturen je een e-mail om je wachtwoord opnieuw in te stellen link waarmee u een nieuwe kunt kiezen.",
+            "mail_link": "Email Wachtwoord Reset Link",
+            "title": "Wachtwoord Vergeten"
+        },
+        "login": {
+            "account": "Geen account?",
+            "cancel": "Cancel",
+            "confirm_password": "Bevestig wachtwoord",
+            "email": "Email",
+            "firstname": "Voornaam",
+            "forgot_password": "Wachtwoord vergeten?",
+            "lastname": "Achternaam",
+            "login_account": "Login bij jou account van Anegy",
+            "name": "Naam",
+            "password": "Wachtwoord",
+            "title": "Login"
+        },
+        "logout": {
+            "title": "Log uit"
+        },
+        "profile": {
+            "current_password": "Huidig Wachtwoord",
+            "delete_account": "Verwijder Account",
+            "delete_data": "Zodra uw account is verwijderd, worden alle bronnen en gegevens permanent verwijderd. Download voordat u uw account verwijdert alle gegevens of informatie die u wilt behouden.",
+            "email_unverified": "Uw e-mailadres is niet geverifieerd.",
+            "ensure_password": "Zorg ervoor dat uw account een lang, willekeurig wachtwoord gebruikt om veilig te blijven.",
+            "information": "Profiel Informatie",
+            "new_password": "Nieuw Wachtwoord",
+            "new_verification": "Er is een nieuwe verificatielink naar uw e-mailadres verzonden.",
+            "resend_email": "Klik hier om de verificatie-e-mail opnieuw te verzenden.",
+            "save": "Opslaan",
+            "saved": "Opgeslagen",
+            "sure": " Weet je zeker dat je je account wilt verwijderen?",
+            "title": "Profiel",
+            "update_password": "Update Wachtwoord",
+            "update_profile": "Werk de profielgegevens en het e-mailadres van uw account bij."
+        },
+        "register": {
+            "create_account": "Registreer een account op Anegy",
+            "registered": "Al geregistreerd?",
+            "title": "Registreren"
+        },
+        "reset_password": {
+            "reset": "Reset je wachtwoord van je Anegy account",
+            "title": "Reset Wachtwoord"
+        },
+        "verify_email": {
+            "link": "Er is een nieuwe verificatielink verzonden naar het e-mailadres dat u tijdens de registratie hebt opgegeven.",
+            "resend": "Stuur Verificatie Email Opnieuw",
+            "thanks": "Bedankt voor het aanmelden! Zou je, voordat je aan de slag gaat, je e-mailadres kunnen verifiëren door op de link te klikken die we je zojuist per e-mail hebben gestuurd? Als je de e-mail niet hebt ontvangen, sturen we je graag een andere.",
+            "title": "Email Verificatie"
+        }
+    },
+    "cards": {
+        "first_air_date": "Eerste uitzenddatum",
+        "known_for": "Bekend voor",
+        "last_air_date": "Laatste uitzenddatum",
+        "more": "Meer weten",
+        "release_date": "Uitzenddatum"
+    },
+    "details": {
+        "budget": "Budget",
+        "cast": {
+            "as": "als",
+            "title": "Cast"
+        },
+        "collection": {
+            "no": "Hoort niet bij een collectie",
+            "title": "Collectie"
+        },
+        "crew": "Crew",
+        "language": "Taal",
+        "links": "Links",
+        "production_companies": "Productie bedrijv(en)",
+        "production_countries": "Productie Land(en)",
+        "revenue": "Omzet",
+        "reviews": {
+            "no": "Geen reviews",
+            "title": "Reviews"
+        },
+        "runtime": "Looptijd",
+        "score": "Score",
+        "seasons": {
+            "episode": "A",
+            "title": "Seizoenen"
+        },
+        "similar": "Vergelijkbaar",
+        "videos": {
+            "no": "Geen videos",
+            "title": "Videos"
+        },
+        "watch_nl": "Bekijk (NL)"
+    },
+    "discover": "Ontdek {name}",
+    "favorites": {
+        "all": "All jouw favorieten staan hier!"
+    },
+    "filters": {
+        "clear": "Wis alle filters",
+        "genres": "Genres",
+        "title": "Filter"
+    },
+    "homepage": {
+        "title": "Films & Series ",
+        "trending_title": "Trending Films & Series Vandaag"
+    },
+    "movies": "Films",
+    "person": {
+        "age": "Leeftijd",
+        "birth": "Geboortedatum",
+        "death": "Sterfdatum",
+        "female": "Vrouw",
+        "gender": "Geslacht",
+        "male": "Man",
+        "place_birth": "Geboorteplaats"
+    },
+    "playing": "Aan Het Draaien {name}",
+    "popular": "Populaire {name}",
+    "series": "Series",
+    "top_rated": "Hoogst Gewaardeerde {name}",
+    "trending": "Trending {name}",
+    "upcoming": "Aanstaande {name}"
+}

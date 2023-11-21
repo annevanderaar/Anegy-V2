@@ -1,0 +1,44 @@
+@import "vuetify/dist/vuetify.min.css";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+.display-4,
+.display-3,
+.display-2,
+.display-1 {
+    font-family: "Fredoka", sans-serif;
+}
+
+.width-card {
+    min-height: 300px;
+    width: 500px;
+}
+
+.width-inputs {
+    width: 90%;
+}
+
+.btnText {
+    margin: 4px;
+}
+
+.cards {
+    margin: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flex-align {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+}

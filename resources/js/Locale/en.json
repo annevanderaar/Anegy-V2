@@ -1,0 +1,143 @@
+{
+    "appbar": {
+        "movies_discover": "Movies Discover",
+        "search": "Search",
+        "series_discover": "Series Discover"
+    },
+    "auth": {
+        "confirm_password": {
+            "confirm": "Confirm",
+            "secure": "This is a secure area of the application. Please confirm your password before continuing.",
+            "title": "Confirm Password"
+        },
+        "dashboard": {
+            "edit_profile": "Edit profile",
+            "favorites": "Favorites",
+            "title": "Dashboard",
+            "welcome": "Welcome {name}! We are glad to have you here on Anegy",
+            "your_information": "Your information"
+        },
+        "forgot_password": {
+            "forgot": "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.",
+            "mail_link": "Email Password Reset Link",
+            "title": "Forgot Password"
+        },
+        "login": {
+            "account": "Don't have an account?",
+            "cancel": "Cancel",
+            "confirm_password": "Confirm password",
+            "email": "Email",
+            "firstname": "Firstname",
+            "forgot_password": "Forgot you password?",
+            "lastname": "Lastname",
+            "login_account": "Login at your account on Anegy",
+            "name": "Name",
+            "password": "Password",
+            "title": "Login"
+        },
+        "logout": {
+            "title": "Logout"
+        },
+        "profile": {
+            "current_password": "Current Password",
+            "delete_account": "Delete Account",
+            "delete_data": "Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.",
+            "email_unverified": "Your email address is unverified.",
+            "ensure_password": "Ensure your account is using a long, random password to stay secure.",
+            "information": "Profile Information",
+            "new_password": "New Password",
+            "new_verification": "A new verification link has been sent to your email address.",
+            "resend_email": "Click here to re-send the verification email.",
+            "save": "Save",
+            "saved": "Saved",
+            "sure": "Are you sure you want to delete your account?",
+            "title": "Profile",
+            "update_password": "Update Password",
+            "update_profile": "Update your account's profile information and email address."
+        },
+        "register": {
+            "create_account": "Create an account on Anegy",
+            "registered": "Already registered?",
+            "title": "Register"
+        },
+        "reset_password": {
+            "reset": "Reset your password on your Anegy account",
+            "title": "Reset Password"
+        },
+        "verify_email": {
+            "link": "A new verification link has been sent to the email address you provided during registration.",
+            "resend": "Resend Verification Email",
+            "thanks": "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.",
+            "title": "Email Verification"
+        }
+    },
+    "cards": {
+        "first_air_date": "First air date",
+        "known_for": "Known for",
+        "last_air_date": "Last air date",
+        "more": "Know more",
+        "release_date": "Release date"
+    },
+    "details": {
+        "budget": "Budget",
+        "cast": {
+            "as": "as",
+            "title": "Cast"
+        },
+        "collection": {
+            "no": "Not part of an collection",
+            "title": "Collection"
+        },
+        "crew": "Crew",
+        "language": "Language",
+        "links": "Links",
+        "production_companies": "Production Companie(s)",
+        "production_countries": "Production Countrie(s)",
+        "revenue": "Revenue",
+        "reviews": {
+            "no": "No reviews",
+            "title": "Reviews"
+        },
+        "runtime": "Runtime",
+        "score": "Score",
+        "seasons": {
+            "episode": "E",
+            "title": "Seasons"
+        },
+        "similar": "Similar",
+        "videos": {
+            "no": "No videos",
+            "title": "Videos"
+        },
+        "watch_nl": "Watch (NL)"
+    },
+    "discover": "Discover {name}",
+    "favorites": {
+        "all": "All your favorites are here!"
+    },
+    "filters": {
+        "clear": "Clear all filters",
+        "genres": "Genres",
+        "title": "Filter"
+    },
+    "homepage": {
+        "title": "Movies & Series",
+        "trending_title": "Today's Trending Movies & Series"
+    },
+    "movies": "Movies",
+    "person": {
+        "age": "Age",
+        "birth": "Date of Birth",
+        "death": "Date of Death",
+        "female": "Female",
+        "gender": "Gender",
+        "male": "Male",
+        "place_birth": "Place of Birth"
+    },
+    "playing": "Playing {name} ",
+    "popular": "Popular {name}",
+    "series": "Series",
+    "top_rated": "Top Rated {name}",
+    "trending": "Trending {name}",
+    "upcoming": "Upcoming {name}"
+}

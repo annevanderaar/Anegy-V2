@@ -20,11 +20,12 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import Cards from '@/Components/Cards.vue';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { DataStore } from '@/Stores/DataStore';
 import { SearchStore } from '@/Stores/SearchStore';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
 
 export default defineComponent({
   name: 'Homepage',
@@ -39,6 +40,7 @@ export default defineComponent({
       languageStore: LanguageStore(),
       dataStore: DataStore(),
       searchStore: SearchStore(),
+      favoriteStore: FavoriteStore(),
     };
   },
 
@@ -54,11 +56,25 @@ export default defineComponent({
     translate () {
       return this.languageStore.translate;
     },
+
+    user () {
+      return usePage().props.auth.user;
+    },
+
+    refresh () {
+      return this.favoriteStore.refresh;
+    },
   },
 
   methods: {
     scroll () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
+    getFavorites () {
+      if (this.user) {
+        this.favoriteStore.getFavorites(this.user.id);
+      }
     },
   },
 
@@ -78,6 +94,10 @@ export default defineComponent({
     translate () {
       this.dataStore.getDiscover();
     },
+
+    refresh () {
+      this.getFavorites();
+    },
   },
 
   mounted () {
@@ -86,6 +106,7 @@ export default defineComponent({
     }
     this.dataStore.url = '/trending/all/day?';
     this.dataStore.getDiscover();
+    this.getFavorites();
   },
 });
 </script>

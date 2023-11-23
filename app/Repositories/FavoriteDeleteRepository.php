@@ -13,10 +13,10 @@ class FavoriteDeleteRepository
      * @return mixed
      * @throws Throwable
      */
-    public function delete(Favorite $favorite): mixed
+    public function delete(array $data): mixed
     {
-        return DB::transaction(static function () use ($favorite) {
-            return $favorite->deleteOrFail();
+        return DB::transaction(static function () use ($data) {
+            return Favorite::where('user_id', '=', $data['user_id'])->where('ms_id', '=', $data['ms_id'])->firstOrFail()->delete();
         });
     }
 }

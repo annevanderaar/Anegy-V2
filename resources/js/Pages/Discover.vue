@@ -24,7 +24,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import Cards from '@/Components/Cards.vue';
 import { DataStore } from '@/Stores/DataStore';
@@ -33,6 +33,7 @@ import Filter from '@/Components/Filters/Filter.vue';
 import FilterButton from '@/Components/Filters/FilterButton.vue';
 import { FilterStore } from '@/Stores/FilterStore';
 import { SearchStore } from '@/Stores/SearchStore';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
 
 export default defineComponent({
   name: 'Discover',
@@ -50,6 +51,7 @@ export default defineComponent({
       dataStore: DataStore(),
       filterStore: FilterStore(),
       searchStore: SearchStore(),
+      favoriteStore: FavoriteStore(),
       pageName: '',
     };
   },
@@ -69,6 +71,14 @@ export default defineComponent({
 
     genres () {
       return this.filterStore.select;
+    },
+
+    user () {
+      return usePage().props.auth.user;
+    },
+
+    refresh () {
+      return this.favoriteStore.refresh;
     },
   },
 
@@ -115,10 +125,17 @@ export default defineComponent({
       }
 
       this.dataStore.getDiscover();
+      this.getFavorites();
     },
 
     scroll () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
+    getFavorites () {
+      if (this.user) {
+        this.favoriteStore.getFavorites(this.user.id);
+      }
     },
   },
 
@@ -142,6 +159,10 @@ export default defineComponent({
     genres () {
       this.dataStore.genres = this.filterStore.selectedGenres;
       this.dataStore.getDiscover();
+    },
+
+    refresh () {
+      this.getFavorites();
     },
   },
 

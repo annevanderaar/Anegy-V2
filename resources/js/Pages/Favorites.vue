@@ -40,11 +40,27 @@ export default defineComponent({
     user () {
       return usePage().props.auth.user;
     },
+
+    refresh () {
+      return this.favoriteStore.refresh;
+    },
   },
 
   methods: {
     title () {
       return this.$t('auth.dashboard.favorites');
+    },
+
+    getFavorites () {
+      if (this.user) {
+        this.favoriteStore.getFavorites(this.user.id);
+      }
+    },
+  },
+
+  watch: {
+    refresh () {
+      this.getFavorites();
     },
   },
 

@@ -40,6 +40,7 @@
             icon="mdi-heart"
             color="secondary"
             size="x-large"
+            @click="favoriteStore.deleteFavorite(user.id, data.id)"
           />
 
           <v-btn
@@ -49,7 +50,8 @@
             icon="mdi-heart-outline"
             color="secondary"
             size="x-large"
-            @click="favoriteStore.createFavorite(data.id, data.video, data.known_for_department, data.first_air_date)"
+            @click="favoriteStore.createFavorite(
+              user.id, data.id, data.video, data.known_for_department, data.first_air_date)"
           />
         </div>
       </v-row>
@@ -359,6 +361,10 @@ export default defineComponent({
     user () {
       return usePage().props.auth.user;
     },
+
+    refresh () {
+      return this.favoriteStore.refresh;
+    },
   },
 
   methods: {
@@ -370,9 +376,7 @@ export default defineComponent({
       this.detailStore.getVideos(`/${val}/${this.id}/videos`);
       this.detailStore.getReviews(`/${val}/${this.id}/reviews`);
       this.detailStore.getSimilar(`/${val}/${this.id}/similar`);
-      if (this.user) {
-        this.favoriteStore.getFavorites(this.user.id);
-      }
+      this.getFavorites();
     },
 
     getTabs () {
@@ -421,6 +425,12 @@ export default defineComponent({
     show (value) {
       this.selectedTab = value;
     },
+
+    getFavorites () {
+      if (this.user) {
+        this.favoriteStore.getFavorites(this.user.id);
+      }
+    },
   },
 
   watch: {
@@ -436,6 +446,10 @@ export default defineComponent({
 
     translate () {
       this.getDetails(this.current ? 'movie' : 'tv');
+    },
+
+    refresh () {
+      this.getFavorites();
     },
   },
 

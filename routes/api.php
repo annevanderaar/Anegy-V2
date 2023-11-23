@@ -38,6 +38,6 @@ Route::prefix('search')->group(static function () {
 
 Route::prefix('favorites')->group(static function () {
     Route::patch('{id}', FavoriteAllController::class)->name('api.favorites.all');
-    Route::delete('{id}', FavoriteDeleteController::class)->name('api.favorites.delete');
+    Route::put('', FavoriteDeleteController::class)->name('api.favorites.delete');
     Route::post('', FavoriteStoreController::class)->name('api.favorites.store');
 });

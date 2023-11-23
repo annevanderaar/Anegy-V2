@@ -43,18 +43,22 @@
         </v-btn>
 
         <v-btn
+          v-if="favoriteStore.favorites.includes(item.id)"
           class="ml-1"
           variant="text"
           icon="mdi-heart"
           color="secondary"
+          @click="favoriteStore.deleteFavorite(user.id, item.id)"
         />
 
         <v-btn
+          v-else
           class="ml-1"
           variant="text"
           icon="mdi-heart-outline"
           color="secondary"
-          @click="createFavorite(item.id, item.video, item.known_for_department, item.first_air_date)"
+          @click="favoriteStore.createFavorite(
+            user.id, item.id, item.video, item.known_for_department, item.first_air_date)"
         />
       </v-card>
     </v-card>
@@ -137,18 +141,6 @@ export default defineComponent({
       } else if (item.overview) {
         return item.overview;
       }
-    },
-
-    createFavorite (id, video, known, air) {
-      if (!video) {
-        this.msType = 'movie';
-      } else if (known) {
-        this.msType = 'person';
-      } else if (air) {
-        this.msType = 'tv';
-      }
-
-      this.favoriteStore.createFavorite(this.user.id, id, this.msType);
     },
   },
 });

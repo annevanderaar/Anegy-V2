@@ -7,6 +7,7 @@ export const FavoriteStore = defineStore('favorite', {
     data: [],
     favorites: [],
     languageStore: LanguageStore(),
+    refresh: false,
   }),
 
   actions: {
@@ -47,7 +48,16 @@ export const FavoriteStore = defineStore('favorite', {
       });
     },
 
-    createFavorite (userId, msId, msType) {
+    createFavorite (userId, msId, video, known, air) {
+      let msType = '';
+      if (!video) {
+        msType = 'movie';
+      } else if (known) {
+        msType = 'person';
+      } else if (air) {
+        msType = 'tv';
+      }
+
       axios({
         method: 'POST',
         url: route('api.favorites.store'),
@@ -56,17 +66,21 @@ export const FavoriteStore = defineStore('favorite', {
           ms_id: msId,
           type: msType,
         },
-      }).then(res => {
-        console.log(res);
+      }).then(() => {
+        this.refresh = !this.refresh;
       });
     },
 
-    deleteFavorite (id) {
+    deleteFavorite (userId, msId) {
       axios({
-        method: 'DELETE',
-        url: route('api.favorites.store', { id }),
-      }).then(res => {
-        console.log(res);
+        method: 'PUT',
+        url: route('api.favorites.delete'),
+        data: {
+          user_id: userId,
+          ms_id: msId,
+        },
+      }).then(() => {
+        this.refresh = !this.refresh;
       });
     },
   },

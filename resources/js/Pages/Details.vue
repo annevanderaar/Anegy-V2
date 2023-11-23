@@ -22,9 +22,43 @@
     </v-col>
 
     <v-col lg="8">
-      <v-col class="text-center mb-4">
+      <v-row justify="space-between" class="mt-2">
+        <div>
+          <v-btn
+            :disabled="true"
+            variant="plain"
+          />
+        </div>
+
         <h1>{{ current ? data.title : data.name }}</h1>
+
+        <div>
+          <v-btn
+            v-if="favoriteStore.favorites.includes(data.id)"
+            class="ml-1"
+            variant="text"
+            icon="mdi-heart"
+            color="secondary"
+            size="x-large"
+          />
+
+          <v-btn
+            v-else
+            class="ml-1"
+            variant="text"
+            icon="mdi-heart-outline"
+            color="secondary"
+            size="x-large"
+            @click="favoriteStore.createFavorite(data.id, data.video, data.known_for_department, data.first_air_date)"
+          />
+        </div>
+      </v-row>
+
+      <v-row justify="center">
         <h3>{{ data.tagline }}</h3>
+      </v-row>
+
+      <v-col class="text-center">
         <p>{{ data.overview }}</p>
       </v-col>
 
@@ -219,8 +253,10 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 import { DetailsStore } from '@/Stores/DetailsStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
 import Cast from '@/Pages/Details/Cast.vue';
 import Crew from '@/Pages/Details/Crew.vue';
 import Collection from '@/Pages/Details/Collection.vue';
@@ -251,6 +287,7 @@ export default defineComponent({
       title: '',
       detailStore: DetailsStore(),
       languageStore: LanguageStore(),
+      favoriteStore: FavoriteStore(),
       selectedTab: 'cast',
       tabs: [
         {
@@ -318,6 +355,10 @@ export default defineComponent({
     translate () {
       return this.languageStore.translate;
     },
+
+    user () {
+      return usePage().props.auth.user;
+    },
   },
 
   methods: {
@@ -329,6 +370,9 @@ export default defineComponent({
       this.detailStore.getVideos(`/${val}/${this.id}/videos`);
       this.detailStore.getReviews(`/${val}/${this.id}/reviews`);
       this.detailStore.getSimilar(`/${val}/${this.id}/similar`);
+      if (this.user) {
+        this.favoriteStore.getFavorites(this.user.id);
+      }
     },
 
     getTabs () {

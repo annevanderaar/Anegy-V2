@@ -57,8 +57,7 @@
           variant="text"
           icon="mdi-heart-outline"
           color="secondary"
-          @click="favoriteStore.createFavorite(
-            user.id, item.id, item.video, item.known_for_department, item.first_air_date)"
+          @click="createFavorite(item.id, item.video, item.known_for_department, item.first_air_date)"
         />
       </v-card>
     </v-card>
@@ -67,8 +66,9 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { usePage } from '@inertiajs/vue3';
+import { useToast } from 'vue-toastification';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
 
 export default defineComponent({
   name: 'Cards',
@@ -141,6 +141,14 @@ export default defineComponent({
       } else if (item.overview) {
         return item.overview;
       }
+    },
+
+    createFavorite (msId, video, known, air) {
+      if (this.user) {
+        this.favoriteStore.createFavorite(this.user.id, msId, video, known, air);
+        return;
+      }
+      useToast().warning(this.$t('favorites.need_account'));
     },
   },
 });

@@ -113,7 +113,8 @@
     },
     "discover": "Ontdek {name}",
     "favorites": {
-        "all": "All jouw favorieten staan hier!"
+        "all": "All jouw favorieten staan hier!",
+        "need_account": "Je hebt een account nodig om een favoriet toe te voegen"
     },
     "filters": {
         "clear": "Wis alle filters",

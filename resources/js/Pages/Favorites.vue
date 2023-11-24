@@ -52,9 +52,7 @@ export default defineComponent({
     },
 
     getFavorites () {
-      if (this.user) {
-        this.favoriteStore.getFavorites(this.user.id);
-      }
+      this.favoriteStore.getFavorites(this.user.id);
     },
   },
 
@@ -65,7 +63,7 @@ export default defineComponent({
   },
 
   mounted () {
-    this.favoriteStore.getFavorites(this.user.id);
+    this.getFavorites();
   },
 });
 </script>

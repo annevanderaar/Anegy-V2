@@ -12,6 +12,8 @@ export const FavoriteStore = defineStore('favorite', {
 
   actions: {
     getFavorites (id) {
+      this.favorites = [];
+      this.data = [];
       axios({
         method: 'PATCH',
         url: route('api.favorites.all', { id }),

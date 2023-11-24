@@ -113,7 +113,8 @@
     },
     "discover": "Discover {name}",
     "favorites": {
-        "all": "All your favorites are here!"
+        "all": "All your favorites are here!",
+        "need_account": "You need to have an account to add a favorite"
     },
     "filters": {
         "clear": "Clear all filters",

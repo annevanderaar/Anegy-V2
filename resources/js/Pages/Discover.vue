@@ -26,14 +26,14 @@
 import { defineComponent } from 'vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import { LanguageStore } from '@/Stores/LanguageStore';
-import Cards from '@/Components/Cards.vue';
 import { DataStore } from '@/Stores/DataStore';
-import route from 'ziggy-js';
-import Filter from '@/Components/Filters/Filter.vue';
-import FilterButton from '@/Components/Filters/FilterButton.vue';
 import { FilterStore } from '@/Stores/FilterStore';
 import { SearchStore } from '@/Stores/SearchStore';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
+import Cards from '@/Components/Cards.vue';
+import Filter from '@/Components/Filters/Filter.vue';
+import FilterButton from '@/Components/Filters/FilterButton.vue';
+import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'Discover',
@@ -126,6 +126,10 @@ export default defineComponent({
 
       this.dataStore.getDiscover();
       this.getFavorites();
+
+      if (localStorage.currentPage) {
+        this.dataStore.page = parseInt(localStorage.currentPage);
+      }
     },
 
     scroll () {

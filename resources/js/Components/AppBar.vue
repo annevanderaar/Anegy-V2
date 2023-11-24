@@ -9,6 +9,7 @@
           v-bind="props"
           :href="route('movies.discover')"
           icon="mdi-movie-open"
+          @click="resetPage"
         />
       </template>
     </v-tooltip>
@@ -19,6 +20,7 @@
           v-bind="props"
           :href="route('series.discover')"
           icon="mdi-television-classic"
+          @click="resetPage"
         />
       </template>
     </v-tooltip>
@@ -53,6 +55,7 @@
       variant="plain"
       class="ms-6"
       icon
+      @click="resetPage"
     >
       <v-img
         alt="Anegy logo"
@@ -209,6 +212,10 @@ export default defineComponent({
       }
 
       this.languageStore.translate = !this.languageStore.translate;
+    },
+
+    resetPage () {
+      localStorage.currentPage = 1;
     },
   },
 

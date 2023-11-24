@@ -31,6 +31,7 @@
             :href="item.route"
             color="accent"
             class="mt-2"
+            @click="resetPage"
           >
             <v-icon
               :icon="item.icon"
@@ -149,6 +150,10 @@ export default defineComponent({
         { text: this.$t('top_rated'), icon: 'mdi-star', route: route(`${name}.top-rated`) },
         { text: this.$t('upcoming'), icon: 'mdi-calendar-month', route: route(`${name}.upcoming`) },
       ];
+    },
+
+    resetPage () {
+      localStorage.currentPage = 1;
     },
   },
 });

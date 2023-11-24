@@ -52,12 +52,12 @@ export const FavoriteStore = defineStore('favorite', {
 
     createFavorite (userId, msId, video, known, air) {
       let msType = '';
-      if (!video) {
-        msType = 'movie';
-      } else if (known) {
+      if (known) {
         msType = 'person';
       } else if (air) {
         msType = 'tv';
+      } else if (!video) {
+        msType = 'movie';
       }
 
       axios({

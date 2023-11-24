@@ -28,9 +28,10 @@
       </v-card>
     </v-col>
 
-    <v-col md="8">
+    <v-col lg="8">
+      <DetailsTitle :data="data"/>
+
       <v-col class="text-center mb-4">
-        <h1>{{ data.name }}</h1>
         <h3>{{ data.known_for_department }}</h3>
         <p>{{ data.biography }}</p>
       </v-col>
@@ -108,14 +109,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 import { DetailsStore } from '../Stores/DetailsStore';
 import { LanguageStore } from '../Stores/LanguageStore';
+import { FavoriteStore } from '../Stores/FavoriteStore';
 import Links from '../Components/Links.vue';
 import PersonCards from '../Pages/Details/PersonCards.vue';
 import Images from '../Pages/Details/Images.vue';
+import DetailsTitle from './Details/DetailsTitle.vue';
 
 export default defineComponent({
   components: {
+    DetailsTitle,
     Images,
     PersonCards,
     Links,
@@ -127,6 +132,7 @@ export default defineComponent({
       title: '',
       detailStore: DetailsStore(),
       languageStore: LanguageStore(),
+      favoriteStore: FavoriteStore(),
       selectedTab: 'movies',
       tabs: [
         {
@@ -156,6 +162,14 @@ export default defineComponent({
     translate () {
       return this.languageStore.translate;
     },
+
+    user () {
+      return usePage().props.auth.user;
+    },
+
+    refresh () {
+      return this.favoriteStore.refresh;
+    },
   },
 
   methods: {
@@ -165,6 +179,7 @@ export default defineComponent({
       this.detailStore.getPersonMovies(this.id);
       this.detailStore.getPersonSeries(this.id);
       this.detailStore.getImages(this.id);
+      this.getFavorites();
     },
 
     getDate (date) {
@@ -189,6 +204,12 @@ export default defineComponent({
     show (value) {
       this.selectedTab = value;
     },
+
+    getFavorites () {
+      if (this.user) {
+        this.favoriteStore.getFavorites(this.user.id);
+      }
+    },
   },
 
   watch: {
@@ -200,6 +221,10 @@ export default defineComponent({
 
     translate () {
       this.getDetails();
+    },
+
+    refresh () {
+      this.getFavorites();
     },
   },
 

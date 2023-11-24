@@ -22,45 +22,10 @@
     </v-col>
 
     <v-col lg="8">
-      <v-row justify="space-between" class="mt-2">
-        <div>
-          <v-btn
-            :disabled="true"
-            variant="plain"
-          />
-        </div>
+      <DetailsTitle :data="data"/>
 
-        <h1>{{ current ? data.title : data.name }}</h1>
-
-        <div>
-          <v-btn
-            v-if="favoriteStore.favorites.includes(data.id)"
-            class="ml-1"
-            variant="text"
-            icon="mdi-heart"
-            color="secondary"
-            size="x-large"
-            @click="favoriteStore.deleteFavorite(user.id, data.id)"
-          />
-
-          <v-btn
-            v-else
-            class="ml-1"
-            variant="text"
-            icon="mdi-heart-outline"
-            color="secondary"
-            size="x-large"
-            @click="favoriteStore.createFavorite(
-              user.id, data.id, data.video, data.known_for_department, data.first_air_date)"
-          />
-        </div>
-      </v-row>
-
-      <v-row justify="center">
+      <v-col class="text-center mb-4">
         <h3>{{ data.tagline }}</h3>
-      </v-row>
-
-      <v-col class="text-center">
         <p>{{ data.overview }}</p>
       </v-col>
 
@@ -267,12 +232,14 @@ import Videos from '@/Pages/Details/Videos.vue';
 import Reviews from '@/Pages/Details/Reviews.vue';
 import Similar from '@/Pages/Details/Similar.vue';
 import Links from '@/Components/Links.vue';
+import DetailsTitle from '@/Pages/Details/DetailsTitle.vue';
 import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'Details',
 
   components: {
+    DetailsTitle,
     Links,
     Similar,
     Reviews,

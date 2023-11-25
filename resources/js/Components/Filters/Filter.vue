@@ -28,7 +28,8 @@
           <v-list-item
             v-for="(item, i) in items()"
             :key="i"
-            :href="item.route"
+            :href="route(item.route)"
+            :class="{ 'highlight-page' : route().current(item.route) }"
             color="accent"
             class="mt-2"
             @click="resetPage"
@@ -43,7 +44,7 @@
         </v-list>
 
         <!-- Genres-->
-        <v-list>
+        <v-list v-if="route().current('series.discover') || route().current('movies.discover')">
           <div class="d-flex justify-space-between align-content-center">
             <h1 class="ml-2 mt-2">
               {{ $t('filters.genres') }}
@@ -67,7 +68,7 @@
           <v-list-item
             v-for="genre in genres"
             :key="genre.id"
-            :class="{ highlight : includes(genre.id) }"
+            :class="{ 'highlight-genre' : includes(genre.id) }"
             @click="addGenre(genre.id)"
           >
             {{ genre.name }}
@@ -143,12 +144,12 @@ export default defineComponent({
       }
 
       return [
-        { text: this.$t('discover'), icon: 'mdi-shuffle-variant', route: route(`${name}.discover`) },
-        { text: this.$t('trending'), icon: 'mdi-fire', route: route(`${name}.trending`) },
-        { text: this.$t('popular'), icon: 'mdi-chart-box', route: route(`${name}.popular`) },
-        { text: this.$t('playing'), icon: 'mdi-play-circle-outline', route: route(`${name}.playing`) },
-        { text: this.$t('top_rated'), icon: 'mdi-star', route: route(`${name}.top-rated`) },
-        { text: this.$t('upcoming'), icon: 'mdi-calendar-month', route: route(`${name}.upcoming`) },
+        { text: this.$t('discover'), icon: 'mdi-shuffle-variant', route: `${name}.discover` },
+        { text: this.$t('trending'), icon: 'mdi-fire', route: `${name}.trending` },
+        { text: this.$t('popular'), icon: 'mdi-chart-box', route: `${name}.popular` },
+        { text: this.$t('playing'), icon: 'mdi-play-circle-outline', route: `${name}.playing` },
+        { text: this.$t('top_rated'), icon: 'mdi-star', route: `${name}.top-rated` },
+        { text: this.$t('upcoming'), icon: 'mdi-calendar-month', route: `${name}.upcoming` },
       ];
     },
 
@@ -160,7 +161,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.highlight {
+.highlight-genre {
   background-color: #23a9a7;
+  color: white;
+}
+
+.highlight-page {
+  background-color: #E4F4F4;
+  color: #23a9a7;
 }
 </style>

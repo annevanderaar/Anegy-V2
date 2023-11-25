@@ -53,7 +53,7 @@
             <div v-if="filterStore.selectedGenres.length > 0">
               <v-tooltip :text="$t('filters.clear')" location="left">
                 <template #activator="{ props }">
-                  <IconButton
+                  <v-btn
                     v-bind="props"
                     icon="mdi-text-box-remove"
                     variant="text"
@@ -83,14 +83,9 @@
 import { defineComponent } from 'vue';
 import { FilterStore } from '@/Stores/FilterStore';
 import route from 'ziggy-js';
-import IconButton from '@/Components/IconButton.vue';
 
 export default defineComponent({
   name: 'Filter',
-
-  components: {
-    IconButton,
-  },
 
   data () {
     return {

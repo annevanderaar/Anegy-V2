@@ -12,6 +12,8 @@ class FavoriteStoreRepository
      */
     public function store(array $data): Favorite
     {
-        return Favorite::create($data);
+        return DB::transaction(static function () use ($data) {
+            return Favorite::create($data);
+        });
     }
 }

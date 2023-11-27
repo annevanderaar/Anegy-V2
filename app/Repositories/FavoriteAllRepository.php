@@ -13,8 +13,6 @@ class FavoriteAllRepository
      */
     public function all(int $id): mixed
     {
-        return DB::transaction(static function () use ($id) {
-            return Favorite::where('user_id', $id)->orderBy('created_at', 'desc')->get();
-        });
+        return Favorite::where('user_id', $id)->orderBy('created_at', 'desc')->get();
     }
 }

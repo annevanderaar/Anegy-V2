@@ -9,9 +9,8 @@ use DB;
 class FavoriteDeleteRepository
 {
     /**
-     * @param Favorite $favorite
+     * @param array $data
      * @return mixed
-     * @throws Throwable
      */
     public function delete(array $data): mixed
     {

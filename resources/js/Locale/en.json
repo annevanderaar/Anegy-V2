@@ -114,7 +114,9 @@
     "discover": "Discover {name}",
     "favorites": {
         "all": "All your favorites are here!",
-        "need_account": "You need to have an account to add a favorite"
+        "latest": "Latest added favorite",
+        "need_account": "You need to have an account to add a favorite",
+        "not_added": "You have not added a favorite"
     },
     "filters": {
         "clear": "Clear all filters",

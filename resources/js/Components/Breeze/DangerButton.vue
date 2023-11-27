@@ -1,7 +1,5 @@
 <template>
-  <v-btn
-    color="secondary-darken"
-  >
+  <v-btn color="secondary">
     <slot/>
   </v-btn>
 </template>

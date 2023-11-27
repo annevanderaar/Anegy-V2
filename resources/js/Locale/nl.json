@@ -114,7 +114,9 @@
     "discover": "Ontdek {name}",
     "favorites": {
         "all": "All jouw favorieten staan hier!",
-        "need_account": "Je hebt een account nodig om een favoriet toe te voegen"
+        "latest": "Laatste toegevoegde favoriet",
+        "need_account": "Je hebt een account nodig om een favoriet toe te voegen",
+        "not_added": "Je hebt nog geen favoriet toegevoegd"
     },
     "filters": {
         "clear": "Wis alle filters",

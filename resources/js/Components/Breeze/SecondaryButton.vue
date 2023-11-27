@@ -1,5 +1,5 @@
 <template>
-  <v-btn>
+  <v-btn color="secondary">
     <slot/>
   </v-btn>
 </template>

@@ -21,17 +21,7 @@ export const FavoriteStore = defineStore('favorite', {
         if (res.data.length > 0) {
           res.data.forEach(item => {
             this.favorites.push(item.ms_id);
-
-            let val;
-            if (item.type === 'movie') {
-              val = 'movie';
-            } else if (item.type === 'tv') {
-              val = 'tv';
-            } else if (item.type === 'person') {
-              val = 'person';
-            }
-
-            this.getDetails(`/${val}/${item.ms_id}`);
+            this.getDetails(`/${item.type}/${item.ms_id}`);
           });
         }
       });
@@ -83,6 +73,18 @@ export const FavoriteStore = defineStore('favorite', {
         },
       }).then(() => {
         this.refresh = !this.refresh;
+      });
+    },
+
+    getLatestFavorite (id) {
+      this.favorites = [];
+      this.data = [];
+      axios({
+        method: 'PUT',
+        url: route('api.favorites.latest', { id }),
+      }).then(res => {
+        this.favorites.push(res.data.ms_id);
+        this.getDetails(`/${res.data.type}/${res.data.ms_id}`);
       });
     },
   },

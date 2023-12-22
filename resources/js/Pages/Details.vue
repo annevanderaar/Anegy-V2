@@ -386,7 +386,10 @@ export default defineComponent({
     },
 
     localString (price) {
-      return parseInt(price).toLocaleString();
+      if (price) {
+        return parseInt(price).toLocaleString();
+      }
+      return '-';
     },
 
     show (value) {

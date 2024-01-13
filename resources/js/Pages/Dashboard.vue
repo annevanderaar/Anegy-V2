@@ -1,7 +1,5 @@
 <template>
-  <Head :title="$t('auth.dashboard.title')">
-    <title>{{ $t('auth.dashboard.title') }}</title>
-  </Head>
+  <PageHeader :title="$t('auth.dashboard.title')"/>
 
   <AuthenticatedLayout>
     <div class="text-center d-flex flex-column">
@@ -53,23 +51,24 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { usePage } from '@inertiajs/vue3';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, usePage } from '@inertiajs/vue3';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
 import ResponsiveNavLink from '@/Components/Breeze/ResponsiveNavLink.vue';
 import route from 'ziggy-js';
 import Cards from '@/Components/Cards.vue';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
 import SecondaryButton from '@/Components/Breeze/SecondaryButton.vue';
+import PageHeader from '@/Components/PageHeader.vue';
 
 export default defineComponent({
   name: 'Dashboard',
 
   components: {
+    PageHeader,
     SecondaryButton,
     Cards,
     AuthenticatedLayout,
-    Head,
     PrimaryButton,
     ResponsiveNavLink,
   },

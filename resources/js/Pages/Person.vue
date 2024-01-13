@@ -1,7 +1,5 @@
 <template>
-  <Head :title="title">
-    <title>{{ title }}</title>
-  </Head>
+  <PageHeader :title="title"/>
 
   <v-row>
     <v-col class="d-flex justify-center" md="4">
@@ -117,9 +115,11 @@ import Links from '../Components/Links.vue';
 import PersonCards from '../Pages/Details/PersonCards.vue';
 import Images from '../Pages/Details/Images.vue';
 import DetailsTitle from './Details/DetailsTitle.vue';
+import PageHeader from '@/Components/PageHeader.vue';
 
 export default defineComponent({
   components: {
+    PageHeader,
     DetailsTitle,
     Images,
     PersonCards,

@@ -1,7 +1,5 @@
 <template>
-  <Head :title="$t('homepage.title')">
-    <title>{{ $t('homepage.title') }}</title>
-  </Head>
+  <PageHeader :title="$t('homepage.title')"/>
 
   <h1 class="mb-5 text-center">
     {{ $t('homepage.trending_title') }}
@@ -20,19 +18,20 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { Head, usePage } from '@inertiajs/vue3';
-import Cards from '@/Components/Cards.vue';
+import { usePage } from '@inertiajs/vue3';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { DataStore } from '@/Stores/DataStore';
 import { SearchStore } from '@/Stores/SearchStore';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
+import Cards from '@/Components/Cards.vue';
+import PageHeader from '@/Components/PageHeader.vue';
 
 export default defineComponent({
   name: 'Homepage',
 
   components: {
+    PageHeader,
     Cards,
-    Head,
   },
 
   data () {

@@ -1,7 +1,5 @@
 <template>
-  <Head :title="title()">
-    <title>{{ title() }}</title>
-  </Head>
+  <PageHeader :title="title()"/>
 
   <h1 class="text-center">
     {{ title() }}
@@ -16,17 +14,18 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { Head, usePage } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
 import Cards from '@/Components/Cards.vue';
+import PageHeader from '@/Components/PageHeader.vue';
 
 export default defineComponent({
   name: 'Favorites',
 
   components: {
+    PageHeader,
     Cards,
-    Head,
   },
 
   data () {

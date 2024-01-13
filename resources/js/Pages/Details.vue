@@ -1,7 +1,5 @@
 <template>
-  <Head :title="title">
-    <title>{{ title }}</title>
-  </Head>
+  <PageHeader :title="title"/>
 
   <v-row>
     <v-col class="d-flex justify-center" lg="4">
@@ -233,12 +231,14 @@ import Reviews from '@/Pages/Details/Reviews.vue';
 import Similar from '@/Pages/Details/Similar.vue';
 import Links from '@/Components/Links.vue';
 import DetailsTitle from '@/Pages/Details/DetailsTitle.vue';
+import PageHeader from '@/Components/PageHeader.vue';
 import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'Details',
 
   components: {
+    PageHeader,
     DetailsTitle,
     Links,
     Similar,

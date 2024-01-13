@@ -1,7 +1,5 @@
 <template>
-  <Head :title="pageName">
-    <title>{{ pageName }}</title>
-  </Head>
+  <PageHeader :title="pageName"/>
 
   <FilterButton @click="filterStore.drawer = true"/>
 
@@ -24,7 +22,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { Head, usePage } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { DataStore } from '@/Stores/DataStore';
 import { FilterStore } from '@/Stores/FilterStore';
@@ -33,16 +31,17 @@ import { FavoriteStore } from '@/Stores/FavoriteStore';
 import Cards from '@/Components/Cards.vue';
 import Filter from '@/Components/Filters/Filter.vue';
 import FilterButton from '@/Components/Filters/FilterButton.vue';
+import PageHeader from '@/Components/PageHeader.vue';
 import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'Discover',
 
   components: {
+    PageHeader,
     FilterButton,
     Filter,
     Cards,
-    Head,
   },
 
   data () {

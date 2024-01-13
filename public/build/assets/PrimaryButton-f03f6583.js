@@ -1,0 +1,1 @@
+import{_ as e,m as n,o as r,c,w as s,r as a}from"./app-d2cccad7.js";const _={};function l(o,f){const t=n("v-btn");return r(),c(t,{color:"accent"},{default:s(()=>[a(o.$slots,"default")]),_:3})}const p=e(_,[["render",l]]);export{p as P};

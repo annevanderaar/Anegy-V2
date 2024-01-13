@@ -1,0 +1,1 @@
+import{_ as a,X as o,o as n,c as r,w as s,b as c,t as i,m as l}from"./app-d2cccad7.js";const _={name:"PageHeader",components:{Head:o},props:{title:{type:String,required:!0}}};function d(p,m,e,u,f,H){const t=l("Head");return n(),r(t,{title:e.title},{default:s(()=>[c("title",null,i(e.title),1)]),_:1},8,["title"])}const x=a(_,[["render",d]]);export{x as P};

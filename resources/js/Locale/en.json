@@ -123,6 +123,7 @@
         "genres": "Genres",
         "title": "Filter"
     },
+    "generator": "Generator",
     "homepage": {
         "title": "Movies & Series",
         "trending_title": "Today's Trending Movies & Series"

@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 import { LanguageStore } from '@/Stores/LanguageStore';
+import axios from 'axios';
+import route from 'ziggy-js';
 
 export const GeneratorStore = defineStore('generator', {
   state: () => ({
@@ -8,6 +10,7 @@ export const GeneratorStore = defineStore('generator', {
     decade: '',
     rating: [0, 10],
     runtime: 250,
+    result: {},
     languageStore: LanguageStore(),
     decades: [
       {
@@ -45,7 +48,30 @@ export const GeneratorStore = defineStore('generator', {
 
   actions: {
     generate () {
-      console.log('test');
+      let url;
+      if (this.choice === 0) {
+        url = '/discover/movie?';
+      } else if (this.choice === 1) {
+        url = '/discover/tv?';
+      }
+
+      axios({
+        method: 'POST',
+        url: route('api.generator'),
+        data: {
+          url,
+          page: Math.floor(Math.random() * 101).toString(),
+          genre: this.genre.id,
+          decade: this.decade,
+          runtime: this.runtime,
+          rating: this.rating,
+          language: this.languageStore.tmdb,
+        },
+      }).then(res => {
+        if (res.data?.results?.length > 0) {
+          this.result = res.data.results[Math.floor(Math.random() * 20)];
+        }
+      });
     },
   },
 });

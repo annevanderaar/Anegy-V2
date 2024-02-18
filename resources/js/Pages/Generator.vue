@@ -98,6 +98,8 @@
     >
       {{ $t('generator.generate') }}
     </v-btn>
+
+    <Cards v-if="generatorStore.result?.id" :results="[generatorStore.result]"/>
   </div>
 </template>
 
@@ -106,14 +108,16 @@ import { defineComponent } from 'vue';
 import { GeneratorStore } from '@/Stores/GeneratorStore';
 import { FilterStore } from '@/Stores/FilterStore';
 import PageHeader from '@/Components/PageHeader.vue';
+import Cards from '@/Components/Cards.vue';
 import VueMultiselect from 'vue-multiselect';
 
 export default defineComponent({
   name: 'Generator',
 
   components: {
-    VueMultiselect,
     PageHeader,
+    Cards,
+    VueMultiselect,
   },
 
   data () {
@@ -131,6 +135,10 @@ export default defineComponent({
 
       return this.filterStore.serieGenres;
     },
+  },
+
+  mounted () {
+    this.generatorStore.result = {};
   },
 });
 </script>

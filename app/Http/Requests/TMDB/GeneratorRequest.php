@@ -18,7 +18,6 @@ class GeneratorRequest extends FormRequest
             'url' => 'string',
             'page' => 'string',
             'language' => 'string',
-            'genre' => 'number'
         ];
     }
 }

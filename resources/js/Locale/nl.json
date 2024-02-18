@@ -123,11 +123,24 @@
         "genres": "Genres",
         "title": "Filter"
     },
-    "generator": "Generator",
+    "generator": {
+        "choose_decade": "Kies decennium",
+        "choose_genre": "Kies genre",
+        "choose_rating": "Kies beoordeling",
+        "choose_runtime": "Kies looptijd",
+        "decade_serie": "(eerste uitzenddatum)",
+        "decades": "Decenniums",
+        "generate": "Genereer",
+        "less_than": "Minder dan",
+        "minutes": "Minuten",
+        "overview": "Genereer een willekeurige film of serie",
+        "title": "Generator"
+    },
     "homepage": {
         "title": "Films & Series ",
         "trending_title": "Trending Films & Series Vandaag"
     },
+    "movie": "Film",
     "movies": "Films",
     "person": {
         "age": "Leeftijd",
@@ -140,6 +153,7 @@
     },
     "playing": "Aan Het Draaien {name}",
     "popular": "Populaire {name}",
+    "serie": "Serie",
     "series": "Series",
     "top_rated": "Hoogst Gewaardeerde {name}",
     "trending": "Trending {name}",

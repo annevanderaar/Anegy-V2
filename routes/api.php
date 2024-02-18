@@ -6,6 +6,7 @@ use App\Http\Controllers\Favorite\FavoriteLatestController;
 use App\Http\Controllers\Favorite\FavoriteStoreController;
 use App\Http\Controllers\TMDB\DetailsController;
 use App\Http\Controllers\TMDB\DiscoverController;
+use App\Http\Controllers\TMDB\GeneratorController;
 use App\Http\Controllers\TMDB\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('generator')->group(static function () {
+    Route::post('', GeneratorController::class)->name('api.generator');
 });
 
 Route::prefix('discover')->group(static function () {

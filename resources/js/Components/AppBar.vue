@@ -3,7 +3,7 @@
     color="secondary"
     clipped-left
   >
-    <v-tooltip :text="$t('generator')" location="bottom">
+    <v-tooltip :text="$t('generator.title')" location="bottom">
       <template #activator="{ props }">
         <IconButton
           v-bind="props"
@@ -81,6 +81,7 @@
     <v-divider class="border-opacity-0"/>
 
     <v-btn
+      v-if="!user"
       :disabled="true"
       icon
     />

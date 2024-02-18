@@ -30,6 +30,13 @@ Route::get('people/{id}', function () {
 })->name('person.details');
 
 /*
+    Generator routes
+*/
+Route::get('generator', function () {
+    return Inertia::render('Generator');
+})->name('generator');
+
+/*
     Movies routes
 */
 Route::get('movies/details/{id}', function () {

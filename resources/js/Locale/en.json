@@ -123,10 +123,24 @@
         "genres": "Genres",
         "title": "Filter"
     },
+    "generator": {
+        "choose_decade": "Choose decade",
+        "choose_genre": "Choose genre",
+        "choose_rating": "Choose rating",
+        "choose_runtime": "Choose runtime",
+        "decade_serie": "(first air date)",
+        "decades": "Decades",
+        "generate": "Generate",
+        "less_than": "Less than",
+        "minutes": "Minutes",
+        "overview": "Generate a random movie or serie",
+        "title": "Generator"
+    },
     "homepage": {
         "title": "Movies & Series",
         "trending_title": "Today's Trending Movies & Series"
     },
+    "movie": "Movie",
     "movies": "Movies",
     "person": {
         "age": "Age",
@@ -139,6 +153,7 @@
     },
     "playing": "Playing {name} ",
     "popular": "Popular {name}",
+    "serie": "Serie",
     "series": "Series",
     "top_rated": "Top Rated {name}",
     "trending": "Trending {name}",

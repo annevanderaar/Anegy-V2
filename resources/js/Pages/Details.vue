@@ -298,7 +298,7 @@ export default defineComponent({
       iLinks: [
         {
           name: '123Movies',
-          to: 'https://0123movie.ru/',
+          to: 'https://123moviesfree.mx/',
         },
         {
           name: 'Watch Series',

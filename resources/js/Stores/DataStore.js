@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
 import { LanguageStore } from './LanguageStore';
+import route from 'ziggy-js';
+import axios from 'axios';
 
 export const DataStore = defineStore('data', {
   state: () => ({

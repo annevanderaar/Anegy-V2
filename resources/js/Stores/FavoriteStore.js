@@ -83,8 +83,10 @@ export const FavoriteStore = defineStore('favorite', {
         method: 'PUT',
         url: route('api.favorites.latest', { id }),
       }).then(res => {
-        this.favorites.push(res.data.ms_id);
-        this.getDetails(`/${res.data.type}/${res.data.ms_id}`);
+        if (res.data) {
+          this.favorites.push(res.data.ms_id);
+          this.getDetails(`/${res.data.type}/${res.data.ms_id}`);
+        }
       });
     },
   },

@@ -3,6 +3,17 @@
     color="secondary"
     clipped-left
   >
+    <v-tooltip :text="$t('generator.title')" location="bottom">
+      <template #activator="{ props }">
+        <IconButton
+          v-bind="props"
+          :href="route('generator')"
+          icon="mdi-generator-portable"
+          @click="resetPage"
+        />
+      </template>
+    </v-tooltip>
+
     <v-tooltip :text="$t('appbar.movies_discover')" location="bottom">
       <template #activator="{ props }">
         <IconButton
@@ -68,6 +79,12 @@
     </v-btn>
 
     <v-divider class="border-opacity-0"/>
+
+    <v-btn
+      v-if="!user"
+      :disabled="true"
+      icon
+    />
 
     <v-btn
       append-icon="mdi-earth"

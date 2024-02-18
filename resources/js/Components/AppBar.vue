@@ -205,6 +205,10 @@ export default defineComponent({
     user () {
       return usePage().props.auth.user;
     },
+
+    mobile () {
+      return this.$vuetify.display.mobile;
+    },
   },
 
   methods: {

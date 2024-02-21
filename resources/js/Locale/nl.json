@@ -1,5 +1,6 @@
 {
     "appbar": {
+        "account": "Account",
         "movies_discover": "Ontdek Films",
         "search": "Zoeken",
         "series_discover": "Ontdek Series"

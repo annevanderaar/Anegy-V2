@@ -1,5 +1,6 @@
 {
     "appbar": {
+        "account": "Account",
         "movies_discover": "Movies Discover",
         "search": "Search",
         "series_discover": "Series Discover"

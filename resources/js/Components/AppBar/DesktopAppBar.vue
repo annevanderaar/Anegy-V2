@@ -268,6 +268,6 @@ export default defineComponent({
   width: 200px;
   z-index: 9999;
   position: absolute;
-  margin-left: 160px;
+  margin-left: 205px;
 }
 </style>

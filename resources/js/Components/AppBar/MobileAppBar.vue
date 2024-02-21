@@ -3,9 +3,7 @@
     color="secondary"
     clipped-left
   >
-    <v-menu
-      transition="slide-y-transition"
-    >
+    <v-menu transition="slide-y-transition">
       <template #activator="{ props }">
         <IconButton
           v-bind="props"
@@ -49,6 +47,23 @@
       v-if="showSearch"
       icon="mdi-magnify"
       @click="showField = !showField"
+    />
+
+    <v-btn
+      v-else
+      :disabled="true"
+      icon
+    />
+
+    <v-text-field
+      v-if="showField"
+      ref="textField"
+      v-model="searchStore.search"
+      :label="$t('appbar.search')"
+      :autofocus="true"
+      variant="solo"
+      density="compact"
+      class="mt-6 text-field"
     />
 
     <v-divider class="border-opacity-0"/>
@@ -135,6 +150,10 @@ export default defineComponent({
       return this.theme.global.name === 'darkTheme';
     },
 
+    search () {
+      return this.searchStore.search;
+    },
+
     user () {
       return usePage().props.auth.user;
     },
@@ -199,5 +218,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.text-field {
+  width: 200px;
+  z-index: 9999;
+  position: absolute;
+  margin-left: 110px;
+}
 </style>

@@ -10,7 +10,7 @@
   <v-pagination
     v-model="dataStore.page"
     :length="dataStore.totalPages"
-    :total-visible="!mobile ? 10 : 5"
+    :total-visible="!mobile ? 10 : 4"
     color="secondary"
     class="my-4"
   />

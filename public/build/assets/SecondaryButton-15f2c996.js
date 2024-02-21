@@ -1,0 +1,1 @@
+import{_ as t,m as n,o as r,c,w as s,r as a}from"./app-80abdd10.js";const _={};function l(o,d){const e=n("v-btn");return r(),c(e,{color:"secondary"},{default:s(()=>[a(o.$slots,"default")]),_:3})}const m=t(_,[["render",l]]);export{m as S};

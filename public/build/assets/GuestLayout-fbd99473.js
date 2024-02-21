@@ -1,1 +1,0 @@
-import{_ as t,o,e as c,b as e,r}from"./app-d2cccad7.js";const n={},d={class:"d-flex justify-center"},a={class:"bg-grey-lighten-3 rounded-xl d-flex justify-center width-card"},i={class:"width-inputs"};function _(s,l){return o(),c("div",d,[e("div",a,[e("div",i,[r(s.$slots,"default")])])])}const u=t(n,[["render",_]]);export{u as G};

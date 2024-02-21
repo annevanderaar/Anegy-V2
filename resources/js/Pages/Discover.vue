@@ -14,7 +14,7 @@
   <v-pagination
     v-model="dataStore.page"
     :length="dataStore.totalPages"
-    :total-visible="10"
+    :total-visible="!mobile ? 10 : 4"
     color="secondary"
     class="my-4"
   />
@@ -78,6 +78,10 @@ export default defineComponent({
 
     refresh () {
       return this.favoriteStore.refresh;
+    },
+
+    mobile () {
+      return this.$vuetify.display.mobile;
     },
   },
 

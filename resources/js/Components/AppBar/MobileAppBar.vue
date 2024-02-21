@@ -90,7 +90,7 @@
 <script>
 import { defineComponent } from 'vue';
 import { LanguageStore } from '@/Stores/LanguageStore';
-import { useRtl, useTheme } from 'vuetify';
+import { useTheme } from 'vuetify';
 import { DataStore } from '@/Stores/DataStore';
 import { SearchStore } from '@/Stores/SearchStore';
 import { usePage } from '@inertiajs/vue3';
@@ -141,7 +141,6 @@ export default defineComponent({
   },
 
   methods: {
-    useRtl,
     route,
 
     darkMode () {

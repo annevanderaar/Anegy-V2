@@ -17,7 +17,9 @@ class DiscoverController extends AbstractController
             $request->get('url') . 'language=' .
             $request->get('language') . '&page=' .
             $request->get('page') .
-            '&with_genres=' . $request->get('genres'));
+            '&with_genres=' . $request->get('genres') .
+            '&vote_average.gte=' . $request->get('rating')[0] . '&vote_average.lte=' . $request->get('rating')[1]
+        );
 
         return $response->json();
     }

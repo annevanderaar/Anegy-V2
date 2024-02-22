@@ -15,7 +15,7 @@
         </v-card-title>
 
         <v-avatar
-          :color="getColor(item.vote_average)"
+          :color="getColor(item.vote_average.toFixed(1))"
           class="ma-2 text-white"
         >
           {{ item.vote_average >= 0 ? item.vote_average.toFixed(1) : 'P' }}

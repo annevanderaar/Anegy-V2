@@ -10,6 +10,7 @@ export const DataStore = defineStore('data', {
     genres: [],
     page: 1,
     totalPages: 500,
+    rating: [0, 10],
     languageStore: LanguageStore(),
   }),
 
@@ -22,6 +23,7 @@ export const DataStore = defineStore('data', {
           url: this.url,
           page: String(this.page),
           genres: encodeURI(this.genres.join(',')),
+          rating: this.rating,
           language: this.languageStore.tmdb,
         },
       }).then(res => {

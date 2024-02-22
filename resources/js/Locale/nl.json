@@ -120,8 +120,9 @@
         "not_added": "Je hebt nog geen favoriet toegevoegd"
     },
     "filters": {
-        "clear": "Wis alle filters",
+        "clear": "Wis alle genre filters",
         "genres": "Genres",
+        "rating": "Beoordeling",
         "title": "Filter"
     },
     "generator": {

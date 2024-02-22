@@ -120,8 +120,9 @@
         "not_added": "You have not added a favorite"
     },
     "filters": {
-        "clear": "Clear all filters",
+        "clear": "Clear all genre filters",
         "genres": "Genres",
+        "rating": "Rating",
         "title": "Filter"
     },
     "generator": {

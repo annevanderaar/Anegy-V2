@@ -65,7 +65,7 @@ export const FavoriteStore = defineStore('favorite', {
 
     deleteFavorite (userId, msId) {
       axios({
-        method: 'PUT',
+        method: 'DELETE',
         url: route('api.favorites.delete'),
         data: {
           user_id: userId,

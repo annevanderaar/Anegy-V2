@@ -11,7 +11,7 @@
 
     <div>
       <v-btn
-        v-if="favoriteStore.favorites.includes(data.id)"
+        v-if="favoriteStore.favorites.includes(String(data.id))"
         class="ml-1"
         variant="text"
         icon="mdi-heart"

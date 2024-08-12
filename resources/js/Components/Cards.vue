@@ -43,7 +43,7 @@
         </v-btn>
 
         <v-btn
-          v-if="favoriteStore.favorites.includes(item.id)"
+          v-if="favoriteStore.favorites.includes(String(item.id))"
           class="ml-1"
           variant="text"
           icon="mdi-heart"
@@ -101,7 +101,7 @@ export default defineComponent({
       } else if (item.poster_path) {
         return posterPath + item.poster_path;
       } else {
-        return 'http://via.placeholder.com/1080x1580';
+        return 'https://via.placeholder.com/1080x1580';
       }
     },
 

@@ -35,9 +35,10 @@ export default defineComponent({
   created () {
     if (!localStorage.getItem('vue_i18n_locale')) {
       this.$i18n.locale = this.languageStore.i18n;
+    } else {
+      this.$i18n.locale = localStorage.getItem('vue_i18n_locale');
+      this.languageStore.i18n = localStorage.getItem('vue_i18n_locale');
     }
-    this.$i18n.locale = localStorage.getItem('vue_i18n_locale');
-    this.languageStore.i18n = localStorage.getItem('vue_i18n_locale');
 
     if (this.languageStore.i18n === 'en') {
       this.languageStore.tmdb = 'en-US';

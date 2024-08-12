@@ -8,11 +8,9 @@ const messages = {
 };
 
 export default createI18n({
-  // Messages contains all the translations
   messages,
-  // Set up basic locale settings based on .env
-  locale: import.meta.env.VITE_I18N_LOCALE || 'nl',
-  fallbackLocale: import.meta.env.VITE_I18N_FALLBACK_LOCALE || 'nl',
+  locale: 'nl',
+  fallbackLocale: 'en',
   // Inject the $t() function in all components
   globalInjection: true,
 });

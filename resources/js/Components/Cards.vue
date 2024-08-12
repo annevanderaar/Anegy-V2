@@ -15,7 +15,7 @@
         </v-card-title>
 
         <v-avatar
-          :color="getColor(item.vote_average.toFixed(1))"
+          :color="getColor(item.vote_average)"
           class="ma-2 text-white"
         >
           {{ item.vote_average >= 0 ? item.vote_average.toFixed(1) : 'P' }}
@@ -106,12 +106,15 @@ export default defineComponent({
     },
 
     getColor (average) {
-      if (average >= 7.5) {
-        return 'green';
-      } else if (average >= 5) {
-        return 'orange';
-      } else if (average >= 0) {
-        return 'red';
+      if (typeof average === 'number') {
+        const newAverage = average.toFixed(1);
+        if (newAverage >= 7.5) {
+          return 'green';
+        } else if (newAverage >= 5) {
+          return 'orange';
+        } else if (newAverage >= 0) {
+          return 'red';
+        }
       } else {
         return 'accent';
       }

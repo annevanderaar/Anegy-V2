@@ -23,7 +23,7 @@
               :icon="item.icon"
               class="mr-3"
             />
-            {{ item.name }}
+            {{ $t(item.name) }}
           </v-list-item-title>
         </v-list-item>
 
@@ -129,12 +129,12 @@ export default defineComponent({
       languageStore: LanguageStore(),
       theme: useTheme(),
       items: [
-        { route: route('generator'), name: this.$t('generator.title'), icon: 'mdi-generator-portable' },
-        { route: route('movies.discover'), name: this.$t('appbar.movies_discover'), icon: 'mdi-movie-open' },
-        { route: route('series.discover'), name: this.$t('appbar.series_discover'), icon: 'mdi-television-classic' },
-        { route: route('dashboard'), name: this.$t('auth.dashboard.title'), icon: 'mdi-view-dashboard' },
-        { route: route('favorites'), name: this.$t('auth.dashboard.favorites'), icon: 'mdi-book-heart' },
-        { route: route('profile.edit'), name: this.$t('auth.dashboard.edit_profile'), icon: 'mdi-account-edit' },
+        { route: route('generator'), name: 'generator.title', icon: 'mdi-generator-portable' },
+        { route: route('movies.discover'), name: 'appbar.movies_discover', icon: 'mdi-movie-open' },
+        { route: route('series.discover'), name: 'appbar.series_discover', icon: 'mdi-television-classic' },
+        { route: route('dashboard'), name: 'auth.dashboard.title', icon: 'mdi-view-dashboard' },
+        { route: route('favorites'), name: 'auth.dashboard.favorites', icon: 'mdi-book-heart' },
+        { route: route('profile.edit'), name: 'auth.dashboard.edit_profile', icon: 'mdi-account-edit' },
       ],
     };
   },

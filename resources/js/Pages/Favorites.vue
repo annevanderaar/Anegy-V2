@@ -43,6 +43,10 @@ export default defineComponent({
     refresh () {
       return this.favoriteStore.refresh;
     },
+
+    translate () {
+      return this.languageStore.translate;
+    },
   },
 
   methods: {
@@ -57,6 +61,10 @@ export default defineComponent({
 
   watch: {
     refresh () {
+      this.getFavorites();
+    },
+
+    translate () {
       this.getFavorites();
     },
   },

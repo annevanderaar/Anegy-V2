@@ -20,7 +20,7 @@ const appName = window.document.getElementsByTagName('title')[0]?.innerText || '
 const lightTheme = {
   dark: false,
   colors: {
-    primary: '#e0dfdf',
+    primary: '#f3f3f3',
     secondary: '#f32b2b',
     accent: '#23a9a7',
     btnFilterColor: '#000000',

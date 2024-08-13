@@ -3,12 +3,9 @@
 
   <v-row>
     <v-col class="d-flex justify-center" lg="4">
-      <v-card
+      <a
         :href="`https://image.tmdb.org/t/p/w500${data.poster_path}`"
-        class="ma-10"
         target="_blank"
-        width="450"
-        height="700"
       >
         <v-img
           :src="getUrl(data.poster_path)"
@@ -16,10 +13,10 @@
           width="450"
           height="700"
         />
-      </v-card>
+      </a>
     </v-col>
 
-    <v-col lg="8">
+    <v-col lg="8" class="pl-6">
       <DetailsTitle :data="data"/>
 
       <v-col class="text-center mb-4">

@@ -8,7 +8,7 @@
 
   <v-btn
     v-else
-    class="filterBtn"
+    class="position-fixed ma-2"
     color="accent"
   >
     {{ $t('filters.title') }}
@@ -38,5 +38,7 @@ export default defineComponent({
 .filterBtn {
   position: fixed;
   margin: 4px;
+  left: 5px;
+  z-index: 9;
 }
 </style>

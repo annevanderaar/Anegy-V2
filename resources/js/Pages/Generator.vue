@@ -107,6 +107,7 @@
 import { defineComponent } from 'vue';
 import { GeneratorStore } from '@/Stores/GeneratorStore';
 import { FilterStore } from '@/Stores/FilterStore';
+import { LanguageStore } from '@/Stores/LanguageStore';
 import PageHeader from '@/Components/PageHeader.vue';
 import Cards from '@/Components/Cards.vue';
 import VueMultiselect from 'vue-multiselect';
@@ -124,7 +125,14 @@ export default defineComponent({
     return {
       generatorStore: GeneratorStore(),
       filterStore: FilterStore(),
+      languageStore: LanguageStore(),
     };
+  },
+
+  computed: {
+    translate () {
+      return this.languageStore.translate;
+    },
   },
 
   methods: {
@@ -134,6 +142,12 @@ export default defineComponent({
       }
 
       return this.filterStore.serieGenres;
+    },
+  },
+
+  watch: {
+    translate () {
+      this.generatorStore.getResult();
     },
   },
 

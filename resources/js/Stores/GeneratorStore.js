@@ -73,5 +73,19 @@ export const GeneratorStore = defineStore('generator', {
         }
       });
     },
+
+    getResult () {
+      const url = `/${this.result.first_air_date ? 'tv' : 'movie'}/${this.result.id}`;
+      axios({
+        method: 'POST',
+        url: route('api.details'),
+        data: {
+          url,
+          language: this.languageStore.tmdb,
+        },
+      }).then(res => {
+        this.result = res.data;
+      });
+    },
   },
 });

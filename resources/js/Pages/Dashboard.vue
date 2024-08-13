@@ -9,6 +9,7 @@
         width="400"
         class="align-self-center mt-2"
         elevation="0"
+        color="primary"
       >
         <v-card-title>
           <h3>{{ $t('auth.dashboard.your_information') }}</h3>
@@ -57,6 +58,7 @@
 import { defineComponent } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { LanguageStore } from '@/Stores/LanguageStore';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
 import ResponsiveNavLink from '@/Components/Breeze/ResponsiveNavLink.vue';
@@ -80,6 +82,7 @@ export default defineComponent({
   data () {
     return {
       favoriteStore: FavoriteStore(),
+      languageStore: LanguageStore(),
     };
   },
 
@@ -87,10 +90,20 @@ export default defineComponent({
     user () {
       return usePage().props.auth.user;
     },
+
+    translate () {
+      return this.languageStore.translate;
+    },
   },
 
   methods: {
     route,
+  },
+
+  watch: {
+    translate () {
+      this.favoriteStore.getLatestFavorite(this.user.id);
+    },
   },
 
   mounted () {

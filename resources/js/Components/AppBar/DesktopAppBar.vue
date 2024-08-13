@@ -124,7 +124,7 @@
               class="mr-3"
               color="accent"
             />
-            {{ item.name }}
+            {{ $t(item.name) }}
           </v-list-item>
 
           <ResponsiveNavLink
@@ -178,9 +178,9 @@ export default defineComponent({
       languageStore: LanguageStore(),
       theme: useTheme(),
       items: [
-        { route: route('dashboard'), name: this.$t('auth.dashboard.title'), icon: 'mdi-view-dashboard' },
-        { route: route('favorites'), name: this.$t('auth.dashboard.favorites'), icon: 'mdi-book-heart' },
-        { route: route('profile.edit'), name: this.$t('auth.dashboard.edit_profile'), icon: 'mdi-account-edit' },
+        { route: route('dashboard'), name: 'auth.dashboard.title', icon: 'mdi-view-dashboard' },
+        { route: route('favorites'), name: 'auth.dashboard.favorites', icon: 'mdi-book-heart' },
+        { route: route('profile.edit'), name: 'auth.dashboard.edit_profile', icon: 'mdi-account-edit' },
       ],
     };
   },

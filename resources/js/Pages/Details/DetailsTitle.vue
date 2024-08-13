@@ -1,5 +1,9 @@
 <template>
-  <v-row justify="space-between" class="mt-2">
+  <v-row
+    justify="center"
+    align="center"
+    class="mt-2"
+  >
     <div>
       <v-btn
         :disabled="true"
@@ -7,7 +11,9 @@
       />
     </div>
 
-    <h1>{{ data.name ? data.name : data.title }}</h1>
+    <h1 class="text-center">
+      {{ data.name ? data.name : data.title }}
+    </h1>
 
     <div>
       <v-btn

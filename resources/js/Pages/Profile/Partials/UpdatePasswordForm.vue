@@ -10,15 +10,16 @@
       </p>
     </header>
 
-    <div>
-      <InputLabel :value="$t('auth.profile.current_password')" for="current_password"/>
-
-      <TextInput
+    <div class="mt-4">
+      <v-text-field
         id="current_password"
         ref="currentPasswordInput"
         v-model="form.current_password"
+        :label="$t('auth.profile.current_password')"
         type="password"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="current-password"
       />
 
@@ -26,14 +27,15 @@
     </div>
 
     <div>
-      <InputLabel :value="$t('auth.profile.new_password')" for="password"/>
-
-      <TextInput
+      <v-text-field
         id="password"
         ref="passwordInput"
         v-model="form.password"
+        :label="$t('auth.profile.new_password')"
         type="password"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="new-password"
       />
 
@@ -41,13 +43,14 @@
     </div>
 
     <div>
-      <InputLabel :value="$t('auth.login.confirm_password')" for="password_confirmation"/>
-
-      <TextInput
+      <v-text-field
         id="password_confirmation"
         v-model="form.password_confirmation"
+        :label="$t('auth.login.confirm_password')"
         type="password"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="new-password"
       />
 
@@ -55,7 +58,11 @@
     </div>
 
     <div class="mb-4">
-      <PrimaryButton :disabled="form.processing" @click="updatePassword">
+      <PrimaryButton
+        :disabled="form.processing"
+        class="w-100"
+        @click="updatePassword"
+      >
         {{ $t('auth.profile.save') }}
       </PrimaryButton>
 
@@ -74,9 +81,7 @@
 
 <script setup>
 import InputError from '@/Components/Breeze/InputError.vue';
-import InputLabel from '@/Components/Breeze/InputLabel.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
-import TextInput from '@/Components/Breeze/TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import route from 'ziggy-js';

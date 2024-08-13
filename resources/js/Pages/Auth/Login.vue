@@ -13,29 +13,30 @@
     </div>
 
     <div class="mt-4">
-      <InputLabel :value="$t('auth.login.email')" for="email"/>
-
-      <TextInput
+      <v-text-field
         id="email"
         v-model="form.email"
+        :label="$t('auth.login.email')"
         type="email"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="email"
         required
-        autofocus
       />
 
       <InputError :message="form.errors.email"/>
     </div>
 
-    <div class="mt-2">
-      <InputLabel :value="$t('auth.login.password')" for="password"/>
-
-      <TextInput
+    <div>
+      <v-text-field
         id="password"
         v-model="form.password"
+        :label="$t('auth.login.password')"
         type="password"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="current-password"
         required
       />
@@ -43,29 +44,28 @@
       <InputError :message="form.errors.password"/>
     </div>
 
-    <div class="d-flex justify-between mb-2 mt-4">
+    <div class="d-flex flex-column justify-center text-center mb-2 mt-2">
       <PrimaryButton
         :class="{ 'opacity-25': form.processing }"
         :disabled="form.processing"
-        class="mb-4 mr-4"
         @click="submit"
       >
         {{ $t('auth.login.title') }}
       </PrimaryButton>
 
       <Link
-        v-if="canResetPassword"
-        :href="route('password.request')"
-        class="underline mr-4 mt-2"
+        :href="route('register')"
+        class="underline mt-4"
       >
-        {{ $t('auth.login.forgot_password') }}
+        {{ $t('auth.login.account') }}
       </Link>
 
       <Link
-        :href="route('register')"
+        v-if="canResetPassword"
+        :href="route('password.request')"
         class="underline mt-2"
       >
-        {{ $t('auth.login.account') }}
+        {{ $t('auth.login.forgot_password') }}
       </Link>
     </div>
   </GuestLayout>
@@ -74,9 +74,7 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/Breeze/InputError.vue';
-import InputLabel from '@/Components/Breeze/InputLabel.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
-import TextInput from '@/Components/Breeze/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { onMounted } from 'vue';
 

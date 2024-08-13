@@ -4,50 +4,49 @@
       <title>{{ $t('auth.register.title') }}</title>
     </Head>
 
-    <div class="text-center mt-6">
+    <div class="text-center mt-6 mb-4">
       <h4>{{ $t('auth.register.create_account') }}</h4>
     </div>
 
     <div>
-      <InputLabel :value="$t('auth.login.firstname')" for="firstname"/>
-
-      <TextInput
+      <v-text-field
         id="firstname"
         v-model="form.firstname"
-        type="text"
-        class="mt-1 block w-full"
+        :label="$t('auth.login.firstname')"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="firstname"
         required
-        autofocus
       />
 
       <InputError :message="form.errors.firstname"/>
     </div>
 
     <div>
-      <InputLabel :value="$t('auth.login.lastname')" for="lastname"/>
-
-      <TextInput
+      <v-text-field
         id="lastname"
         v-model="form.lastname"
-        type="text"
-        class="mt-1 block w-full"
+        :label="$t('auth.login.lastname')"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="lastname"
         required
-        autofocus
       />
 
       <InputError :message="form.errors.lastname"/>
     </div>
 
-    <div class="mt-2">
-      <InputLabel :value="$t('auth.login.email')" for="email"/>
-
-      <TextInput
+    <div>
+      <v-text-field
         id="email"
         v-model="form.email"
+        :label="$t('auth.login.email')"
         type="email"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="username"
         required
       />
@@ -56,13 +55,14 @@
     </div>
 
     <div class="mt-2">
-      <InputLabel :value="$t('auth.login.password')" for="password"/>
-
-      <TextInput
+      <v-text-field
         id="password"
         v-model="form.password"
+        :label="$t('auth.login.password')"
         type="password"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="new-password"
         required
       />
@@ -71,13 +71,14 @@
     </div>
 
     <div class="mt-2">
-      <InputLabel :value="$t('auth.login.confirm_password')" for="password_confirmation"/>
-
-      <TextInput
+      <v-text-field
         id="password_confirmation"
         v-model="form.password_confirmation"
+        :label="$t('auth.login.confirm_password')"
         type="password"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="new-password"
         required
       />
@@ -85,11 +86,10 @@
       <InputError :message="form.errors.password_confirmation"/>
     </div>
 
-    <div class="d-flex mb-2 mt-4">
+    <div class="d-flex flex-column justify-center mb-2 mt-2">
       <PrimaryButton
         :class="{ 'opacity-25': form.processing }"
         :disabled="form.processing"
-        class="mb-4 mr-4"
         @click="submit"
       >
         {{ $t('auth.register.title') }}
@@ -97,7 +97,7 @@
 
       <Link
         :href="route('login')"
-        class="underline mt-2"
+        class="underline mt-4 text-center"
       >
         {{ $t('auth.register.registered') }}
       </Link>
@@ -108,9 +108,7 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/Breeze/InputError.vue';
-import InputLabel from '@/Components/Breeze/InputLabel.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
-import TextInput from '@/Components/Breeze/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { onMounted } from 'vue';
 import route from 'ziggy-js';

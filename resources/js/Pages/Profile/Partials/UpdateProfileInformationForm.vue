@@ -10,46 +10,47 @@
       </p>
     </header>
 
-    <div class="mt-2">
-      <InputLabel :value="$t('auth.login.firstname')" for="firstname"/>
-
-      <TextInput
+    <div class="mt-4">
+      <v-text-field
         id="firstname"
         v-model="form.firstname"
+        :label="$t('auth.login.firstname')"
         type="text"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="firstname"
         required
-        autofocus
       />
 
       <InputError :message="form.errors.firstname"/>
     </div>
 
     <div class="mt-2">
-      <InputLabel :value="$t('auth.login.lastname')" for="lastname"/>
-
-      <TextInput
+      <v-text-field
         id="lastname"
         v-model="form.lastname"
+        :label="$t('auth.login.lastname')"
         type="text"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="lastname"
         required
-        autofocus
       />
 
       <InputError :message="form.errors.lastname"/>
     </div>
 
     <div>
-      <InputLabel :value="$t('auth.login.email')" for="email"/>
-
-      <TextInput
+      <v-text-field
         id="email"
         v-model="form.email"
+        :label="$t('auth.login.email')"
         type="email"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="username"
         required
       />
@@ -78,7 +79,11 @@
     </div>
 
     <div class="mb-4">
-      <PrimaryButton :disabled="form.processing" @click="form.patch(route('profile.update'))">
+      <PrimaryButton
+        :disabled="form.processing"
+        class="w-100"
+        @click="form.patch(route('profile.update'))"
+      >
         {{ $t('auth.profile.save') }}
       </PrimaryButton>
 
@@ -97,9 +102,7 @@
 
 <script setup>
 import InputError from '@/Components/Breeze/InputError.vue';
-import InputLabel from '@/Components/Breeze/InputLabel.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
-import TextInput from '@/Components/Breeze/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
 import route from 'ziggy-js';
 

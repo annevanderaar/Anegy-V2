@@ -5,7 +5,11 @@
     <div class="text-center d-flex flex-column">
       <h1>{{ $t('auth.dashboard.welcome', {name: user.firstname}) }}</h1>
 
-      <v-card width="400" class="align-self-center mt-2">
+      <v-card
+        width="400"
+        class="align-self-center mt-2"
+        elevation="0"
+      >
         <v-card-title>
           <h3>{{ $t('auth.dashboard.your_information') }}</h3>
         </v-card-title>

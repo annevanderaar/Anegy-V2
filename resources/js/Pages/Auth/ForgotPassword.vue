@@ -13,29 +13,37 @@
     </p>
 
     <div>
-      <InputLabel :value="$t('auth.login.email')" for="email"/>
-
-      <TextInput
+      <v-text-field
         id="email"
         v-model="form.email"
+        :label="$t('auth.login.email')"
         type="email"
-        class="mt-1 block w-full"
+        variant="outlined"
+        density="compact"
+        color="accent"
         autocomplete="email"
         required
-        autofocus
       />
 
       <InputError :message="form.errors.email"/>
     </div>
 
-    <div class="mt-4">
+    <div class="mb-4 d-flex flex-column justify-center">
       <PrimaryButton
-        :class="{ 'opacity-25': form.processing }"
+        :class="{ 'opacity-25' : form.processing }"
         :disabled="form.processing"
+        class="w-100"
         @click="submit"
       >
         {{ $t('auth.forgot_password.mail_link') }}
       </PrimaryButton>
+
+      <Link
+        :href="route('login')"
+        class="underline mt-4 text-center"
+      >
+        {{ $t('auth.login.login_account') }}
+      </Link>
     </div>
   </GuestLayout>
 </template>
@@ -43,10 +51,8 @@
 <script setup>
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/Breeze/InputError.vue';
-import InputLabel from '@/Components/Breeze/InputLabel.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
-import TextInput from '@/Components/Breeze/TextInput.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps({
   status: {

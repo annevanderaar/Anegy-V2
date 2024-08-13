@@ -25,7 +25,7 @@
       <Link
         :href="route('logout')"
         method="post"
-        class="underline mt-2"
+        class="underline mt-4"
       >
         {{ $t('auth.logout.title') }}
       </Link>

@@ -4,24 +4,34 @@
   </Head>
 
   <AuthenticatedLayout>
-    <div>
-      <div class="d-flex justify-center flex-column align-content-center">
-        <div class="mb-8 w-50 align-self-center d-flex justify-center bg-grey-lighten-4 rounded-xl">
-          <UpdateProfileInformationForm
-            :must-verify-email="mustVerifyEmail"
-            :status="status"
-            class="width-inputs"
-          />
-        </div>
+    <div class="d-flex flex-row justify-space-between flex-wrap gap-2">
+      <v-card
+        class="rounded-xl pa-4 width-card ma-2"
+        elevation="0"
+        color="primary"
+      >
+        <UpdateProfileInformationForm
+          :must-verify-email="mustVerifyEmail"
+          :status="status"
+          class="width-inputs"
+        />
+      </v-card>
 
-        <div class="mb-8 w-50 align-self-center d-flex justify-center bg-grey-lighten-4 rounded-xl">
-          <UpdatePasswordForm class="width-inputs"/>
-        </div>
+      <v-card
+        class="rounded-xl pa-4 width-card ma-2"
+        elevation="0"
+        color="primary"
+      >
+        <UpdatePasswordForm class="width-inputs"/>
+      </v-card>
 
-        <div class="mb-4 w-50 align-self-center d-flex justify-center bg-grey-lighten-4 rounded-xl">
-          <DeleteUserForm class="width-inputs"/>
-        </div>
-      </div>
+      <v-card
+        class="rounded-xl pa-4 width-card ma-2"
+        elevation="0"
+        color="primary"
+      >
+        <DeleteUserForm class="width-inputs"/>
+      </v-card>
     </div>
   </AuthenticatedLayout>
 </template>

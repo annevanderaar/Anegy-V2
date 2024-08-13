@@ -16,12 +16,8 @@ span,
 }
 
 .width-card {
-    min-height: 300px;
+    min-height: 200px;
     width: 500px;
-}
-
-.width-inputs {
-    width: 90%;
 }
 
 .btnText {

@@ -187,9 +187,20 @@ export default defineComponent({
 
   computed: {
     showSearch () {
-      return !(route().current('movies.details') ||
-        route().current('series.details') ||
-        route().current('person.details'));
+      return (route().current('home') ||
+        route().current('movies.discover') ||
+        route().current('movies.trending') ||
+        route().current('movies.popular') ||
+        route().current('movies.playing') ||
+        route().current('movies.top-rated') ||
+        route().current('movies.upcoming') ||
+        route().current('series.discover') ||
+        route().current('series.trending') ||
+        route().current('series.popular') ||
+        route().current('series.playing') ||
+        route().current('series.top-rated') ||
+        route().current('series.upcoming')
+      );
     },
 
     dark () {

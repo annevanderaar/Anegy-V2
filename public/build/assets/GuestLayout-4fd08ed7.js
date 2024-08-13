@@ -1,0 +1,1 @@
+import{_ as t,r as s,o as a,e as r,a as c,w as n,k as d}from"./app-2cdeb229.js";const l={},_={class:"d-flex justify-center"};function i(e,f){const o=s("v-card");return a(),r("div",_,[c(o,{class:"pa-4 width-card rounded-xl",color:"primary",elevation:"0"},{default:n(()=>[d(e.$slots,"default")]),_:3})])}const u=t(l,[["render",i]]);export{u as G};

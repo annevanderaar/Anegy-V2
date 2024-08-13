@@ -4,9 +4,9 @@
   </Head>
 
   <AuthenticatedLayout>
-    <div class="d-flex flex-row justify-space-between flex-wrap gap-2">
+    <div class="d-flex flex-row justify-center flex-wrap gap-2">
       <v-card
-        class="rounded-xl pa-4 width-card ma-2"
+        class="rounded-xl pa-4 width-card ma-4"
         elevation="0"
         color="primary"
       >
@@ -18,7 +18,7 @@
       </v-card>
 
       <v-card
-        class="rounded-xl pa-4 width-card ma-2"
+        class="rounded-xl pa-4 width-card ma-4"
         elevation="0"
         color="primary"
       >
@@ -26,7 +26,7 @@
       </v-card>
 
       <v-card
-        class="rounded-xl pa-4 width-card ma-2"
+        class="rounded-xl pa-4 width-card ma-4"
         elevation="0"
         color="primary"
       >

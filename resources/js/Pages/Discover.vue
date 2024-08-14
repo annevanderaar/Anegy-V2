@@ -161,6 +161,7 @@ export default defineComponent({
 
     translate () {
       this.dataStore.getDiscover();
+      this.getRoutes();
     },
 
     genres () {

@@ -39,7 +39,7 @@
               class="mr-3"
               color="accent"
             />
-            {{ item.text }}
+            {{ $t(item.text) }}
           </v-list-item>
         </v-list>
 
@@ -168,12 +168,12 @@ export default defineComponent({
       }
 
       return [
-        { text: this.$t('discover'), icon: 'mdi-shuffle-variant', route: `${name}.discover` },
-        { text: this.$t('trending'), icon: 'mdi-fire', route: `${name}.trending` },
-        { text: this.$t('popular'), icon: 'mdi-chart-box', route: `${name}.popular` },
-        { text: this.$t('playing'), icon: 'mdi-play-circle-outline', route: `${name}.playing` },
-        { text: this.$t('top_rated'), icon: 'mdi-star', route: `${name}.top-rated` },
-        { text: this.$t('upcoming'), icon: 'mdi-calendar-month', route: `${name}.upcoming` },
+        { text: 'discover', icon: 'mdi-shuffle-variant', route: `${name}.discover` },
+        { text: 'trending', icon: 'mdi-fire', route: `${name}.trending` },
+        { text: 'popular', icon: 'mdi-chart-box', route: `${name}.popular` },
+        { text: 'playing', icon: 'mdi-play-circle-outline', route: `${name}.playing` },
+        { text: 'top_rated', icon: 'mdi-star', route: `${name}.top-rated` },
+        { text: 'upcoming', icon: 'mdi-calendar-month', route: `${name}.upcoming` },
       ];
     },
 

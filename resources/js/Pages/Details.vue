@@ -195,7 +195,7 @@
           :key="tab.title"
           @click="show(tab.val)"
         >
-          <v-icon>{{ tab.icon }}</v-icon>{{ tab.title }}
+          <v-icon>{{ tab.icon }}</v-icon>{{ $t(tab.title) }}
         </v-tab>
       </v-tabs>
 
@@ -257,37 +257,37 @@ export default defineComponent({
       selectedTab: 'cast',
       tabs: [
         {
-          title: this.$t('details.cast.title'),
+          title: 'details.cast.title',
           icon: 'mdi-account-box-multiple',
           val: 'cast',
         },
         {
-          title: this.$t('details.crew'),
+          title: 'details.crew',
           icon: 'mdi-account-group',
           val: 'crew',
         },
         {
-          title: this.$t('details.seasons.title'),
+          title: 'details.seasons.title',
           icon: 'mdi-cards-variant',
           val: 'seasons',
         },
         {
-          title: this.$t('details.collection.title'),
+          title: 'details.collection.title',
           icon: 'mdi-bookmark-box-multiple',
           val: 'collection',
         },
         {
-          title: this.$t('details.videos.title'),
+          title: 'details.videos.title',
           icon: 'mdi-filmstrip-box-multiple',
           val: 'videos',
         },
         {
-          title: this.$t('details.reviews.title'),
+          title: 'details.reviews.title',
           icon: 'mdi-message-text',
           val: 'reviews',
         },
         {
-          title: this.$t('details.similar'),
+          title: 'details.similar',
           icon: 'mdi-approximately-equal-box',
           val: 'similar',
         },

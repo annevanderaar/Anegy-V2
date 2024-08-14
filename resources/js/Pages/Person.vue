@@ -3,27 +3,18 @@
 
   <v-row>
     <v-col class="d-flex justify-center" md="4">
-      <v-card
+      <a
         :href="`https://image.tmdb.org/t/p/w500${data.profile_path}`"
-        width="450px"
-        height="700px"
-        class="ma-10"
         target="_blank"
       >
         <v-img
-          :src="`https://image.tmdb.org/t/p/w500${data.profile_path}`"
+          :src="data.profile_path == null ?
+            'http://via.placeholder.com/1080x1580' : `https://image.tmdb.org/t/p/w500${data.profile_path}`"
           :alt="`${data.title}`"
           width="450px"
           height="700px"
         />
-        <v-img
-          v-if="data.profile_path == null"
-          :alt="`${data.title}`"
-          width="450px"
-          height="700px"
-          src="http://via.placeholder.com/1080x1580"
-        />
-      </v-card>
+      </a>
     </v-col>
 
     <v-col lg="8">
@@ -94,7 +85,7 @@
           :key="tab.title"
           @click="show(tab.val)"
         >
-          <v-icon>{{ tab.icon }}</v-icon>{{ tab.title }}
+          <v-icon>{{ tab.icon }}</v-icon>{{ $t(tab.title) }}
         </v-tab>
       </v-tabs>
 
@@ -136,17 +127,17 @@ export default defineComponent({
       selectedTab: 'movies',
       tabs: [
         {
-          title: 'Movies',
+          title: 'movies',
           icon: 'mdi-movie-open',
           val: 'movies',
         },
         {
-          title: 'Series',
+          title: 'series',
           icon: 'mdi-television-classic',
           val: 'series',
         },
         {
-          title: 'Images',
+          title: 'images',
           icon: 'mdi-image-multiple',
           val: 'images',
         },

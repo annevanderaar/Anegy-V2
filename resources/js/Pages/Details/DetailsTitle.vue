@@ -1,16 +1,9 @@
 <template>
   <v-row
-    :class="{ 'mt-2' : !mobile}"
+    class="mt-2"
     justify="center"
     align="center"
   >
-    <div>
-      <v-btn
-        :disabled="true"
-        variant="plain"
-      />
-    </div>
-
     <h1 class="text-center">
       {{ data.name ? data.name : data.title }}
     </h1>
@@ -62,10 +55,6 @@ export default defineComponent({
   computed: {
     user () {
       return usePage().props.auth.user;
-    },
-
-    mobile () {
-      return this.$vuetify.display.mobile;
     },
   },
 

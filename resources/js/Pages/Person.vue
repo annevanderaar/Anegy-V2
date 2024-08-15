@@ -2,22 +2,9 @@
   <PageHeader :title="title"/>
 
   <v-row>
-    <v-col class="d-flex justify-center" md="4">
-      <a
-        :href="`https://image.tmdb.org/t/p/w500${data.profile_path}`"
-        target="_blank"
-      >
-        <v-img
-          :src="data.profile_path == null ?
-            'http://via.placeholder.com/1080x1580' : `https://image.tmdb.org/t/p/w500${data.profile_path}`"
-          :alt="`${data.title}`"
-          width="450px"
-          height="700px"
-        />
-      </a>
-    </v-col>
+    <ImageTile :title="data.title" :profile-path="data.profile_path"/>
 
-    <v-col lg="8">
+    <v-col :class="['pl-6', {'pt-0' : mobile}]" lg="8">
       <DetailsTitle :data="data"/>
 
       <v-col class="text-center mb-4">
@@ -107,9 +94,11 @@ import PersonCards from '../Pages/Details/PersonCards.vue';
 import Images from '../Pages/Details/Images.vue';
 import DetailsTitle from './Details/DetailsTitle.vue';
 import PageHeader from '@/Components/PageHeader.vue';
+import ImageTile from '@/Pages/Details/ImageTile.vue';
 
 export default defineComponent({
   components: {
+    ImageTile,
     PageHeader,
     DetailsTitle,
     Images,
@@ -160,6 +149,10 @@ export default defineComponent({
 
     refresh () {
       return this.favoriteStore.refresh;
+    },
+
+    mobile () {
+      return this.$vuetify.display.mobile;
     },
   },
 

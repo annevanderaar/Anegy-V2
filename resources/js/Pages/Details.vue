@@ -2,24 +2,12 @@
   <PageHeader :title="title"/>
 
   <v-row>
-    <v-col class="d-flex justify-center" lg="4">
-      <a
-        :href="`https://image.tmdb.org/t/p/w500${data.poster_path}`"
-        target="_blank"
-      >
-        <v-img
-          :src="getUrl(data.poster_path)"
-          :alt="`${data.title}`"
-          width="450"
-          height="700"
-        />
-      </a>
-    </v-col>
+    <ImageTile :title="data.title" :poster-path="data.poster_path"/>
 
-    <v-col lg="8" class="pl-6">
+    <v-col :class="['pl-6', {'pt-0' : mobile}]" lg="8">
       <DetailsTitle :data="data"/>
 
-      <v-col class="text-center mb-4">
+      <v-col class="text-center mb-6">
         <h3>{{ data.tagline }}</h3>
         <p>{{ data.overview }}</p>
       </v-col>
@@ -230,11 +218,13 @@ import Links from '@/Components/Links.vue';
 import DetailsTitle from '@/Pages/Details/DetailsTitle.vue';
 import PageHeader from '@/Components/PageHeader.vue';
 import route from 'ziggy-js';
+import ImageTile from '@/Pages/Details/ImageTile.vue';
 
 export default defineComponent({
   name: 'Details',
 
   components: {
+    ImageTile,
     PageHeader,
     DetailsTitle,
     Links,
@@ -329,6 +319,10 @@ export default defineComponent({
     refresh () {
       return this.favoriteStore.refresh;
     },
+
+    mobile () {
+      return this.$vuetify.display.mobile;
+    },
   },
 
   methods: {
@@ -349,13 +343,6 @@ export default defineComponent({
         return;
       }
       this.tabs.splice(3, 1);
-    },
-
-    getUrl (path) {
-      if (!path) {
-        return 'http://via.placeholder.com/1080x1580';
-      }
-      return `https://image.tmdb.org/t/p/w500${path}`;
     },
 
     getDate (date) {

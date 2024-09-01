@@ -12,6 +12,7 @@
             "title": "Confirm Password"
         },
         "dashboard": {
+            "created": "Created",
             "edit_profile": "Edit profile",
             "favorites": "Favorites",
             "title": "Dashboard",

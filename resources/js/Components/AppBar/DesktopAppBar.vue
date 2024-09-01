@@ -107,9 +107,10 @@
           <v-btn
             v-if="user"
             v-bind="props"
-            prepend-icon="mdi-account"
+            icon="mdi-account"
+            variant="text"
           >
-            {{ user.firstname }}
+            {{ user.firstname.substring(0, 1) + user.lastname.substring(0, 1).toUpperCase() }}
           </v-btn>
         </template>
 

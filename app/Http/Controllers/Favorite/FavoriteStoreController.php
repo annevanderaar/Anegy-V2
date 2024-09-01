@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Favorite;
 use App\Http\Controllers\AbstractController;
 use App\Http\Requests\Favorite\FavoriteStoreRequest;
 use App\Models\Favorite;
-use App\Repositories\FavoriteStoreRepository;
+use App\Repositories\FavoriteRepository;
 
 class FavoriteStoreController extends AbstractController
 {
     /**
      * @param FavoriteStoreRequest $request
-     * @param FavoriteStoreRepository $repository
+     * @param FavoriteRepository $repository
      * @return Favorite
      */
-    public function __invoke(FavoriteStoreRequest $request, FavoriteStoreRepository $repository): Favorite
+    public function __invoke(FavoriteStoreRequest $request, FavoriteRepository $repository): Favorite
     {
         return $repository->store($request->all());
     }

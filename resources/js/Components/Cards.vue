@@ -43,7 +43,7 @@
         </v-btn>
 
         <v-btn
-          v-if="favoriteStore.favorites.includes(String(item.id))"
+          v-if="favoriteStore.favorites.includes(item.id)"
           class="ml-1"
           variant="text"
           icon="mdi-heart"

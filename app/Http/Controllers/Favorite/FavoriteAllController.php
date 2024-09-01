@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Favorite;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\FavoriteAllRepository;
+use App\Repositories\FavoriteRepository;
 
 class FavoriteAllController extends Controller
 {
     /**
-     * @param FavoriteAllRepository $repository
+     * @param FavoriteRepository $repository
      * @param int $id
      * @return mixed
      */
-    public function __invoke(FavoriteAllRepository $repository, int $id): mixed
+    public function __invoke(FavoriteRepository $repository, int $id): mixed
     {
         return $repository->all($id);
     }

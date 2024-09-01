@@ -12,6 +12,7 @@
             "title": "Bevestig Wachtwoord"
         },
         "dashboard": {
+            "created": "Aangemaakt",
             "edit_profile": "Bewerk profiel",
             "favorites": "Favorieten",
             "title": "Dashboard",

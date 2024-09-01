@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -10,15 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * App\Models\Favorite
  *
  * @property int $id
- * @property int user_id
- * @property int ms_id
+ * @property int $user_id
+ * @property int $ms_id
  * @property string $type
  *
  */
 class Favorite extends Model
 {
-    use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -37,5 +34,4 @@ class Favorite extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

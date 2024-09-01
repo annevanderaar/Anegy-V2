@@ -6,18 +6,18 @@
   </h1>
 
   <h3 class="text-center">
-    {{ $t('favorites.all') }}
+    {{ $t('watched.all') }}
   </h3>
 
-  <Cards :results="favoriteStore.data"/>
+  <Cards :results="watchedStore.data"/>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { LanguageStore } from '@/Stores/LanguageStore';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { WatchedStore } from '@/Stores/WatchedStore';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
 import Cards from '@/Components/Cards.vue';
 import PageHeader from '@/Components/PageHeader.vue';
 
@@ -31,9 +31,9 @@ export default defineComponent({
 
   data () {
     return {
-      favoriteStore: FavoriteStore(),
-      languageStore: LanguageStore(),
       watchedStore: WatchedStore(),
+      languageStore: LanguageStore(),
+      favoriteStore: FavoriteStore(),
     };
   },
 
@@ -57,15 +57,15 @@ export default defineComponent({
 
   methods: {
     title () {
-      return this.$t('auth.dashboard.favorites');
-    },
-
-    getFavorites () {
-      this.favoriteStore.getFavorites(this.user.id);
+      return this.$t('auth.dashboard.watched');
     },
 
     getWatched () {
       this.watchedStore.getWatched(this.user.id);
+    },
+
+    getFavorites () {
+      this.favoriteStore.getFavorites(this.user.id);
     },
   },
 

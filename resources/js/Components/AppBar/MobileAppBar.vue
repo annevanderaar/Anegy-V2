@@ -134,6 +134,7 @@ export default defineComponent({
         { route: route('series.discover'), name: 'appbar.series_discover', icon: 'mdi-television-classic' },
         { route: route('dashboard'), name: 'auth.dashboard.title', icon: 'mdi-view-dashboard' },
         { route: route('favorites'), name: 'auth.dashboard.favorites', icon: 'mdi-book-heart' },
+        { route: route('watched'), name: 'auth.dashboard.watched', icon: 'mdi-book-check' },
         { route: route('profile.edit'), name: 'auth.dashboard.edit_profile', icon: 'mdi-account-edit' },
       ],
     };

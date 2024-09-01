@@ -37,13 +37,14 @@
           :href="getHref(item)"
           elevation="0"
           color="accent"
-          class="ml-2"
+          class="ml-2 mr-2"
         >
           {{ $t('cards.more') }}
         </v-btn>
 
         <v-btn
-          v-if="favoriteStore.favorites.includes(String(item.id)) || favoriteStore.favorites.includes(item.id)"
+          v-if="(favoriteStore.favorites?.includes(String(item.id)) || favoriteStore.favorites?.includes(item.id))
+            && !route().current('generator')"
           class="ml-1"
           variant="text"
           icon="mdi-heart"
@@ -52,12 +53,31 @@
         />
 
         <v-btn
-          v-else
+          v-else-if="!route().current('generator')"
           class="ml-1"
           variant="text"
           icon="mdi-heart-outline"
           color="secondary"
           @click="createFavorite(item.id, item.video, item.known_for_department, item.first_air_date)"
+        />
+
+        <v-btn
+          v-if="(watchedStore.watched?.includes(String(item.id)) || watchedStore.watched?.includes(item.id))
+            && !route().current('generator')"
+          class="ml-1"
+          variant="text"
+          icon="mdi-check-bold"
+          color="accent"
+          @click="watchedStore.deleteWatched(user.id, item.id)"
+        />
+
+        <v-btn
+          v-else-if="!route().current('generator')"
+          class="ml-1"
+          variant="text"
+          icon="mdi-check-outline"
+          color="accent"
+          @click="createWatched(item.id, item.video, item.known_for_department, item.first_air_date)"
         />
       </v-card>
     </v-card>
@@ -69,6 +89,7 @@ import { defineComponent } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { useToast } from 'vue-toastification';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { WatchedStore } from '@/Stores/WatchedStore';
 
 export default defineComponent({
   name: 'Cards',
@@ -84,6 +105,7 @@ export default defineComponent({
     return {
       msType: '',
       favoriteStore: FavoriteStore(),
+      watchedStore: WatchedStore(),
     };
   },
 
@@ -152,6 +174,14 @@ export default defineComponent({
         return;
       }
       useToast().warning(this.$t('favorites.need_account'));
+    },
+
+    createWatched (msId, video, known, air) {
+      if (this.user) {
+        this.watchedStore.createWatched(this.user.id, msId, video, known, air);
+        return;
+      }
+      useToast().warning(this.$t('watched.need_account'));
     },
   },
 });

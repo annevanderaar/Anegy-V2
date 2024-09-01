@@ -113,6 +113,10 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Favorites');
     })->name('favorites');
 
+    Route::get('/watched', function () {
+        return Inertia::render('Watched');
+    })->name('watched');
+
     Route::prefix('profile')->group(static function () {
         Route::get('', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('', [ProfileController::class, 'update'])->name('profile.update');

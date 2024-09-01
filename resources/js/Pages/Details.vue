@@ -207,6 +207,7 @@ import { usePage } from '@inertiajs/vue3';
 import { DetailsStore } from '@/Stores/DetailsStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { WatchedStore } from '@/Stores/WatchedStore';
 import Cast from '@/Pages/Details/Cast.vue';
 import Crew from '@/Pages/Details/Crew.vue';
 import Collection from '@/Pages/Details/Collection.vue';
@@ -217,8 +218,8 @@ import Similar from '@/Pages/Details/Similar.vue';
 import Links from '@/Components/Links.vue';
 import DetailsTitle from '@/Pages/Details/DetailsTitle.vue';
 import PageHeader from '@/Components/PageHeader.vue';
-import route from 'ziggy-js';
 import ImageTile from '@/Pages/Details/ImageTile.vue';
+import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'Details',
@@ -244,6 +245,7 @@ export default defineComponent({
       detailStore: DetailsStore(),
       languageStore: LanguageStore(),
       favoriteStore: FavoriteStore(),
+      watchedStore: WatchedStore(),
       selectedTab: 'cast',
       tabs: [
         {
@@ -316,8 +318,12 @@ export default defineComponent({
       return usePage().props.auth.user;
     },
 
-    refresh () {
+    refreshFav () {
       return this.favoriteStore.refresh;
+    },
+
+    refreshWat () {
+      return this.watchedStore.refresh;
     },
 
     mobile () {
@@ -335,6 +341,7 @@ export default defineComponent({
       this.detailStore.getReviews(`/${val}/${this.id}/reviews`);
       this.detailStore.getSimilar(`/${val}/${this.id}/similar`);
       this.getFavorites();
+      this.getWatched();
     },
 
     getTabs () {
@@ -385,6 +392,12 @@ export default defineComponent({
         this.favoriteStore.getFavorites(this.user.id);
       }
     },
+
+    getWatched () {
+      if (this.user) {
+        this.watchedStore.getWatched(this.user.id);
+      }
+    },
   },
 
   watch: {
@@ -402,8 +415,12 @@ export default defineComponent({
       this.getDetails(this.current ? 'movie' : 'tv');
     },
 
-    refresh () {
+    refreshFav () {
       this.getFavorites();
+    },
+
+    refreshWat () {
+      this.getWatched();
     },
   },
 

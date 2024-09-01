@@ -16,6 +16,7 @@
             "edit_profile": "Bewerk profiel",
             "favorites": "Favorieten",
             "title": "Dashboard",
+            "watched": "Gekeken",
             "welcome": "Welkom {name}! We zijn blij om je hier op Anegy te hebben",
             "your_information": "Jouw informatie"
         },
@@ -115,7 +116,7 @@
     },
     "discover": "Ontdek {name}",
     "favorites": {
-        "all": "All jouw favorieten staan hier!",
+        "all": "Al jouw favorieten staan hier!",
         "latest": "Laatste toegevoegde favoriet",
         "need_account": "Je hebt een account nodig om een favoriet toe te voegen",
         "not_added": "Je hebt nog geen favoriet toegevoegd"
@@ -161,5 +162,11 @@
     "series": "Series",
     "top_rated": "Hoogst Gewaardeerde {name}",
     "trending": "Trending {name}",
-    "upcoming": "Aanstaande {name}"
+    "upcoming": "Aanstaande {name}",
+    "watched": {
+        "all": "Al jouw gekeken staan hier!",
+        "latest": "Laatste toegevoegde gekeken",
+        "need_account": "Je hebt een account nodig om een gekeken toe te voegen",
+        "not_added": "Je hebt nog geen gekeken toegevoegd"
+    }
 }

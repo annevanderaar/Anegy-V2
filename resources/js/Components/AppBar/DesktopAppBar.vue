@@ -45,7 +45,7 @@
     <v-btn
       v-else
       :disabled="true"
-      icon
+      icon=""
     />
 
     <v-text-field
@@ -65,7 +65,7 @@
       :href="route('home')"
       variant="plain"
       class="ms-6"
-      icon
+      icon=""
       @click="resetPage"
     >
       <v-img
@@ -81,9 +81,8 @@
     <v-divider class="border-opacity-0"/>
 
     <v-btn
-      v-if="!user"
       :disabled="true"
-      icon
+      icon=""
     />
 
     <v-btn
@@ -181,6 +180,7 @@ export default defineComponent({
       items: [
         { route: route('dashboard'), name: 'auth.dashboard.title', icon: 'mdi-view-dashboard' },
         { route: route('favorites'), name: 'auth.dashboard.favorites', icon: 'mdi-book-heart' },
+        { route: route('watched'), name: 'auth.dashboard.watched', icon: 'mdi-book-check' },
         { route: route('profile.edit'), name: 'auth.dashboard.edit_profile', icon: 'mdi-account-edit' },
       ],
     };

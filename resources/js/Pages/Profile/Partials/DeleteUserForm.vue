@@ -25,20 +25,20 @@
       <InputError :message="form.errors.password"/>
     </header>
 
-    <DangerButton
+    <SecondaryButton
       :class="{ 'opacity-25': form.processing }"
       :disabled="form.processing"
       class="mb-4 mt-2 w-100"
       @click="deleteUser"
     >
       {{ $t('auth.profile.delete_account') }}
-    </DangerButton>
+    </SecondaryButton>
   </section>
 </template>
 
-<script setup>
-import DangerButton from '@/Components/Breeze/DangerButton.vue';
+<script setup lang="ts">
 import InputError from '@/Components/Breeze/InputError.vue';
+import SecondaryButton from '@/Components/Breeze/SecondaryButton.vue';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import route from 'ziggy-js';

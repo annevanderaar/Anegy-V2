@@ -2,7 +2,7 @@
   <v-app>
     <AppBar/>
     <v-main>
-      <v-container :fluid="true">
+      <v-container fluid>
         <slot/>
       </v-container>
     </v-main>

@@ -4,19 +4,13 @@
   </Head>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 
-export default {
-  name: 'PageHeader',
-  components: {
-    Head,
+defineProps({
+  title: {
+    type: String,
+    required: true,
   },
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
-};
+});
 </script>

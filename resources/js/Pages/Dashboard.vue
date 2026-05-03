@@ -57,22 +57,13 @@
           </v-card-text>
 
           <v-card-actions class="d-flex flex-column">
-            <SecondaryButton :href="route('favorites')">
-              {{ $t('auth.dashboard.favorites') }}
-            </SecondaryButton>
-
             <PrimaryButton :href="route('profile.edit')">
               {{ $t('auth.dashboard.edit_profile') }}
             </PrimaryButton>
 
-            <ResponsiveNavLink
-              :href="route('logout')"
-              method="post"
-              as="button"
-              class="text-uppercase"
-            >
+            <SecondaryButton @click="logout">
               {{ $t('auth.logout.title') }}
-            </ResponsiveNavLink>
+            </SecondaryButton>
           </v-card-actions>
         </v-card>
       </div>
@@ -106,13 +97,12 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { usePage } from '@inertiajs/vue3';
+import { router, usePage } from '@inertiajs/vue3';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { WatchedStore } from '@/Stores/WatchedStore';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
-import ResponsiveNavLink from '@/Components/Breeze/ResponsiveNavLink.vue';
 import Cards from '@/Components/Cards.vue';
 import SecondaryButton from '@/Components/Breeze/SecondaryButton.vue';
 import PageHeader from '@/Components/PageHeader.vue';
@@ -126,7 +116,6 @@ export default defineComponent({
     Cards,
     AuthenticatedLayout,
     PrimaryButton,
-    ResponsiveNavLink,
   },
   data () {
     return {
@@ -145,6 +134,12 @@ export default defineComponent({
   },
   methods: {
     route,
+    logout () {
+      router.post(route('logout'));
+      setTimeout(() => {
+        window.location.href = route('home');
+      }, 200);
+    },
   },
   watch: {
     translate () {

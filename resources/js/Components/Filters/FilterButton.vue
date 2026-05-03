@@ -15,21 +15,11 @@
   </v-btn>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
 import IconButton from '@/Components/IconButton.vue';
+import { useDisplay } from 'vuetify';
 
-export default defineComponent({
-  name: 'FilterButton',
-  components: {
-    IconButton,
-  },
-  computed: {
-    mobile () {
-      return this.$vuetify.display.mobile;
-    },
-  },
-});
+const { mobile } = useDisplay();
 </script>
 
 <style scoped>

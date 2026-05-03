@@ -2,8 +2,8 @@
   <section>
     <v-navigation-drawer
       v-model="filterStore.drawer"
-      :temporary="true"
       style="width: 300px"
+      temporary
     >
       <v-container>
         <v-row>
@@ -53,13 +53,13 @@
 
           <v-range-slider
             v-model="rating"
-            :strict="true"
             :min="0"
             :max="10"
             :step="0.1"
             thumb-label="always"
             color="accent"
             class="mt-6"
+            strict
           />
 
           <v-btn color="accent ml-2" @click="addRating">

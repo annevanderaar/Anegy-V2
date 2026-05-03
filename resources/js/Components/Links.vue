@@ -54,15 +54,8 @@
   </v-row>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import { DetailsStore } from '@/Stores/DetailsStore';
 
-export default defineComponent({
-  data () {
-    return {
-      detailStore: DetailsStore(),
-    };
-  },
-});
+const detailStore = DetailsStore();
 </script>

@@ -11,9 +11,9 @@
     <div>
       <v-btn-toggle
         v-model="generatorStore.choice"
-        :divided="true"
         variant="outlined"
         color="accent"
+        divided
       >
         <v-btn>
           {{ $t('movie') }}
@@ -63,12 +63,12 @@
     <div class="mt-2 select-width">
       <v-range-slider
         v-model="generatorStore.rating"
-        :strict="true"
         :min="0"
         :max="10"
         :step="0.1"
         thumb-label="always"
         color="accent"
+        strict
       />
     </div>
 

@@ -44,8 +44,8 @@
 
     <v-btn
       v-else
-      :disabled="true"
       icon=""
+      disabled
     />
 
     <v-text-field
@@ -53,10 +53,10 @@
       ref="textField"
       v-model="searchStore.search"
       :label="$t('appbar.search')"
-      :autofocus="true"
       variant="solo"
       density="compact"
       class="mt-6 text-field"
+      autofocus
     />
 
     <v-divider class="border-opacity-0"/>
@@ -81,8 +81,8 @@
     <v-divider class="border-opacity-0"/>
 
     <v-btn
-      :disabled="true"
       icon=""
+      disabled
     />
 
     <v-btn
@@ -126,19 +126,20 @@
             {{ $t(item.name) }}
           </v-list-item>
 
-          <ResponsiveNavLink
-            :href="route('logout')"
-            class="ml-1"
-            method="post"
-            as="button"
+          <v-list-item
+            v-if="user"
+            @click="logout"
           >
-            <v-icon
-              icon="mdi-logout"
-              class="mr-3"
-              color="accent"
-            />
-            {{ $t('auth.logout.title') }}
-          </ResponsiveNavLink>
+            <v-list-item-title>
+              <v-icon
+                icon="mdi-logout"
+                class="mr-3"
+                color="accent"
+              />
+
+              {{ $t('auth.logout.title') }}
+            </v-list-item-title>
+          </v-list-item>
         </v-list>
       </v-menu>
     </div>
@@ -152,20 +153,18 @@
 
 <script>
 import { defineComponent } from 'vue';
-import ResponsiveNavLink from '@/Components/Breeze/ResponsiveNavLink.vue';
 import IconButton from '@/Components/IconButton.vue';
 import { DataStore } from '@/Stores/DataStore';
 import { SearchStore } from '@/Stores/SearchStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { useTheme } from 'vuetify';
-import { usePage } from '@inertiajs/vue3';
+import { usePage, router } from '@inertiajs/vue3';
 import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'DesktopAppBar',
   components: {
     IconButton,
-    ResponsiveNavLink,
   },
   data () {
     return {
@@ -232,6 +231,12 @@ export default defineComponent({
     },
     resetPage () {
       localStorage.currentPage = 1;
+    },
+    logout () {
+      router.post(route('logout'));
+      setTimeout(() => {
+        window.location.href = route('home');
+      }, 200);
     },
   },
   watch: {

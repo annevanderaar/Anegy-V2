@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex justify-center flex-wrap">
-    <div class="d-flex flex-wrap">
+    <div class="d-flex flex-wrap justify-center">
       <v-card
         v-for="season in seasons"
         :key="season.id"

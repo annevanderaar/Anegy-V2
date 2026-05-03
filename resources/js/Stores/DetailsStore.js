@@ -19,7 +19,6 @@ export const DetailsStore = defineStore('detail', {
     images: {},
     languageStore: LanguageStore(),
   }),
-
   actions: {
     getDetails (url) {
       axios({
@@ -41,7 +40,6 @@ export const DetailsStore = defineStore('detail', {
         }
       });
     },
-
     getLinks (url) {
       axios({
         method: 'POST',
@@ -54,7 +52,6 @@ export const DetailsStore = defineStore('detail', {
         this.links = res.data;
       });
     },
-
     getProviders (url) {
       axios({
         method: 'POST',
@@ -67,7 +64,6 @@ export const DetailsStore = defineStore('detail', {
         this.providers = res.data.results.NL;
       });
     },
-
     getCredits (url) {
       axios({
         method: 'POST',
@@ -80,7 +76,6 @@ export const DetailsStore = defineStore('detail', {
         this.credits = res.data;
       });
     },
-
     getCollection (url) {
       axios({
         method: 'POST',
@@ -93,7 +88,6 @@ export const DetailsStore = defineStore('detail', {
         this.collection = res.data;
       });
     },
-
     getSeasonDetails (url) {
       axios({
         method: 'POST',
@@ -106,7 +100,6 @@ export const DetailsStore = defineStore('detail', {
         this.episodes = res.data.episodes;
       });
     },
-
     getVideos (url) {
       axios({
         method: 'POST',
@@ -119,7 +112,6 @@ export const DetailsStore = defineStore('detail', {
         this.videos = res.data.results;
       });
     },
-
     getReviews (url) {
       axios({
         method: 'POST',
@@ -132,7 +124,6 @@ export const DetailsStore = defineStore('detail', {
         this.reviews = res.data.results;
       });
     },
-
     getSimilar (url) {
       axios({
         method: 'POST',
@@ -145,7 +136,6 @@ export const DetailsStore = defineStore('detail', {
         this.similar = res.data.results;
       });
     },
-
     getPersonMovies (id) {
       axios({
         method: 'POST',
@@ -158,7 +148,6 @@ export const DetailsStore = defineStore('detail', {
         this.personMovies = res.data;
       });
     },
-
     getPersonSeries (id) {
       axios({
         method: 'POST',
@@ -171,7 +160,6 @@ export const DetailsStore = defineStore('detail', {
         this.personSeries = res.data;
       });
     },
-
     getImages (id) {
       axios({
         method: 'POST',

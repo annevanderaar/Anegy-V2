@@ -32,9 +32,9 @@
   </v-row>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
-import { FavoriteStore } from '../../Stores/FavoriteStore';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { usePage } from '@inertiajs/vue3';
 import { useToast } from 'vue-toastification';
 
@@ -45,19 +45,16 @@ export default defineComponent({
       required: true,
     },
   },
-
   data () {
     return {
       favoriteStore: FavoriteStore(),
     };
   },
-
   computed: {
     user () {
       return usePage().props.auth.user;
     },
   },
-
   methods: {
     createFavorite (msId, video, known, air) {
       if (this.user) {

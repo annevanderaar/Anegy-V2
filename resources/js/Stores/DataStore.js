@@ -13,7 +13,6 @@ export const DataStore = defineStore('data', {
     rating: [0, 10],
     languageStore: LanguageStore(),
   }),
-
   actions: {
     getDiscover () {
       axios({

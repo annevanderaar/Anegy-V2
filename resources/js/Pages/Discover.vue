@@ -37,14 +37,12 @@ import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'Discover',
-
   components: {
     PageHeader,
     FilterButton,
     Filter,
     Cards,
   },
-
   data () {
     return {
       languageStore: LanguageStore(),
@@ -56,41 +54,32 @@ export default defineComponent({
       pageName: '',
     };
   },
-
   computed: {
     data () {
       return this.dataStore.data;
     },
-
     page () {
       return this.dataStore.page;
     },
-
     translate () {
       return this.languageStore.translate;
     },
-
     genres () {
       return this.filterStore.select;
     },
-
     user () {
       return usePage().props.auth.user;
     },
-
     refreshFav () {
       return this.favoriteStore.refresh;
     },
-
     refreshWat () {
       return this.watchedStore.refresh;
     },
-
     mobile () {
       return this.$vuetify.display.mobile;
     },
   },
-
   methods: {
     getRoutes () {
       if (route().current('movies.discover')) {
@@ -141,24 +130,20 @@ export default defineComponent({
         this.dataStore.page = parseInt(localStorage.currentPage);
       }
     },
-
     scroll () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     },
-
     getFavorites () {
       if (this.user) {
         this.favoriteStore.getFavorites(this.user.id);
       }
     },
-
     getWatched () {
       if (this.user) {
         this.watchedStore.getWatched(this.user.id);
       }
     },
   },
-
   watch: {
     page (val) {
       localStorage.currentPage = val;
@@ -171,26 +156,21 @@ export default defineComponent({
       }
       this.scroll();
     },
-
     translate () {
       this.dataStore.getDiscover();
       this.getRoutes();
     },
-
     genres () {
       this.dataStore.genres = this.filterStore.selectedGenres;
       this.dataStore.getDiscover();
     },
-
     refreshFav () {
       this.getFavorites();
     },
-
     refreshWat () {
       this.getWatched();
     },
   },
-
   mounted () {
     this.getRoutes();
   },

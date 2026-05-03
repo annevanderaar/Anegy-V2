@@ -9,11 +9,13 @@
 
       <v-col class="text-center mb-6">
         <h3>{{ data.tagline }}</h3>
+
         <p>{{ data.overview }}</p>
       </v-col>
 
       <v-row v-if="current" class="mb-2">
         <h4>{{ $t('cards.release_date') }}: </h4>
+
         <p class="ml-2">
           {{ getDate(data.release_date) }}
           ({{ data.status }})
@@ -22,6 +24,7 @@
 
       <v-row v-else class="mb-2">
         <h4>{{ $t('cards.first_air_date') }}:</h4>
+
         <p class="ml-2">
           {{ getDate(data.first_air_date) }}
           ({{ data.status }})
@@ -30,6 +33,7 @@
 
       <v-row v-if="data.last_air_date" class="mb-2">
         <h4>{{ $t('cards.last_air_date') }}:</h4>
+
         <p class="ml-2">
           {{ getDate(data.last_air_date) }}
         </p>
@@ -37,17 +41,19 @@
 
       <v-row class="flex-align">
         <h4>{{ $t('details.language') }}:</h4>
+
         <v-chip
           class="ml-2"
         >
-          <span class="text-uppercase">{{
-            data.original_language
-          }}</span>
+          <span class="text-uppercase">
+            {{ data.original_language }}
+          </span>
         </v-chip>
       </v-row>
 
       <v-row class="mb-2">
         <h4>{{ $t('details.runtime') }}:</h4>
+
         <p class="ml-2">
           {{ data.runtime ? data.runtime : String(data.episode_run_time) }} min
         </p>
@@ -55,6 +61,7 @@
 
       <v-row class="flex-align">
         <h4>{{ $t('details.score') }}:</h4>
+
         <v-avatar
           :color="getColor(data.vote_average)"
           rounded="0"
@@ -66,6 +73,7 @@
 
       <v-row class="mb-2">
         <h4>{{ $t('details.budget') }}:</h4>
+
         <p class="ml-2">
           ${{ localString(data.budget) }}
         </p>
@@ -73,6 +81,7 @@
 
       <v-row class="mb-2">
         <h4>{{ $t('details.revenue') }}:</h4>
+
         <p class="ml-2">
           ${{ localString(data.revenue) }}
         </p>
@@ -80,6 +89,7 @@
 
       <v-row class="flex-align">
         <h4>{{ $t('filters.genres') }}:</h4>
+
         <v-chip
           v-for="item in data.genres"
           :key="item.id"
@@ -94,6 +104,7 @@
 
       <v-row class="flex-align">
         <h4>{{ $t('details.production_companies') }}:</h4>
+
         <v-chip
           v-for="company in data.production_companies"
           :key="company.id"
@@ -106,6 +117,7 @@
 
       <v-row class="flex-align">
         <h4>{{ $t('details.production_countries') }}:</h4>
+
         <v-chip
           v-for="country in data.production_countries"
           :key="country.iso_3166_1"
@@ -119,6 +131,7 @@
 
       <v-row v-if="detailStore.providers" class="flex-align">
         <h4>{{ $t('details.watch_nl') }}:</h4>
+
         <v-chip
           v-for="item in detailStore.providers.flatrate"
           :key="item.provider_id"
@@ -127,6 +140,7 @@
         >
           {{ item.provider_name }}
         </v-chip>
+
         <v-chip
           v-for="item in detailStore.providers.buy"
           :key="item.provider_id"
@@ -135,6 +149,7 @@
         >
           {{ item.provider_name }}
         </v-chip>
+
         <v-chip
           v-for="item in detailStore.providers.rent"
           :key="item.provider_id"
@@ -143,6 +158,7 @@
         >
           {{ item.provider_name }}
         </v-chip>
+
         <v-chip
           v-for="item in this.iLinks"
           :key="item.name"
@@ -157,6 +173,7 @@
 
       <v-row v-else class="flex-align">
         <h4>{{ $t('details.watch_nl') }}:</h4>
+
         <v-chip
           v-for="item in this.iLinks"
           :key="item.name"
@@ -172,8 +189,8 @@
 
     <v-col sm="12">
       <v-tabs
-        :stacked="true"
         color="accent"
+        stacked
         icons-and-text
         fixed-tabs
         show-arrows
@@ -183,20 +200,46 @@
           :key="tab.title"
           @click="show(tab.val)"
         >
-          <v-icon>{{ tab.icon }}</v-icon>{{ $t(tab.title) }}
+          <v-icon>{{ tab.icon }}</v-icon>
+
+          {{ $t(tab.title) }}
         </v-tab>
       </v-tabs>
 
-      <Cast v-if="selectedTab === 'cast'" :credits="detailStore.credits"/>
-      <Crew v-else-if="selectedTab === 'crew'" :credits="detailStore.credits"/>
+      <Cast
+        v-if="selectedTab === 'cast'"
+        :credits="detailStore.credits"
+      />
+
+      <Crew
+        v-else-if="selectedTab === 'crew'"
+        :credits="detailStore.credits"
+      />
+
       <Collection
         v-else-if="selectedTab === 'collection'"
         :collection="detailStore.collection"
       />
-      <Seasons v-else-if="selectedTab === 'seasons'" :seasons="detailStore.seasons"/>
-      <Videos v-else-if="selectedTab === 'videos'" :videos="detailStore.videos"/>
-      <Reviews v-else-if="selectedTab === 'reviews'" :reviews="detailStore.reviews"/>
-      <Similar v-else-if="selectedTab === 'similar'" :similar="detailStore.similar"/>
+
+      <Seasons
+        v-else-if="selectedTab === 'seasons'"
+        :seasons="detailStore.seasons"
+      />
+
+      <Videos
+        v-else-if="selectedTab === 'videos'"
+        :videos="detailStore.videos"
+      />
+
+      <Reviews
+        v-else-if="selectedTab === 'reviews'"
+        :reviews="detailStore.reviews"
+      />
+
+      <Similar
+        v-else-if="selectedTab === 'similar'"
+        :similar="detailStore.similar"
+      />
     </v-col>
   </v-row>
 </template>
@@ -223,7 +266,6 @@ import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'Details',
-
   components: {
     ImageTile,
     PageHeader,
@@ -237,7 +279,6 @@ export default defineComponent({
     Collection,
     Seasons,
   },
-
   data () {
     return {
       id: this.$page.props.route_parameters.id,
@@ -300,37 +341,29 @@ export default defineComponent({
       ],
     };
   },
-
   computed: {
     data () {
       return this.detailStore.data;
     },
-
     current () {
       return route().current('movies.*');
     },
-
     translate () {
       return this.languageStore.translate;
     },
-
     user () {
       return usePage().props.auth.user;
     },
-
     refreshFav () {
       return this.favoriteStore.refresh;
     },
-
     refreshWat () {
       return this.watchedStore.refresh;
     },
-
     mobile () {
       return this.$vuetify.display.mobile;
     },
   },
-
   methods: {
     getDetails (val) {
       this.detailStore.getDetails(`/${val}/${this.id}`);
@@ -343,7 +376,6 @@ export default defineComponent({
       this.getFavorites();
       this.getWatched();
     },
-
     getTabs () {
       if (this.current) {
         this.tabs.splice(2, 1);
@@ -351,7 +383,6 @@ export default defineComponent({
       }
       this.tabs.splice(3, 1);
     },
-
     getDate (date) {
       return new Date(date).toLocaleDateString(this.languageStore.tmdb, {
         year: 'numeric',
@@ -359,13 +390,11 @@ export default defineComponent({
         day: 'numeric',
       });
     },
-
     getYear (date) {
       return new Date(date).toLocaleDateString(this.languageStore.tmdb, {
         year: 'numeric',
       });
     },
-
     getColor (average) {
       if (average >= 7.5) {
         return 'green';
@@ -375,31 +404,26 @@ export default defineComponent({
         return 'red';
       }
     },
-
     localString (price) {
       if (price) {
         return parseInt(price).toLocaleString();
       }
       return '-';
     },
-
     show (value) {
       this.selectedTab = value;
     },
-
     getFavorites () {
       if (this.user) {
         this.favoriteStore.getFavorites(this.user.id);
       }
     },
-
     getWatched () {
       if (this.user) {
         this.watchedStore.getWatched(this.user.id);
       }
     },
   },
-
   watch: {
     data (val) {
       if (val) {
@@ -410,27 +434,19 @@ export default defineComponent({
         }
       }
     },
-
     translate () {
       this.getDetails(this.current ? 'movie' : 'tv');
     },
-
     refreshFav () {
       this.getFavorites();
     },
-
     refreshWat () {
       this.getWatched();
     },
   },
-
   mounted () {
     this.getTabs();
     this.getDetails(this.current ? 'movie' : 'tv');
   },
 });
 </script>
-
-<style scoped>
-@import "../../css/app.css";
-</style>

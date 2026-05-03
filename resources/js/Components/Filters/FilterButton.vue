@@ -21,11 +21,9 @@ import IconButton from '@/Components/IconButton.vue';
 
 export default defineComponent({
   name: 'FilterButton',
-
   components: {
     IconButton,
   },
-
   computed: {
     mobile () {
       return this.$vuetify.display.mobile;

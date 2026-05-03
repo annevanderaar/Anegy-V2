@@ -45,7 +45,6 @@ export const GeneratorStore = defineStore('generator', {
       },
     ],
   }),
-
   actions: {
     generate () {
       let url;
@@ -73,7 +72,6 @@ export const GeneratorStore = defineStore('generator', {
         }
       });
     },
-
     getResult () {
       const url = `/${this.result.first_air_date ? 'tv' : 'movie'}/${this.result.id}`;
       axios({

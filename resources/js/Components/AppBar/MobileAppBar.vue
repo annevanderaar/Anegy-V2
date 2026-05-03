@@ -115,12 +115,10 @@ import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'MobileAppBar',
-
   components: {
     ResponsiveNavLink,
     IconButton,
   },
-
   data () {
     return {
       showField: false,
@@ -139,7 +137,6 @@ export default defineComponent({
       ],
     };
   },
-
   computed: {
     showSearch () {
       return (route().current('home') ||
@@ -157,28 +154,22 @@ export default defineComponent({
         route().current('series.upcoming')
       );
     },
-
     dark () {
       return this.theme.global.name === 'darkTheme';
     },
-
     search () {
       return this.searchStore.search;
     },
-
     user () {
       return usePage().props.auth.user;
     },
   },
-
   methods: {
     route,
-
     darkMode () {
       this.theme.global.name = this.dark ? 'lightTheme' : 'darkTheme';
       localStorage.setItem('dark_theme', String(this.theme.global.name));
     },
-
     translate () {
       this.languageStore.i18n = this.languageStore.i18n === 'en' ? 'nl' : 'en';
       localStorage.setItem('vue_i18n_locale', this.languageStore.i18n);
@@ -194,19 +185,16 @@ export default defineComponent({
 
       this.languageStore.translate = !this.languageStore.translate;
     },
-
     resetPage () {
       localStorage.currentPage = 1;
     },
   },
-
   watch: {
     showField (val) {
       if (!val) {
         this.searchStore.search = '';
       }
     },
-
     search (val) {
       if (!val) {
         this.dataStore.getDiscover();

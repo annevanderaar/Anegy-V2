@@ -3,12 +3,14 @@
     <h2 v-if="!videos.length" class="text-center">
       {{ $t('details.videos.no') }}
     </h2>
+
     <v-card
       v-for="video in videos"
       :key="video.id"
       class="cards"
     >
       <h4>{{ video.name }}</h4>
+
       <iframe
         :src="`https://www.youtube.com/embed/${video.key}`"
         width="560"
@@ -20,7 +22,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -32,7 +34,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-@import "../../../css/app.css";
-</style>

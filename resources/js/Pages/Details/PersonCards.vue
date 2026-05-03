@@ -7,6 +7,7 @@
       mandatory
     >
       <v-btn>{{ $t('details.cast.title') }}</v-btn>
+
       <v-btn>{{ $t('details.crew') }}</v-btn>
     </v-btn-toggle>
 
@@ -22,7 +23,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import Cards from '../../Components/Cards.vue';
 
@@ -30,28 +31,24 @@ export default defineComponent({
   components: {
     Cards,
   },
-
   props: {
     personMovies: {
       type: Object,
       required: false,
       default: () => {},
     },
-
     personSeries: {
       type: Object,
       required: false,
       default: () => {},
     },
   },
-
   data () {
     return {
       selectedValue: 'cast',
       value: 0,
     };
   },
-
   watch: {
     value (val) {
       if (val === 0) {

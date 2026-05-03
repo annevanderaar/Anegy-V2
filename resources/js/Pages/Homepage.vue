@@ -29,12 +29,10 @@ import PageHeader from '@/Components/PageHeader.vue';
 
 export default defineComponent({
   name: 'Homepage',
-
   components: {
     PageHeader,
     Cards,
   },
-
   data () {
     return {
       languageStore: LanguageStore(),
@@ -44,55 +42,44 @@ export default defineComponent({
       watchedStore: WatchedStore(),
     };
   },
-
   computed: {
     data () {
       return this.dataStore.data;
     },
-
     page () {
       return this.dataStore.page;
     },
-
     translate () {
       return this.languageStore.translate;
     },
-
     user () {
       return usePage().props.auth.user;
     },
-
     refreshFav () {
       return this.favoriteStore.refresh;
     },
-
     refreshWat () {
       return this.watchedStore.refresh;
     },
-
     mobile () {
       return this.$vuetify.display.mobile;
     },
   },
-
   methods: {
     scroll () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     },
-
     getFavorites () {
       if (this.user) {
         this.favoriteStore.getFavorites(this.user.id);
       }
     },
-
     getWatched () {
       if (this.user) {
         this.watchedStore.getWatched(this.user.id);
       }
     },
   },
-
   watch: {
     page (val) {
       localStorage.currentPage = val;
@@ -105,20 +92,16 @@ export default defineComponent({
       }
       this.scroll();
     },
-
     translate () {
       this.dataStore.getDiscover();
     },
-
     refreshFav () {
       this.getFavorites();
     },
-
     refreshWat () {
       this.getWatched();
     },
   },
-
   mounted () {
     if (localStorage.currentPage) {
       this.dataStore.page = parseInt(localStorage.currentPage);

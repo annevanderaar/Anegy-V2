@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-wrap justify-center">
     <v-card
-      v-for="crew in this.credits.crew"
+      v-for="crew in credits.crew"
       :key="crew.id"
       :href="`/people/${crew.id}`"
       width="300px"
@@ -12,7 +12,9 @@
         size="128"
         class="ma-2"
       />
+
       <v-card-title>{{ crew.name }}</v-card-title>
+
       <v-card-text class="text-center">
         {{ crew.job }}
       </v-card-text>
@@ -20,7 +22,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -32,7 +34,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-@import "../../../css/app.css";
-</style>

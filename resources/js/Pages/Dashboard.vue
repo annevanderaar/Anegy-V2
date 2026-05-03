@@ -26,23 +26,30 @@
               size="x-large"
             >
               <span class="text-h5">
-                {{ user.firstname.substring(0, 1) + user.lastname.substring(0, 1).toUpperCase() }}
+                {{ user.firstname.substring(0, 1).toUpperCase() }}
               </span>
             </v-avatar>
+
             <h3 class="mt-2">
               {{ $t('auth.login.name') }}:
+
               <span class="font-weight-regular">
-                {{ user.firstname }}  {{ user.lastname }}
+                {{ user.firstname }}
+                {{ user.lastname }}
               </span>
             </h3>
+
             <h3 class="mt-2">
               {{ $t('auth.login.email') }}:
+
               <span class="font-weight-regular">
                 {{ user.email }}
               </span>
             </h3>
+
             <h3 class="mt-2">
               {{ $t('auth.dashboard.created') }}:
+
               <span class="font-weight-regular">
                 {{ new Date(user.created_at).toLocaleDateString('nl') }}
               </span>
@@ -113,7 +120,6 @@ import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'Dashboard',
-
   components: {
     PageHeader,
     SecondaryButton,
@@ -122,7 +128,6 @@ export default defineComponent({
     PrimaryButton,
     ResponsiveNavLink,
   },
-
   data () {
     return {
       favoriteStore: FavoriteStore(),
@@ -130,28 +135,23 @@ export default defineComponent({
       watchedStore: WatchedStore(),
     };
   },
-
   computed: {
     user () {
       return usePage().props.auth.user;
     },
-
     translate () {
       return this.languageStore.translate;
     },
   },
-
   methods: {
     route,
   },
-
   watch: {
     translate () {
       this.favoriteStore.getLatestFavorite(this.user.id);
       this.watchedStore.getLatestWatched(this.user.id);
     },
   },
-
   mounted () {
     this.favoriteStore.getLatestFavorite(this.user.id);
     this.watchedStore.getLatestWatched(this.user.id);

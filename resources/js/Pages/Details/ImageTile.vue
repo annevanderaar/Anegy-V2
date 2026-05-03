@@ -17,32 +17,27 @@
 <script>
 export default {
   name: 'ImageTile',
-
   props: {
     title: {
       type: String,
       required: true,
     },
-
     posterPath: {
       type: String,
       required: false,
       default: null,
     },
-
     profilePath: {
       type: String,
       required: false,
       default: null,
     },
   },
-
   computed: {
     mobile () {
       return this.$vuetify.display.mobile;
     },
   },
-
   methods: {
     getUrl (path) {
       if (!path) {

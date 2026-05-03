@@ -9,11 +9,9 @@ import { Head } from '@inertiajs/vue3';
 
 export default {
   name: 'PageHeader',
-
   components: {
     Head,
   },
-
   props: {
     title: {
       type: String,

@@ -10,7 +10,6 @@ export const SearchStore = defineStore('search', {
     searching: false,
     dataStore: DataStore(),
   }),
-
   actions: {
     getSearch () {
       axios({

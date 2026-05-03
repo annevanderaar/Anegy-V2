@@ -9,9 +9,11 @@
         @click="showEpisodes(season.season_number)"
       >
         <v-img :src="`https://image.tmdb.org/t/p/w500${season.poster_path}`"/>
+
         <v-card-title class="text-center">
           Season {{ season.season_number }}
         </v-card-title>
+
         <v-card-text class="text-center">
           {{ season.episode_count }}
           {{ season.episode_count > 1 ? "Episodes" : "Episode" }}
@@ -37,15 +39,16 @@
         <v-card-title>
           {{ $t('details.seasons.episode') }}{{ episode.episode_number }} {{ episode.name }}
         </v-card-title>
+
         <v-card-text>{{ episode.overview }}</v-card-text>
       </v-card>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
-import { DetailsStore } from '../../Stores/DetailsStore';
+import { DetailsStore } from '@/Stores/DetailsStore';
 
 export default defineComponent({
   props: {
@@ -54,13 +57,11 @@ export default defineComponent({
       required: true,
     },
   },
-
   data () {
     return {
       detailStore: DetailsStore(),
     };
   },
-
   methods: {
     showEpisodes (season: number) {
       this.detailStore.getSeasonDetails(`/tv/${this.$page.props.route_parameters.id}/season/${season}`);

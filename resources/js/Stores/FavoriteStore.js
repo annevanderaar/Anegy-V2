@@ -9,7 +9,6 @@ export const FavoriteStore = defineStore('favorite', {
     languageStore: LanguageStore(),
     refresh: false,
   }),
-
   actions: {
     getFavorites (id) {
       this.favorites = [];
@@ -20,13 +19,12 @@ export const FavoriteStore = defineStore('favorite', {
       }).then(res => {
         if (res.data.length > 0) {
           res.data.forEach(item => {
-            this.favorites.push(item.ms_id);
+            this.favorites = res.data.map(item => item.ms_id);
             this.getDetails(`/${item.type}/${item.ms_id}`);
           });
         }
       });
     },
-
     getDetails (url) {
       axios({
         method: 'POST',
@@ -39,7 +37,6 @@ export const FavoriteStore = defineStore('favorite', {
         this.data.push(res.data);
       });
     },
-
     createFavorite (userId, msId, video, known, air) {
       let msType = '';
       if (known) {
@@ -62,7 +59,6 @@ export const FavoriteStore = defineStore('favorite', {
         this.refresh = !this.refresh;
       });
     },
-
     deleteFavorite (userId, msId) {
       axios({
         method: 'DELETE',
@@ -75,7 +71,6 @@ export const FavoriteStore = defineStore('favorite', {
         this.refresh = !this.refresh;
       });
     },
-
     getLatestFavorite (id) {
       this.favorites = [];
       this.data = [];
@@ -84,7 +79,7 @@ export const FavoriteStore = defineStore('favorite', {
         url: route('api.favorites.latest', { id }),
       }).then(res => {
         if (res.data) {
-          this.favorites.push(res.data.ms_id);
+          this.favorites = [res.data.ms_id];
           this.getDetails(`/${res.data.type}/${res.data.ms_id}`);
         }
       });

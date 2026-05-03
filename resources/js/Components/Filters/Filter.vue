@@ -111,7 +111,6 @@ import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'Filter',
-
   data () {
     return {
       dataStore: DataStore(),
@@ -119,7 +118,6 @@ export default defineComponent({
       rating: [0, 10],
     };
   },
-
   computed: {
     genres () {
       if (route().current('series.*')) {
@@ -129,19 +127,15 @@ export default defineComponent({
       }
     },
   },
-
   methods: {
     route,
-
     includes (id) {
       return this.filterStore.selectedGenres.includes(id);
     },
-
     reset () {
       this.filterStore.drawer = false;
       this.filterStore.select = !this.filterStore.select;
     },
-
     addGenre (id) {
       if (this.includes(id)) {
         const index = this.filterStore.selectedGenres.indexOf(id);
@@ -152,12 +146,10 @@ export default defineComponent({
       this.filterStore.selectedGenres.push(id);
       this.reset();
     },
-
     clearAllFilters () {
       this.filterStore.selectedGenres.splice(0);
       this.reset();
     },
-
     items () {
       let name;
 
@@ -176,11 +168,9 @@ export default defineComponent({
         { text: 'upcoming', icon: 'mdi-calendar-month', route: `${name}.upcoming` },
       ];
     },
-
     resetPage () {
       localStorage.currentPage = 1;
     },
-
     addRating () {
       this.dataStore.rating = this.rating;
       this.reset();

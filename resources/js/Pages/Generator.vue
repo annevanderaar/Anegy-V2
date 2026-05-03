@@ -114,13 +114,11 @@ import VueMultiselect from 'vue-multiselect';
 
 export default defineComponent({
   name: 'Generator',
-
   components: {
     PageHeader,
     Cards,
     VueMultiselect,
   },
-
   data () {
     return {
       generatorStore: GeneratorStore(),
@@ -128,13 +126,11 @@ export default defineComponent({
       languageStore: LanguageStore(),
     };
   },
-
   computed: {
     translate () {
       return this.languageStore.translate;
     },
   },
-
   methods: {
     getGenres () {
       if (this.generatorStore.choice === 0) {
@@ -144,13 +140,11 @@ export default defineComponent({
       return this.filterStore.serieGenres;
     },
   },
-
   watch: {
     translate () {
       this.generatorStore.getResult();
     },
   },
-
   mounted () {
     this.generatorStore.result = {};
   },
@@ -159,8 +153,13 @@ export default defineComponent({
 
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
 
-<style scoped>
+<style>
 .select-width {
   min-width: 250px;
+}
+
+.multiselect__option--highlight:not(.multiselect__option--selected),
+.multiselect__option--highlight:not(.multiselect__option--selected)::after {
+  background: rgb(var(--v-theme-accent)) !important;
 }
 </style>

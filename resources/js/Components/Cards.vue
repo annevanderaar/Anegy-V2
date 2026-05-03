@@ -24,7 +24,9 @@
 
       <v-card class="overview">
         <v-card-subtitle v-if="item.release_date || item.first_air_date" class="text-wrap">
-          <strong>{{ item.release_date ? $t('cards.release_date') : $t('cards.first_air_date') }}:</strong>
+          <strong>
+            {{ item.release_date ? $t('cards.release_date') : $t('cards.first_air_date') }}:
+          </strong>
 
           {{ item.release_date ? getDate(item.release_date) : getDate(item.first_air_date) }}
         </v-card-subtitle>
@@ -93,14 +95,12 @@ import { WatchedStore } from '@/Stores/WatchedStore';
 
 export default defineComponent({
   name: 'Cards',
-
   props: {
     results: {
       type: Object,
       required: true,
     },
   },
-
   data () {
     return {
       msType: '',
@@ -108,13 +108,11 @@ export default defineComponent({
       watchedStore: WatchedStore(),
     };
   },
-
   computed: {
     user () {
       return usePage().props.auth.user;
     },
   },
-
   methods: {
     getUrl (item) {
       const posterPath = 'https://image.tmdb.org/t/p/w500';
@@ -126,7 +124,6 @@ export default defineComponent({
         return 'https://via.placeholder.com/1080x1580';
       }
     },
-
     getColor (average) {
       if (typeof average === 'number') {
         const newAverage = average.toFixed(1);
@@ -141,7 +138,6 @@ export default defineComponent({
         return 'accent';
       }
     },
-
     getDate (date) {
       return new Date(date).toLocaleDateString('nl-NL', {
         year: 'numeric',
@@ -149,7 +145,6 @@ export default defineComponent({
         day: 'numeric',
       });
     },
-
     getHref (item) {
       if (item.media_type === 'movie' || item.video === false) {
         return `/movies/details/${item.id}`;
@@ -159,7 +154,6 @@ export default defineComponent({
         return `/series/details/${item.id}`;
       }
     },
-
     getText (item) {
       if (item.media_type === 'person' || item.known_for_department) {
         return this.$t('cards.known_for') + ': ' + item.known_for_department;
@@ -167,7 +161,6 @@ export default defineComponent({
         return item.overview;
       }
     },
-
     createFavorite (msId, video, known, air) {
       if (this.user) {
         this.favoriteStore.createFavorite(this.user.id, msId, video, known, air);
@@ -175,7 +168,6 @@ export default defineComponent({
       }
       useToast().warning(this.$t('favorites.need_account'));
     },
-
     createWatched (msId, video, known, air) {
       if (this.user) {
         this.watchedStore.createWatched(this.user.id, msId, video, known, air);
@@ -188,5 +180,33 @@ export default defineComponent({
 </script>
 
 <style scoped>
-@import "../../css/cards.css";
+.overview {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 100%;
+  padding: 1rem;
+  transform: translateY(101%);
+  transition: transform 0.3s ease-in;
+  overflow: auto;
+}
+
+.overview::-webkit-scrollbar {
+  width: 10px;
+}
+
+.card:hover .overview {
+  transform: translateY(0);
+}
+
+.v-avatar {
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.title {
+  width: 240px;
+}
 </style>

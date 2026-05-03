@@ -47,7 +47,6 @@ defineProps({
   mustVerifyEmail: {
     type: Boolean,
   },
-
   status: {
     type: String,
     default: '',

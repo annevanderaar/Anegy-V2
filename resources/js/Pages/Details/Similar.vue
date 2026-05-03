@@ -3,7 +3,8 @@
     <Cards :results="similar"/>
   </div>
 </template>
-<script lang="ts">
+
+<script>
 import { defineComponent } from 'vue';
 import Cards from '@/Components/Cards.vue';
 
@@ -11,7 +12,6 @@ export default defineComponent({
   components: {
     Cards,
   },
-
   props: {
     similar: {
       type: Array,

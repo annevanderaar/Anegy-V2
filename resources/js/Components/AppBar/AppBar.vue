@@ -11,12 +11,10 @@ import DesktopAppBar from '@/Components/AppBar/DesktopAppBar.vue';
 
 export default defineComponent({
   name: 'AppBar',
-
   components: {
     DesktopAppBar,
     MobileAppBar,
   },
-
   computed: {
     mobile () {
       return this.$vuetify.display.mobile;

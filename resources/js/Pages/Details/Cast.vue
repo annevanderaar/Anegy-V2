@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-wrap justify-center">
     <v-card
-      v-for="cast in this.credits.cast"
+      v-for="cast in credits.cast"
       :key="cast.id"
       :href="`/people/${cast.id}`"
       width="300px"
@@ -13,15 +13,17 @@
         class="ma-2"
       />
       <v-card-title>{{ cast.name }}</v-card-title>
+
       <v-card-subtitle>{{ $t('details.cast.as') }}</v-card-subtitle>
-      <v-card-text style="text-align: center">
+
+      <v-card-text class="text-center">
         {{ cast.character }}
       </v-card-text>
     </v-card>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -33,7 +35,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-@import "../../../css/app.css";
-</style>

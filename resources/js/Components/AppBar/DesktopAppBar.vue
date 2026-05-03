@@ -99,7 +99,6 @@
       icon="mdi-account"
     />
 
-    <!-- Dropdown -->
     <div class="d-flex justify-space-around">
       <v-menu>
         <template #activator="{ props }">
@@ -109,7 +108,7 @@
             icon="mdi-account"
             variant="text"
           >
-            {{ user.firstname.substring(0, 1) + user.lastname.substring(0, 1).toUpperCase() }}
+            {{ user.firstname.substring(0, 1).toUpperCase() }}
           </v-btn>
         </template>
 
@@ -164,12 +163,10 @@ import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'DesktopAppBar',
-
   components: {
     IconButton,
     ResponsiveNavLink,
   },
-
   data () {
     return {
       showField: false,
@@ -185,7 +182,6 @@ export default defineComponent({
       ],
     };
   },
-
   computed: {
     showSearch () {
       return (route().current('home') ||
@@ -203,28 +199,22 @@ export default defineComponent({
         route().current('series.upcoming')
       );
     },
-
     dark () {
       return this.theme.global.name === 'darkTheme';
     },
-
     search () {
       return this.searchStore.search;
     },
-
     user () {
       return usePage().props.auth.user;
     },
   },
-
   methods: {
     route,
-
     darkMode () {
       this.theme.global.name = this.dark ? 'lightTheme' : 'darkTheme';
       localStorage.setItem('dark_theme', String(this.theme.global.name));
     },
-
     translate () {
       this.languageStore.i18n = this.languageStore.i18n === 'en' ? 'nl' : 'en';
       localStorage.setItem('vue_i18n_locale', this.languageStore.i18n);
@@ -240,19 +230,16 @@ export default defineComponent({
 
       this.languageStore.translate = !this.languageStore.translate;
     },
-
     resetPage () {
       localStorage.currentPage = 1;
     },
   },
-
   watch: {
     showField (val) {
       if (!val) {
         this.searchStore.search = '';
       }
     },
-
     search (val) {
       if (!val) {
         this.dataStore.getDiscover();

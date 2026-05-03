@@ -22,13 +22,11 @@ import Cards from '@/Components/Cards.vue';
 import PageHeader from '@/Components/PageHeader.vue';
 
 export default defineComponent({
-  name: 'Favorites',
-
+  name: 'Watched',
   components: {
     PageHeader,
     Cards,
   },
-
   data () {
     return {
       watchedStore: WatchedStore(),
@@ -36,54 +34,43 @@ export default defineComponent({
       favoriteStore: FavoriteStore(),
     };
   },
-
   computed: {
     user () {
       return usePage().props.auth.user;
     },
-
     refreshFav () {
       return this.favoriteStore.refresh;
     },
-
     refreshWat () {
       return this.watchedStore.refresh;
     },
-
     translate () {
       return this.languageStore.translate;
     },
   },
-
   methods: {
     title () {
       return this.$t('auth.dashboard.watched');
     },
-
     getWatched () {
       this.watchedStore.getWatched(this.user.id);
     },
-
     getFavorites () {
       this.favoriteStore.getFavorites(this.user.id);
     },
   },
-
   watch: {
     refreshFav () {
       this.getFavorites();
     },
-
     refreshWat () {
       this.getWatched();
     },
-
     translate () {
       this.getFavorites();
       this.getWatched();
     },
   },
-
   mounted () {
     this.getFavorites();
     this.getWatched();

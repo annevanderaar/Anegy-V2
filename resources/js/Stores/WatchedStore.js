@@ -9,7 +9,6 @@ export const WatchedStore = defineStore('watched', {
     languageStore: LanguageStore(),
     refresh: false,
   }),
-
   actions: {
     getWatched (id) {
       this.watched = [];
@@ -19,14 +18,13 @@ export const WatchedStore = defineStore('watched', {
         url: route('api.watched.all', { id }),
       }).then(res => {
         if (res.data.length > 0) {
+          this.watched = res.data.map(item => item.ms_id);
           res.data.forEach(item => {
-            this.watched.push(item.ms_id);
             this.getDetails(`/${item.type}/${item.ms_id}`);
           });
         }
       });
     },
-
     getDetails (url) {
       axios({
         method: 'POST',
@@ -39,7 +37,6 @@ export const WatchedStore = defineStore('watched', {
         this.data.push(res.data);
       });
     },
-
     createWatched (userId, msId, video, known, air) {
       let msType = '';
       if (known) {
@@ -62,7 +59,6 @@ export const WatchedStore = defineStore('watched', {
         this.refresh = !this.refresh;
       });
     },
-
     deleteWatched (userId, msId) {
       axios({
         method: 'DELETE',
@@ -75,7 +71,6 @@ export const WatchedStore = defineStore('watched', {
         this.refresh = !this.refresh;
       });
     },
-
     getLatestWatched (id) {
       this.watched = [];
       this.data = [];
@@ -84,7 +79,7 @@ export const WatchedStore = defineStore('watched', {
         url: route('api.watched.latest', { id }),
       }).then(res => {
         if (res.data) {
-          this.watched.push(res.data.ms_id);
+          this.watched = [res.data.ms_id];
           this.getDetails(`/${res.data.type}/${res.data.ms_id}`);
         }
       });

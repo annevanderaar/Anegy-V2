@@ -79,7 +79,19 @@
           {{ $t('favorites.not_added') }}
         </p>
 
-        <Cards :results="favoriteStore.data"/>
+        <Cards v-else :results="favoriteStore.data"/>
+      </div>
+
+      <div>
+        <h2 class="mt-2">
+          {{ $t('watched.latest') }}
+        </h2>
+
+        <p v-if="watchedStore.data.length < 1">
+          {{ $t('watched.not_added') }}
+        </p>
+
+        <Cards v-else :results="watchedStore.data"/>
       </div>
     </div>
   </AuthenticatedLayout>
@@ -90,6 +102,7 @@ import { defineComponent } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
+import { WatchedStore } from '@/Stores/WatchedStore';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
 import ResponsiveNavLink from '@/Components/Breeze/ResponsiveNavLink.vue';
@@ -114,6 +127,7 @@ export default defineComponent({
     return {
       favoriteStore: FavoriteStore(),
       languageStore: LanguageStore(),
+      watchedStore: WatchedStore(),
     };
   },
 
@@ -134,11 +148,13 @@ export default defineComponent({
   watch: {
     translate () {
       this.favoriteStore.getLatestFavorite(this.user.id);
+      this.watchedStore.getLatestWatched(this.user.id);
     },
   },
 
   mounted () {
     this.favoriteStore.getLatestFavorite(this.user.id);
+    this.watchedStore.getLatestWatched(this.user.id);
   },
 });
 </script>

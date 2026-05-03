@@ -16,6 +16,7 @@
             "edit_profile": "Edit profile",
             "favorites": "Favorites",
             "title": "Dashboard",
+            "watched": "Watched",
             "welcome": "Welcome {name}! We are glad to have you here on Anegy",
             "your_information": "Your information"
         },
@@ -161,5 +162,11 @@
     "series": "Series",
     "top_rated": "Top Rated {name}",
     "trending": "Trending {name}",
-    "upcoming": "Upcoming {name}"
+    "upcoming": "Upcoming {name}",
+    "watched": {
+        "all": "All your watched are here!",
+        "latest": "Latest added watched",
+        "need_account": "You need to have an account to add a watched",
+        "not_added": "You have not added a watched"
+    }
 }

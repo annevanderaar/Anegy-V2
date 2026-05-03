@@ -1,13 +1,17 @@
 <?php
 
-use App\Http\Controllers\Favorite\FavoriteAllController;
-use App\Http\Controllers\Favorite\FavoriteDeleteController;
-use App\Http\Controllers\Favorite\FavoriteLatestController;
-use App\Http\Controllers\Favorite\FavoriteStoreController;
-use App\Http\Controllers\TMDB\DetailsController;
-use App\Http\Controllers\TMDB\DiscoverController;
 use App\Http\Controllers\TMDB\GeneratorController;
+use App\Http\Controllers\TMDB\DiscoverController;
+use App\Http\Controllers\TMDB\DetailsController;
 use App\Http\Controllers\TMDB\SearchController;
+use App\Http\Controllers\Favorite\FavoriteAllController;
+use App\Http\Controllers\Favorite\FavoriteLatestController;
+use App\Http\Controllers\Favorite\FavoriteDeleteController;
+use App\Http\Controllers\Favorite\FavoriteStoreController;
+use App\Http\Controllers\Watched\WatchedAllController;
+use App\Http\Controllers\Watched\WatchedLatestController;
+use App\Http\Controllers\Watched\WatchedDeleteController;
+use App\Http\Controllers\Watched\WatchedStoreController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -47,4 +51,11 @@ Route::prefix('favorites')->group(static function () {
     Route::put('{id}', FavoriteLatestController::class)->name('api.favorites.latest');
     Route::delete('', FavoriteDeleteController::class)->name('api.favorites.delete');
     Route::post('', FavoriteStoreController::class)->name('api.favorites.store');
+});
+
+Route::prefix('watched')->group(static function () {
+    Route::patch('{id}', WatchedAllController::class)->name('api.watched.all');
+    Route::put('{id}', WatchedLatestController::class)->name('api.watched.latest');
+    Route::delete('', WatchedDeleteController::class)->name('api.watched.delete');
+    Route::post('', WatchedStoreController::class)->name('api.watched.store');
 });

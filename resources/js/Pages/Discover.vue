@@ -28,6 +28,7 @@ import { DataStore } from '@/Stores/DataStore';
 import { FilterStore } from '@/Stores/FilterStore';
 import { SearchStore } from '@/Stores/SearchStore';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { WatchedStore } from '@/Stores/WatchedStore';
 import Cards from '@/Components/Cards.vue';
 import Filter from '@/Components/Filters/Filter.vue';
 import FilterButton from '@/Components/Filters/FilterButton.vue';
@@ -51,6 +52,7 @@ export default defineComponent({
       filterStore: FilterStore(),
       searchStore: SearchStore(),
       favoriteStore: FavoriteStore(),
+      watchedStore: WatchedStore(),
       pageName: '',
     };
   },
@@ -76,8 +78,12 @@ export default defineComponent({
       return usePage().props.auth.user;
     },
 
-    refresh () {
+    refreshFav () {
       return this.favoriteStore.refresh;
+    },
+
+    refreshWat () {
+      return this.watchedStore.refresh;
     },
 
     mobile () {
@@ -129,6 +135,7 @@ export default defineComponent({
 
       this.dataStore.getDiscover();
       this.getFavorites();
+      this.getWatched();
 
       if (localStorage.currentPage) {
         this.dataStore.page = parseInt(localStorage.currentPage);
@@ -142,6 +149,12 @@ export default defineComponent({
     getFavorites () {
       if (this.user) {
         this.favoriteStore.getFavorites(this.user.id);
+      }
+    },
+
+    getWatched () {
+      if (this.user) {
+        this.watchedStore.getWatched(this.user.id);
       }
     },
   },
@@ -169,8 +182,12 @@ export default defineComponent({
       this.dataStore.getDiscover();
     },
 
-    refresh () {
+    refreshFav () {
       this.getFavorites();
+    },
+
+    refreshWat () {
+      this.getWatched();
     },
   },
 

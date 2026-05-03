@@ -23,6 +23,7 @@ import { LanguageStore } from '@/Stores/LanguageStore';
 import { DataStore } from '@/Stores/DataStore';
 import { SearchStore } from '@/Stores/SearchStore';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { WatchedStore } from '@/Stores/WatchedStore';
 import Cards from '@/Components/Cards.vue';
 import PageHeader from '@/Components/PageHeader.vue';
 
@@ -40,6 +41,7 @@ export default defineComponent({
       dataStore: DataStore(),
       searchStore: SearchStore(),
       favoriteStore: FavoriteStore(),
+      watchedStore: WatchedStore(),
     };
   },
 
@@ -60,8 +62,12 @@ export default defineComponent({
       return usePage().props.auth.user;
     },
 
-    refresh () {
+    refreshFav () {
       return this.favoriteStore.refresh;
+    },
+
+    refreshWat () {
+      return this.watchedStore.refresh;
     },
 
     mobile () {
@@ -77,6 +83,12 @@ export default defineComponent({
     getFavorites () {
       if (this.user) {
         this.favoriteStore.getFavorites(this.user.id);
+      }
+    },
+
+    getWatched () {
+      if (this.user) {
+        this.watchedStore.getWatched(this.user.id);
       }
     },
   },
@@ -98,8 +110,12 @@ export default defineComponent({
       this.dataStore.getDiscover();
     },
 
-    refresh () {
+    refreshFav () {
       this.getFavorites();
+    },
+
+    refreshWat () {
+      this.getWatched();
     },
   },
 
@@ -110,6 +126,7 @@ export default defineComponent({
     this.dataStore.url = '/trending/all/day?';
     this.dataStore.getDiscover();
     this.getFavorites();
+    this.getWatched();
   },
 });
 </script>

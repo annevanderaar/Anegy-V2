@@ -89,6 +89,7 @@ import { usePage } from '@inertiajs/vue3';
 import { DetailsStore } from '../Stores/DetailsStore';
 import { LanguageStore } from '../Stores/LanguageStore';
 import { FavoriteStore } from '../Stores/FavoriteStore';
+import { WatchedStore } from '../Stores/WatchedStore';
 import Links from '../Components/Links.vue';
 import PersonCards from '../Pages/Details/PersonCards.vue';
 import Images from '../Pages/Details/Images.vue';
@@ -113,6 +114,7 @@ export default defineComponent({
       detailStore: DetailsStore(),
       languageStore: LanguageStore(),
       favoriteStore: FavoriteStore(),
+      watchedStore: WatchedStore(),
       selectedTab: 'movies',
       tabs: [
         {
@@ -147,8 +149,12 @@ export default defineComponent({
       return usePage().props.auth.user;
     },
 
-    refresh () {
+    refreshFav () {
       return this.favoriteStore.refresh;
+    },
+
+    refreshWat () {
+      return this.watchedStore.refresh;
     },
 
     mobile () {
@@ -164,6 +170,7 @@ export default defineComponent({
       this.detailStore.getPersonSeries(this.id);
       this.detailStore.getImages(this.id);
       this.getFavorites();
+      this.getWatched();
     },
 
     getDate (date) {
@@ -194,6 +201,12 @@ export default defineComponent({
         this.favoriteStore.getFavorites(this.user.id);
       }
     },
+
+    getWatched () {
+      if (this.user) {
+        this.watchedStore.getWatched(this.user.id);
+      }
+    },
   },
 
   watch: {
@@ -207,8 +220,12 @@ export default defineComponent({
       this.getDetails();
     },
 
-    refresh () {
+    refreshFav () {
       this.getFavorites();
+    },
+
+    refreshWat () {
+      this.getWatched();
     },
   },
 

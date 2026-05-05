@@ -34,9 +34,9 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { usePage } from '@inertiajs/vue3';
 import { useToast } from 'vue-toastification';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
 
 export default defineComponent({
   props: {

@@ -105,12 +105,12 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { LanguageStore } from '@/Stores/LanguageStore';
-import { useTheme } from 'vuetify';
-import { DataStore } from '@/Stores/DataStore';
-import { SearchStore } from '@/Stores/SearchStore';
 import { router, usePage } from '@inertiajs/vue3';
+import { useTheme } from 'vuetify';
 import IconButton from '@/Components/IconButton.vue';
+import { DataStore } from '@/Stores/DataStore';
+import { LanguageStore } from '@/Stores/LanguageStore';
+import { SearchStore } from '@/Stores/SearchStore';
 import route from 'ziggy-js';
 
 export default defineComponent({

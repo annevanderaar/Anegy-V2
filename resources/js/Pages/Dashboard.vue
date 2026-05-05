@@ -1,7 +1,7 @@
 <template>
   <PageHeader :title="$t('auth.dashboard.title')"/>
 
-  <AuthenticatedLayout>
+  <main class="d-flex justify-center flex-column">
     <h1 class="text-center">
       {{ $t('auth.dashboard.welcome', {name: user.firstname}) }}
     </h1>
@@ -92,30 +92,28 @@
         <Cards v-else :results="watchedStore.data"/>
       </div>
     </div>
-  </AuthenticatedLayout>
+  </main>
 </template>
 
 <script>
 import { defineComponent } from 'vue';
 import { router, usePage } from '@inertiajs/vue3';
+import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
+import SecondaryButton from '@/Components/Breeze/SecondaryButton.vue';
+import Cards from '@/Components/Cards.vue';
+import PageHeader from '@/Components/PageHeader.vue';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { WatchedStore } from '@/Stores/WatchedStore';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
-import Cards from '@/Components/Cards.vue';
-import SecondaryButton from '@/Components/Breeze/SecondaryButton.vue';
-import PageHeader from '@/Components/PageHeader.vue';
 import route from 'ziggy-js';
 
 export default defineComponent({
   name: 'Dashboard',
   components: {
-    PageHeader,
+    PrimaryButton,
     SecondaryButton,
     Cards,
-    AuthenticatedLayout,
-    PrimaryButton,
+    PageHeader,
   },
   data () {
     return {

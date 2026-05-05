@@ -110,16 +110,16 @@
 <script>
 import { defineComponent } from 'vue';
 import { usePage } from '@inertiajs/vue3';
-import { DetailsStore } from '@/Stores/DetailsStore';
-import { LanguageStore } from '@/Stores/LanguageStore';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
 import Links from '@/Components/Links.vue';
-import PersonCards from '@/Pages/Details/PersonCards.vue';
-import Images from '@/Pages/Details/Images.vue';
-import DetailsTitle from '@/Pages/Details/DetailsTitle.vue';
 import PageHeader from '@/Components/PageHeader.vue';
+import DetailsTitle from '@/Pages/Details/DetailsTitle.vue';
 import ImageTile from '@/Pages/Details/ImageTile.vue';
+import Images from '@/Pages/Details/Images.vue';
+import PersonCards from '@/Pages/Details/PersonCards.vue';
+import { DetailsStore } from '@/Stores/DetailsStore';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { LanguageStore } from '@/Stores/LanguageStore';
+import { WatchedStore } from '@/Stores/WatchedStore';
 
 export default defineComponent({
   name: 'Person',

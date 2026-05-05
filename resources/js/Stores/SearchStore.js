@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
 import { DataStore } from './DataStore';
+import axios from 'axios';
 
 export const SearchStore = defineStore('search', {
   state: () => ({

@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import IconButton from '@/Components/IconButton.vue';
 import { useDisplay } from 'vuetify';
+import IconButton from '@/Components/IconButton.vue';
 
 const { mobile } = useDisplay();
 </script>

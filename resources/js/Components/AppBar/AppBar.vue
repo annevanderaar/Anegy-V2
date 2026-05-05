@@ -5,9 +5,9 @@
 </template>
 
 <script setup lang="ts">
-import MobileAppBar from '@/Components/AppBar/MobileAppBar.vue';
-import DesktopAppBar from '@/Components/AppBar/DesktopAppBar.vue';
 import { useDisplay } from 'vuetify';
+import DesktopAppBar from '@/Components/AppBar/DesktopAppBar.vue';
+import MobileAppBar from '@/Components/AppBar/MobileAppBar.vue';
 
 const { mobile } = useDisplay();
 </script>

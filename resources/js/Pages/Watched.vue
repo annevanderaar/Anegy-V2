@@ -15,11 +15,11 @@
 <script>
 import { defineComponent } from 'vue';
 import { usePage } from '@inertiajs/vue3';
-import { LanguageStore } from '@/Stores/LanguageStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
 import Cards from '@/Components/Cards.vue';
 import PageHeader from '@/Components/PageHeader.vue';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { LanguageStore } from '@/Stores/LanguageStore';
+import { WatchedStore } from '@/Stores/WatchedStore';
 
 export default defineComponent({
   name: 'Watched',

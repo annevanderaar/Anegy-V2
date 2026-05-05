@@ -35,9 +35,9 @@
 
 <script setup>
 import { computed } from 'vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
-import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 
 const props = defineProps({
   status: {

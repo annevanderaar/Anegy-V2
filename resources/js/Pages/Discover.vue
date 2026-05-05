@@ -23,16 +23,16 @@
 <script>
 import { defineComponent } from 'vue';
 import { usePage } from '@inertiajs/vue3';
-import { LanguageStore } from '@/Stores/LanguageStore';
-import { DataStore } from '@/Stores/DataStore';
-import { FilterStore } from '@/Stores/FilterStore';
-import { SearchStore } from '@/Stores/SearchStore';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
 import Cards from '@/Components/Cards.vue';
 import Filter from '@/Components/Filters/Filter.vue';
 import FilterButton from '@/Components/Filters/FilterButton.vue';
 import PageHeader from '@/Components/PageHeader.vue';
+import { DataStore } from '@/Stores/DataStore';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { FilterStore } from '@/Stores/FilterStore';
+import { LanguageStore } from '@/Stores/LanguageStore';
+import { SearchStore } from '@/Stores/SearchStore';
+import { WatchedStore } from '@/Stores/WatchedStore';
 import route from 'ziggy-js';
 
 export default defineComponent({

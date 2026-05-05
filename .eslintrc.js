@@ -12,6 +12,7 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
+    '@typescript-eslint/no-empty-function': 'off',
     'no-unused-expressions': 'off',
     'arrow-parens': [1, 'as-needed'],
     'no-console': 'off',
@@ -78,4 +79,25 @@ module.exports = {
     'shims-vue.d.ts',
     'models.d.ts',
   ],
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [
+          ['@enums', './resources/vue/enums'],
+          ['@components', './resources/vue/components'],
+          ['@models', './resources/vue/models'],
+          ['@permissions', '/resources/vue/permissions'],
+          ['@stores', './resources/vue/stores'],
+          ['@services', './resources/vue/services'],
+          ['@mixins', './resources/vue/mixins'],
+          ['@support', './resources/vue/support'],
+          ['@utilities', './resources/vue/utilities'],
+        ],
+        extensions: ['.js', '.ts', '.vue'],
+      },
+      node: {
+        extensions: ['.js', '.ts', '.vue'],
+      },
+    },
+  },
 };

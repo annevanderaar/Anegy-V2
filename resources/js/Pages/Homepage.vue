@@ -19,13 +19,13 @@
 <script>
 import { defineComponent } from 'vue';
 import { usePage } from '@inertiajs/vue3';
-import { LanguageStore } from '@/Stores/LanguageStore';
-import { DataStore } from '@/Stores/DataStore';
-import { SearchStore } from '@/Stores/SearchStore';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
 import Cards from '@/Components/Cards.vue';
 import PageHeader from '@/Components/PageHeader.vue';
+import { DataStore } from '@/Stores/DataStore';
+import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { LanguageStore } from '@/Stores/LanguageStore';
+import { SearchStore } from '@/Stores/SearchStore';
+import { WatchedStore } from '@/Stores/WatchedStore';
 
 export default defineComponent({
   name: 'Homepage',

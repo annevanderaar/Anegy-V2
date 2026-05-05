@@ -247,21 +247,21 @@
 <script>
 import { defineComponent } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import Links from '@/Components/Links.vue';
+import PageHeader from '@/Components/PageHeader.vue';
+import Cast from '@/Pages/Details/Cast.vue';
+import Collection from '@/Pages/Details/Collection.vue';
+import Crew from '@/Pages/Details/Crew.vue';
+import DetailsTitle from '@/Pages/Details/DetailsTitle.vue';
+import ImageTile from '@/Pages/Details/ImageTile.vue';
+import Reviews from '@/Pages/Details/Reviews.vue';
+import Seasons from '@/Pages/Details/Seasons.vue';
+import Videos from '@/Pages/Details/Videos.vue';
 import { DetailsStore } from '@/Stores/DetailsStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { WatchedStore } from '@/Stores/WatchedStore';
-import Cast from '@/Pages/Details/Cast.vue';
-import Crew from '@/Pages/Details/Crew.vue';
-import Collection from '@/Pages/Details/Collection.vue';
-import Seasons from '@/Pages/Details/Seasons.vue';
-import Videos from '@/Pages/Details/Videos.vue';
-import Reviews from '@/Pages/Details/Reviews.vue';
 import Similar from '@/Pages/Details/Similar.vue';
-import Links from '@/Components/Links.vue';
-import DetailsTitle from '@/Pages/Details/DetailsTitle.vue';
-import PageHeader from '@/Components/PageHeader.vue';
-import ImageTile from '@/Pages/Details/ImageTile.vue';
 import route from 'ziggy-js';
 
 export default defineComponent({

@@ -105,12 +105,12 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { GeneratorStore } from '@/Stores/GeneratorStore';
-import { FilterStore } from '@/Stores/FilterStore';
-import { LanguageStore } from '@/Stores/LanguageStore';
-import PageHeader from '@/Components/PageHeader.vue';
-import Cards from '@/Components/Cards.vue';
 import VueMultiselect from 'vue-multiselect';
+import Cards from '@/Components/Cards.vue';
+import PageHeader from '@/Components/PageHeader.vue';
+import { FilterStore } from '@/Stores/FilterStore';
+import { GeneratorStore } from '@/Stores/GeneratorStore';
+import { LanguageStore } from '@/Stores/LanguageStore';
 
 export default defineComponent({
   name: 'Generator',

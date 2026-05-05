@@ -101,9 +101,9 @@
 </template>
 
 <script setup>
+import { Link, useForm, usePage } from '@inertiajs/vue3';
 import InputError from '@/Components/Breeze/InputError.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
 import route from 'ziggy-js';
 
 defineProps({

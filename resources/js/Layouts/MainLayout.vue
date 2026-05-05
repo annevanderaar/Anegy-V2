@@ -12,9 +12,9 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { useTheme } from 'vuetify';
 import AppBar from '@/Components/AppBar/AppBar.vue';
 import Footer from '@/Components/Footer.vue';
-import { useTheme } from 'vuetify';
 import { LanguageStore } from '@/Stores/LanguageStore';
 
 export default defineComponent({

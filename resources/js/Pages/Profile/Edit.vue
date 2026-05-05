@@ -3,7 +3,7 @@
     <title>{{ $t('auth.profile.title') }}</title>
   </Head>
 
-  <AuthenticatedLayout>
+  <main class="d-flex justify-center flex-column">
     <div class="d-flex flex-row justify-center flex-wrap gap-2">
       <v-card
         class="rounded-xl pa-4 width-card ma-4"
@@ -33,15 +33,14 @@
         <DeleteUserForm class="width-inputs"/>
       </v-card>
     </div>
-  </AuthenticatedLayout>
+  </main>
 </template>
 
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import { Head } from '@inertiajs/vue3';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
-import { Head } from '@inertiajs/vue3';
 
 defineProps({
   mustVerifyEmail: {

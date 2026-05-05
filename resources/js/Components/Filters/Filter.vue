@@ -105,8 +105,8 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { FilterStore } from '@/Stores/FilterStore';
 import { DataStore } from '@/Stores/DataStore';
+import { FilterStore } from '@/Stores/FilterStore';
 import route from 'ziggy-js';
 
 export default defineComponent({

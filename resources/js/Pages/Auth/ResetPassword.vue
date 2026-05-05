@@ -70,10 +70,10 @@
 </template>
 
 <script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+import { Head, useForm } from '@inertiajs/vue3';
 import InputError from '@/Components/Breeze/InputError.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 
 const props = defineProps({
   email: {

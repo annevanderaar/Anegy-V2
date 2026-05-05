@@ -63,7 +63,7 @@ export default defineComponent({
     };
   },
   methods: {
-    showEpisodes (season: number) {
+    showEpisodes (season) {
       this.detailStore.getSeasonDetails(`/tv/${this.$page.props.route_parameters.id}/season/${season}`);
       window.scrollTo(0, document.body.scrollHeight);
     },

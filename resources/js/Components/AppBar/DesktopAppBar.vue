@@ -153,12 +153,12 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { usePage, router } from '@inertiajs/vue3';
+import { useTheme } from 'vuetify';
 import IconButton from '@/Components/IconButton.vue';
 import { DataStore } from '@/Stores/DataStore';
-import { SearchStore } from '@/Stores/SearchStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
-import { useTheme } from 'vuetify';
-import { usePage, router } from '@inertiajs/vue3';
+import { SearchStore } from '@/Stores/SearchStore';
 import route from 'ziggy-js';
 
 export default defineComponent({

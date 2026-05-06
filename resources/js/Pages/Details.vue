@@ -264,7 +264,7 @@ import { DetailsStore } from '@/Stores/DetailsStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { ListStore } from '@/Stores/ListStore';
 import { GeneralStore } from '@/Stores/GeneralStore';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 
 const id = usePage().props.route_parameters.id;
 const title = ref('');

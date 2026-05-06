@@ -33,7 +33,7 @@ import { FilterStore } from '@/Stores/FilterStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { SearchStore } from '@/Stores/SearchStore';
 import { ListStore } from '@/Stores/ListStore';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 
 const instance = getCurrentInstance();
 const { mobile } = useDisplay();

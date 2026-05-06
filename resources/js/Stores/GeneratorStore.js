@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import axios from 'axios';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 
 export const GeneratorStore = defineStore('generator', {
   state: () => ({

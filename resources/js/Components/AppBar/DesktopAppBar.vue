@@ -143,7 +143,7 @@
 
 <script setup>
 import IconButton from '@/Components/IconButton.vue';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { SearchStore } from '@/Stores/SearchStore';
 

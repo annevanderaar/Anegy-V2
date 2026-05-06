@@ -104,7 +104,7 @@ import Cards from '@/Components/Cards.vue';
 import PageHeader from '@/Components/PageHeader.vue';
 import { ListStore } from '@/Stores/ListStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 
 const languageStore = LanguageStore();
 const listStore = ListStore();

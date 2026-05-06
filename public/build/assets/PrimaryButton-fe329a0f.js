@@ -1,1 +1,0 @@
-import{_ as e,r as n,o as r,c,w as s,k as a}from"./app-abfd566f.js";const _={};function l(o,f){const t=n("v-btn");return r(),c(t,{color:"accent"},{default:s(()=>[a(o.$slots,"default")]),_:3})}const p=e(_,[["render",l]]);export{p as P};

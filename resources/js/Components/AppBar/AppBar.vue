@@ -35,7 +35,7 @@ import MobileAppBar from '@/Components/AppBar/MobileAppBar.vue';
 import { DataStore } from '@/Stores/DataStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { SearchStore } from '@/Stores/SearchStore';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 
 const { mobile } = useDisplay();
 const theme = useTheme();

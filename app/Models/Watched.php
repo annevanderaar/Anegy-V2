@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Watched extends Model
 {
+    protected $table = 'watched';
+
     /**
      * The attributes that are mass assignable.
      *

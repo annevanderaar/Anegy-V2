@@ -8,7 +8,7 @@
     />
 
     <v-col :class="['pl-6', {'pt-0' : mobile}]" lg="8">
-      <DetailsTitle :data="data"/>
+      <DetailsTitle :data="data" person/>
 
       <v-col class="text-center mb-4">
         <h3>{{ data.known_for_department }}</h3>

@@ -65,7 +65,7 @@
 
         <v-btn
           v-if="isInList('watched', item.id)
-            && !route().current('generator')"
+            && !route().current('generator') && item.media_type !== 'person'"
           class="ml-1"
           variant="text"
           icon="mdi-check-bold"
@@ -74,7 +74,7 @@
         />
 
         <v-btn
-          v-else-if="!route().current('generator')"
+          v-else-if="!route().current('generator') && item.media_type !== 'person'"
           class="ml-1"
           variant="text"
           icon="mdi-check-outline"

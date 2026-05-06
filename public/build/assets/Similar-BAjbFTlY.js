@@ -1,1 +1,0 @@
-import{C as e}from"./Cards-Due2ux6P.js";import{o as t,e as a,a as s}from"./app-C5Nu5mia.js";import"./ListStore-Bj0TDy2m.js";import"./GeneralStore-CsrS-1dd.js";const c={__name:"Similar",props:{similar:{type:Array,required:!0}},setup(r){return(o,i)=>(t(),a("div",null,[s(e,{results:r.similar},null,8,["results"])]))}};export{c as default};

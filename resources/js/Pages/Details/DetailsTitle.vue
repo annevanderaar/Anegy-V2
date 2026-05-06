@@ -30,7 +30,7 @@
       />
 
       <v-btn
-        v-if="isInList('watched', data.id)"
+        v-if="isInList('watched', data.id) && !person"
         class="ml-1"
         variant="text"
         icon="mdi-check-bold"
@@ -40,7 +40,7 @@
       />
 
       <v-btn
-        v-else
+        v-else-if="!person"
         class="ml-1"
         variant="text"
         icon="mdi-check-outline"
@@ -63,6 +63,11 @@ const props = defineProps({
   data: {
     type: Object,
     required: true,
+  },
+  person: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 });
 

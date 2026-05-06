@@ -1,1 +1,0 @@
-import{o as e,c as a,w as r,b as i,t as l,u as s,Z as c}from"./app-DWzYli_8.js";const p={__name:"PageHeader",props:{title:{type:String,required:!0}},setup(t){return(n,o)=>(e(),a(s(c),{title:t.title},{default:r(()=>[i("title",null,l(t.title),1)]),_:1},8,["title"]))}};export{p as _};

@@ -1,1 +1,0 @@
-import{_ as t,r as n,o as r,c,w as s,j as a}from"./app-DWzYli_8.js";const _={};function l(o,d){const e=n("v-btn");return r(),c(e,{color:"secondary"},{default:s(()=>[a(o.$slots,"default")]),_:3})}const p=t(_,[["render",l]]);export{p as S};

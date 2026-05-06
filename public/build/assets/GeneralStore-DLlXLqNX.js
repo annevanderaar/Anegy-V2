@@ -1,0 +1,1 @@
+import{H as t,L as a}from"./app-DWzYli_8.js";const n=t("general",{state:()=>({languageStore:a()}),actions:{getDate(e){return new Date(e).toLocaleDateString(this.languageStore.tmdb,{year:"numeric",month:"long",day:"numeric"})}}});export{n as G};

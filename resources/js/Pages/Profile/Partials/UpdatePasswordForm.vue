@@ -84,7 +84,7 @@ import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import InputError from '@/Components/Breeze/InputError.vue';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 
 const passwordInput = ref(null);
 const currentPasswordInput = ref(null);

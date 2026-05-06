@@ -8,13 +8,13 @@
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
-        "@vitejs/plugin-vue": "^4.0.0",
-        "autoprefixer": "^10.4.14",
+        "@vitejs/plugin-vue": "^5.2.4",
+        "autoprefixer": "^10.5.0",
         "axios": "^1.1.2",
         "eslint-import-resolver-alias": "^1.1.2",
-        "laravel-vite-plugin": "^0.7.2",
-        "vite": "^4.0.0",
-        "vue": "^3.2.41"
+        "laravel-vite-plugin": "^1.3.0",
+        "vite": "^6.4.2",
+        "vue": "^3.5.34"
     },
     "dependencies": {
         "@vue/eslint-config-standard": "^8.0.1",
@@ -31,6 +31,6 @@
         "vue-toast-notification": "2.0",
         "vue-toastification": "^2.0.0-rc.5",
         "vuetify": "^3.3.12",
-        "ziggy-js": "^1.6.0"
+        "ziggy-js": "^2.6.2"
     }
 }

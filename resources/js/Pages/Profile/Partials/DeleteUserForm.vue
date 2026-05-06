@@ -41,7 +41,7 @@ import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import InputError from '@/Components/Breeze/InputError.vue';
 import SecondaryButton from '@/Components/Breeze/SecondaryButton.vue';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 
 const passwordInput = ref(null);
 

@@ -107,7 +107,7 @@
 import { computed, ref } from 'vue';
 import { DataStore } from '@/Stores/DataStore';
 import { FilterStore } from '@/Stores/FilterStore';
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 
 const dataStore = DataStore();
 const filterStore = FilterStore();

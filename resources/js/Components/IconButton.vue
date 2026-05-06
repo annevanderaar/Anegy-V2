@@ -6,19 +6,15 @@
   />
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  props: {
-    icon: {
-      type: String,
-      default: '',
-    },
-    href: {
-      type: String,
-      default: '',
-    },
+<script setup>
+defineProps({
+  icon: {
+    type: String,
+    default: '',
+  },
+  href: {
+    type: String,
+    default: '',
   },
 });
 </script>

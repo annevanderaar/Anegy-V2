@@ -20,159 +20,183 @@
   />
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { useDisplay } from 'vuetify';
 import Cards from '@/Components/Cards.vue';
 import Filter from '@/Components/Filters/Filter.vue';
 import FilterButton from '@/Components/Filters/FilterButton.vue';
 import PageHeader from '@/Components/PageHeader.vue';
 import { DataStore } from '@/Stores/DataStore';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { FilterStore } from '@/Stores/FilterStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { SearchStore } from '@/Stores/SearchStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
+import { ListStore } from '@/Stores/ListStore';
 import route from 'ziggy-js';
 
-export default defineComponent({
-  name: 'Discover',
-  components: {
-    PageHeader,
-    FilterButton,
-    Filter,
-    Cards,
-  },
-  data () {
-    return {
-      languageStore: LanguageStore(),
-      dataStore: DataStore(),
-      filterStore: FilterStore(),
-      searchStore: SearchStore(),
-      favoriteStore: FavoriteStore(),
-      watchedStore: WatchedStore(),
-      pageName: '',
-    };
-  },
-  computed: {
-    data () {
-      return this.dataStore.data;
-    },
-    page () {
-      return this.dataStore.page;
-    },
-    translate () {
-      return this.languageStore.translate;
-    },
-    genres () {
-      return this.filterStore.select;
-    },
-    user () {
-      return usePage().props.auth.user;
-    },
-    refreshFav () {
-      return this.favoriteStore.refresh;
-    },
-    refreshWat () {
-      return this.watchedStore.refresh;
-    },
-    mobile () {
-      return this.$vuetify.display.mobile;
-    },
-  },
-  methods: {
-    getRoutes () {
-      if (route().current('movies.discover')) {
-        this.pageName = this.$t('discover', { name: this.$t('movies') });
-        this.dataStore.url = '/discover/movie?';
-      } else if (route().current('movies.trending')) {
-        this.pageName = this.$t('trending', { name: this.$t('movies') });
-        this.dataStore.url = '/trending/movie/day?';
-      } else if (route().current('movies.popular')) {
-        this.pageName = this.$t('popular', { name: this.$t('movies') });
-        this.dataStore.url = '/movie/popular?';
-      } else if (route().current('movies.playing')) {
-        this.pageName = this.$t('playing', { name: this.$t('movies') });
-        this.dataStore.url = '/movie/now_playing?';
-      } else if (route().current('movies.top-rated')) {
-        this.pageName = this.$t('top_rated', { name: this.$t('movies') });
-        this.dataStore.url = '/movie/top_rated?';
-      } else if (route().current('movies.upcoming')) {
-        this.pageName = this.$t('upcoming', { name: this.$t('movies') });
-        this.dataStore.url = '/movie/upcoming?';
-      }
+const instance = getCurrentInstance();
+const { mobile } = useDisplay();
 
-      if (route().current('series.discover')) {
-        this.pageName = this.$t('discover', { name: this.$t('series') });
-        this.dataStore.url = '/discover/tv?';
-      } else if (route().current('series.trending')) {
-        this.pageName = this.$t('trending', { name: this.$t('series') });
-        this.dataStore.url = '/trending/tv/day?';
-      } else if (route().current('series.popular')) {
-        this.pageName = this.$t('popular', { name: this.$t('series') });
-        this.dataStore.url = '/tv/popular?';
-      } else if (route().current('series.playing')) {
-        this.pageName = this.$t('playing', { name: this.$t('series') });
-        this.dataStore.url = '/tv/on_the_air?';
-      } else if (route().current('series.top-rated')) {
-        this.pageName = this.$t('top_rated', { name: this.$t('series') });
-        this.dataStore.url = '/tv/top_rated?';
-      } else if (route().current('series.upcoming')) {
-        this.pageName = this.$t('upcoming', { name: this.$t('series') });
-        this.dataStore.url = '/tv/airing_today?';
-      }
+const languageStore = LanguageStore();
+const dataStore = DataStore();
+const filterStore = FilterStore();
+const searchStore = SearchStore();
+const listStore = ListStore();
 
-      this.dataStore.getDiscover();
-      this.getFavorites();
-      this.getWatched();
+const pageName = ref('');
 
-      if (localStorage.currentPage) {
-        this.dataStore.page = parseInt(localStorage.currentPage);
-      }
+const data = computed(() => dataStore.data);
+const page = computed(() => dataStore.page);
+const translate = computed(() => languageStore.translate);
+const genres = computed(() => filterStore.select);
+const user = computed(() => usePage().props.auth.user);
+const refreshFav = computed(() => listStore.favorites.refresh);
+const refreshWat = computed(() => listStore.watched.refresh);
+
+const t = (key, params) => instance.proxy.$t(key, params);
+
+const routeConfig = {
+  movies: {
+    discover: {
+      title: 'discover',
+      url: '/discover/movie?',
     },
-    scroll () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    trending: {
+      title: 'trending',
+      url: '/trending/movie/day?',
     },
-    getFavorites () {
-      if (this.user) {
-        this.favoriteStore.getFavorites(this.user.id);
-      }
+    popular: {
+      title: 'popular',
+      url: '/movie/popular?',
     },
-    getWatched () {
-      if (this.user) {
-        this.watchedStore.getWatched(this.user.id);
-      }
+    playing: {
+      title: 'playing',
+      url: '/movie/now_playing?',
     },
-  },
-  watch: {
-    page (val) {
-      localStorage.currentPage = val;
-      if (this.searchStore.searching) {
-        this.searchStore.searchPage = val;
-        this.searchStore.getSearch();
-      } else {
-        this.dataStore.page = val;
-        this.dataStore.getDiscover();
-      }
-      this.scroll();
+    'top-rated': {
+      title: 'top_rated',
+      url: '/movie/top_rated?',
     },
-    translate () {
-      this.dataStore.getDiscover();
-      this.getRoutes();
-    },
-    genres () {
-      this.dataStore.genres = this.filterStore.selectedGenres;
-      this.dataStore.getDiscover();
-    },
-    refreshFav () {
-      this.getFavorites();
-    },
-    refreshWat () {
-      this.getWatched();
+    upcoming: {
+      title: 'upcoming',
+      url: '/movie/upcoming?',
     },
   },
-  mounted () {
-    this.getRoutes();
+  series: {
+    discover: {
+      title: 'discover',
+      url: '/discover/tv?',
+    },
+    trending: {
+      title: 'trending',
+      url: '/trending/tv/day?',
+    },
+    popular: {
+      title: 'popular',
+      url: '/tv/popular?',
+    },
+    playing: {
+      title: 'playing',
+      url: '/tv/on_the_air?',
+    },
+    'top-rated': {
+      title: 'top_rated',
+      url: '/tv/top_rated?',
+    },
+    upcoming: {
+      title: 'upcoming',
+      url: '/tv/airing_today?',
+    },
   },
+};
+
+const getCurrentRouteConfig = () => {
+  const type = route().current('movies.*') ? 'movies' : 'series';
+  const routes = routeConfig[type];
+
+  const key = Object.keys(routes).find(item => {
+    return route().current(`${type}.${item}`);
+  });
+
+  return {
+    type,
+    config: routes[key],
+  };
+};
+
+const getFavorites = () => {
+  if (user.value) {
+    listStore.getAll('favorites', user.value.id);
+  }
+};
+
+const getWatched = () => {
+  if (user.value) {
+    listStore.getAll('watched', user.value.id);
+  }
+};
+
+const getRoutes = () => {
+  const currentRoute = getCurrentRouteConfig();
+
+  if (!currentRoute.config) {
+    return;
+  }
+
+  const translatedType = currentRoute.type === 'movies'
+    ? t('movies')
+    : t('series');
+
+  pageName.value = t(currentRoute.config.title, { name: translatedType });
+  dataStore.url = currentRoute.config.url;
+
+  dataStore.getDiscover();
+  getFavorites();
+  getWatched();
+
+  if (localStorage.currentPage) {
+    dataStore.page = parseInt(localStorage.currentPage);
+  }
+};
+
+const scroll = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+watch(page, val => {
+  localStorage.currentPage = val;
+
+  if (searchStore.searching) {
+    searchStore.searchPage = val;
+    searchStore.getSearch();
+  } else {
+    dataStore.page = val;
+    dataStore.getDiscover();
+  }
+
+  scroll();
+});
+
+watch(translate, () => {
+  dataStore.getDiscover();
+  getRoutes();
+});
+
+watch(genres, () => {
+  dataStore.genres = filterStore.selectedGenres;
+  dataStore.getDiscover();
+});
+
+watch(refreshFav, () => {
+  getFavorites();
+});
+
+watch(refreshWat, () => {
+  getWatched();
+});
+
+onMounted(() => {
+  getRoutes();
 });
 </script>

@@ -73,11 +73,11 @@
           {{ $t('favorites.latest') }}
         </h2>
 
-        <p v-if="favoriteStore.data.length < 1">
+        <p v-if="listStore.favorites.data.length < 1">
           {{ $t('favorites.not_added') }}
         </p>
 
-        <Cards v-else :results="favoriteStore.data"/>
+        <Cards v-else :results="listStore.favorites.data"/>
       </div>
 
       <div>
@@ -85,69 +85,54 @@
           {{ $t('watched.latest') }}
         </h2>
 
-        <p v-if="watchedStore.data.length < 1">
+        <p v-if="listStore.watched.data.length < 1">
           {{ $t('watched.not_added') }}
         </p>
 
-        <Cards v-else :results="watchedStore.data"/>
+        <Cards v-else :results="listStore.watched.data"/>
       </div>
     </div>
   </main>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed, onMounted, watch } from 'vue';
 import { router, usePage } from '@inertiajs/vue3';
 import PrimaryButton from '@/Components/Breeze/PrimaryButton.vue';
 import SecondaryButton from '@/Components/Breeze/SecondaryButton.vue';
 import Cards from '@/Components/Cards.vue';
 import PageHeader from '@/Components/PageHeader.vue';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { ListStore } from '@/Stores/ListStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
 import route from 'ziggy-js';
 
-export default defineComponent({
-  name: 'Dashboard',
-  components: {
-    PrimaryButton,
-    SecondaryButton,
-    Cards,
-    PageHeader,
-  },
-  data () {
-    return {
-      favoriteStore: FavoriteStore(),
-      languageStore: LanguageStore(),
-      watchedStore: WatchedStore(),
-    };
-  },
-  computed: {
-    user () {
-      return usePage().props.auth.user;
-    },
-    translate () {
-      return this.languageStore.translate;
-    },
-  },
-  methods: {
-    route,
-    logout () {
-      router.post(route('logout'));
-      setTimeout(() => {
-        window.location.href = route('home');
-      }, 200);
-    },
-  },
-  watch: {
-    translate () {
-      this.favoriteStore.getLatestFavorite(this.user.id);
-      this.watchedStore.getLatestWatched(this.user.id);
-    },
-  },
-  mounted () {
-    this.favoriteStore.getLatestFavorite(this.user.id);
-    this.watchedStore.getLatestWatched(this.user.id);
-  },
+const languageStore = LanguageStore();
+const listStore = ListStore();
+
+const user = computed(() => usePage().props.auth.user);
+
+const translate = computed(() => {
+  return languageStore.translate;
+});
+
+const getLatestLists = () => {
+  listStore.getLatest('favorites', user.value.id);
+  listStore.getLatest('watched', user.value.id);
+};
+
+const logout = () => {
+  router.post(route('logout'));
+
+  setTimeout(() => {
+    window.location.href = route('home');
+  }, 200);
+};
+
+watch(translate, () => {
+  getLatestLists();
+});
+
+onMounted(() => {
+  getLatestLists();
 });
 </script>

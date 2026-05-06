@@ -103,80 +103,78 @@
   </section>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed, ref } from 'vue';
 import { DataStore } from '@/Stores/DataStore';
 import { FilterStore } from '@/Stores/FilterStore';
 import route from 'ziggy-js';
 
-export default defineComponent({
-  name: 'Filter',
-  data () {
-    return {
-      dataStore: DataStore(),
-      filterStore: FilterStore(),
-      rating: [0, 10],
-    };
-  },
-  computed: {
-    genres () {
-      if (route().current('series.*')) {
-        return this.filterStore.serieGenres;
-      } else {
-        return this.filterStore.movieGenres;
-      }
-    },
-  },
-  methods: {
-    route,
-    includes (id) {
-      return this.filterStore.selectedGenres.includes(id);
-    },
-    reset () {
-      this.filterStore.drawer = false;
-      this.filterStore.select = !this.filterStore.select;
-    },
-    addGenre (id) {
-      if (this.includes(id)) {
-        const index = this.filterStore.selectedGenres.indexOf(id);
-        this.filterStore.selectedGenres.splice(index, 1);
-        this.reset();
-        return;
-      }
-      this.filterStore.selectedGenres.push(id);
-      this.reset();
-    },
-    clearAllFilters () {
-      this.filterStore.selectedGenres.splice(0);
-      this.reset();
-    },
-    items () {
-      let name;
+const dataStore = DataStore();
+const filterStore = FilterStore();
 
-      if (route().current('series.*')) {
-        name = 'series';
-      } else {
-        name = 'movies';
-      }
+const rating = ref([0, 10]);
 
-      return [
-        { text: 'discover', icon: 'mdi-shuffle-variant', route: `${name}.discover` },
-        { text: 'trending', icon: 'mdi-fire', route: `${name}.trending` },
-        { text: 'popular', icon: 'mdi-chart-box', route: `${name}.popular` },
-        { text: 'playing', icon: 'mdi-play-circle-outline', route: `${name}.playing` },
-        { text: 'top_rated', icon: 'mdi-star', route: `${name}.top-rated` },
-        { text: 'upcoming', icon: 'mdi-calendar-month', route: `${name}.upcoming` },
-      ];
-    },
-    resetPage () {
-      localStorage.currentPage = 1;
-    },
-    addRating () {
-      this.dataStore.rating = this.rating;
-      this.reset();
-    },
-  },
+const genres = computed(() => {
+  if (route().current('series.*')) {
+    return filterStore.serieGenres;
+  }
+
+  return filterStore.movieGenres;
 });
+
+const includes = id => {
+  return filterStore.selectedGenres.includes(id);
+};
+
+const reset = () => {
+  filterStore.drawer = false;
+  filterStore.select = !filterStore.select;
+};
+
+const addGenre = id => {
+  if (includes(id)) {
+    const index = filterStore.selectedGenres.indexOf(id);
+    filterStore.selectedGenres.splice(index, 1);
+    reset();
+    return;
+  }
+
+  filterStore.selectedGenres.push(id);
+  reset();
+};
+
+const clearAllFilters = () => {
+  filterStore.selectedGenres.splice(0);
+  reset();
+};
+
+const items = () => {
+  let name;
+
+  if (route().current('series.*')) {
+    name = 'series';
+  } else {
+    name = 'movies';
+  }
+
+  return [
+    { text: 'discover', icon: 'mdi-shuffle-variant', route: `${name}.discover` },
+    { text: 'trending', icon: 'mdi-fire', route: `${name}.trending` },
+    { text: 'popular', icon: 'mdi-chart-box', route: `${name}.popular` },
+    { text: 'playing', icon: 'mdi-play-circle-outline', route: `${name}.playing` },
+    { text: 'top_rated', icon: 'mdi-star', route: `${name}.top-rated` },
+    { text: 'upcoming', icon: 'mdi-calendar-month', route: `${name}.upcoming` },
+  ];
+};
+
+const resetPage = () => {
+  localStorage.currentPage = 1;
+};
+
+const addRating = () => {
+  dataStore.rating = rating.value;
+  reset();
+};
 </script>
 
 <style scoped>

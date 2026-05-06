@@ -22,15 +22,11 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  props: {
-    videos: {
-      type: Array,
-      required: true,
-    },
+<script setup>
+defineProps({
+  videos: {
+    type: Array,
+    required: true,
   },
 });
 </script>

@@ -28,7 +28,7 @@
             {{ item.release_date ? $t('cards.release_date') : $t('cards.first_air_date') }}:
           </strong>
 
-          {{ item.release_date ? getDate(item.release_date) : getDate(item.first_air_date) }}
+          {{ item.release_date ? generalStore.getDate(item.release_date) : generalStore.getDate(item.first_air_date) }}
         </v-card-subtitle>
 
         <v-card-text>
@@ -45,13 +45,13 @@
         </v-btn>
 
         <v-btn
-          v-if="(favoriteStore.favorites?.includes(String(item.id)) || favoriteStore.favorites?.includes(item.id))
+          v-if="isInList('favorites', item.id)
             && !route().current('generator')"
           class="ml-1"
           variant="text"
           icon="mdi-heart"
           color="secondary"
-          @click="favoriteStore.deleteFavorite(user.id, item.id)"
+          @click="listStore.delete('favorites', user.id, item.id)"
         />
 
         <v-btn
@@ -60,17 +60,17 @@
           variant="text"
           icon="mdi-heart-outline"
           color="secondary"
-          @click="createFavorite(item.id, item.video, item.known_for_department, item.first_air_date)"
+          @click="createListItem('favorites', item)"
         />
 
         <v-btn
-          v-if="(watchedStore.watched?.includes(String(item.id)) || watchedStore.watched?.includes(item.id))
+          v-if="isInList('watched', item.id)
             && !route().current('generator')"
           class="ml-1"
           variant="text"
           icon="mdi-check-bold"
           color="accent"
-          @click="watchedStore.deleteWatched(user.id, item.id)"
+          @click="listStore.delete('watched', user.id, item.id)"
         />
 
         <v-btn
@@ -79,104 +79,129 @@
           variant="text"
           icon="mdi-check-outline"
           color="accent"
-          @click="createWatched(item.id, item.video, item.known_for_department, item.first_air_date)"
+          @click="createListItem('watched', item)"
         />
       </v-card>
     </v-card>
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed, getCurrentInstance } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { useToast } from 'vue-toastification';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
+import { ListStore } from '@/Stores/ListStore';
+import { GeneralStore } from '@/Stores/GeneralStore';
 
-export default defineComponent({
-  name: 'Cards',
-  props: {
-    results: {
-      type: Object,
-      required: true,
-    },
-  },
-  data () {
-    return {
-      msType: '',
-      favoriteStore: FavoriteStore(),
-      watchedStore: WatchedStore(),
-    };
-  },
-  computed: {
-    user () {
-      return usePage().props.auth.user;
-    },
-  },
-  methods: {
-    getUrl (item) {
-      const posterPath = 'https://image.tmdb.org/t/p/w500';
-      if (item.profile_path) {
-        return posterPath + item.profile_path;
-      } else if (item.poster_path) {
-        return posterPath + item.poster_path;
-      } else {
-        return 'https://via.placeholder.com/1080x1580';
-      }
-    },
-    getColor (average) {
-      if (typeof average === 'number') {
-        const newAverage = average.toFixed(1);
-        if (newAverage >= 7.5) {
-          return 'green';
-        } else if (newAverage >= 5) {
-          return 'orange';
-        } else if (newAverage >= 0) {
-          return 'red';
-        }
-      } else {
-        return 'accent';
-      }
-    },
-    getDate (date) {
-      return new Date(date).toLocaleDateString('nl-NL', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
-    },
-    getHref (item) {
-      if (item.media_type === 'movie' || item.video === false) {
-        return `/movies/details/${item.id}`;
-      } else if (item.media_type === 'person' || item.known_for_department) {
-        return `/people/${item.id}`;
-      } else if (item.media_type === 'tv' || item.name) {
-        return `/series/details/${item.id}`;
-      }
-    },
-    getText (item) {
-      if (item.media_type === 'person' || item.known_for_department) {
-        return this.$t('cards.known_for') + ': ' + item.known_for_department;
-      } else if (item.overview) {
-        return item.overview;
-      }
-    },
-    createFavorite (msId, video, known, air) {
-      if (this.user) {
-        this.favoriteStore.createFavorite(this.user.id, msId, video, known, air);
-        return;
-      }
-      useToast().warning(this.$t('favorites.need_account'));
-    },
-    createWatched (msId, video, known, air) {
-      if (this.user) {
-        this.watchedStore.createWatched(this.user.id, msId, video, known, air);
-        return;
-      }
-      useToast().warning(this.$t('watched.need_account'));
-    },
+defineProps({
+  results: {
+    type: Object,
+    required: true,
   },
 });
+
+const instance = getCurrentInstance();
+const toast = useToast();
+
+const generalStore = GeneralStore();
+const listStore = ListStore();
+
+const user = computed(() => {
+  return usePage().props.auth.user;
+});
+
+const t = key => {
+  return instance.proxy.$t(key);
+};
+
+const getUrl = item => {
+  const posterPath = 'https://image.tmdb.org/t/p/w500';
+
+  if (item.profile_path) {
+    return posterPath + item.profile_path;
+  }
+
+  if (item.poster_path) {
+    return posterPath + item.poster_path;
+  }
+
+  return 'https://via.placeholder.com/1080x1580';
+};
+
+const getColor = average => {
+  if (typeof average === 'number') {
+    const newAverage = average.toFixed(1);
+
+    if (newAverage >= 7.5) {
+      return 'green';
+    }
+
+    if (newAverage >= 5) {
+      return 'orange';
+    }
+
+    if (newAverage >= 0) {
+      return 'red';
+    }
+  }
+
+  return 'accent';
+};
+
+const getHref = item => {
+  if (item.media_type === 'movie' || item.video === false) {
+    return `/movies/details/${item.id}`;
+  }
+
+  if (item.media_type === 'person' || item.known_for_department) {
+    return `/people/${item.id}`;
+  }
+
+  if (item.media_type === 'tv' || item.name) {
+    return `/series/details/${item.id}`;
+  }
+
+  return '';
+};
+
+const getText = item => {
+  if (item.media_type === 'person' || item.known_for_department) {
+    return `${t('cards.known_for')}: ${item.known_for_department}`;
+  }
+
+  if (item.overview) {
+    return item.overview;
+  }
+
+  return '';
+};
+
+const isInList = (kind, id) => {
+  const ids = listStore[kind].ids;
+
+  return ids?.includes(String(id)) || ids?.includes(id);
+};
+
+const createListItem = (kind, item) => {
+  if (user.value) {
+    listStore.create(
+      kind,
+      user.value.id,
+      item.id,
+      item.video,
+      item.known_for_department,
+      item.first_air_date,
+    );
+
+    return;
+  }
+
+  const messageKey = kind === 'favorites'
+    ? 'favorites.need_account'
+    : 'watched.need_account';
+
+  toast.warning(t(messageKey));
+};
 </script>
 
 <style scoped>

@@ -20,7 +20,7 @@
         <h4>{{ $t('person.birth') }}:</h4>
 
         <p class="ml-2">
-          {{ getDate(data.birthday) }}
+          {{ generalStore.getDate(data.birthday) }}
         </p>
       </v-row>
 
@@ -28,7 +28,7 @@
         <h4>{{ $t('person.death') }}:</h4>
 
         <p class="ml-2">
-          {{ getDate(data.deathday) }}
+          {{ generalStore.getDate(data.deathday) }}
         </p>
       </v-row>
 
@@ -107,9 +107,10 @@
   </v-row>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed, onMounted, ref, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { useDisplay } from 'vuetify';
 import Links from '@/Components/Links.vue';
 import PageHeader from '@/Components/PageHeader.vue';
 import DetailsTitle from '@/Pages/Details/DetailsTitle.vue';
@@ -117,127 +118,103 @@ import ImageTile from '@/Pages/Details/ImageTile.vue';
 import Images from '@/Pages/Details/Images.vue';
 import PersonCards from '@/Pages/Details/PersonCards.vue';
 import { DetailsStore } from '@/Stores/DetailsStore';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
+import { ListStore } from '@/Stores/ListStore';
+import { GeneralStore } from '@/Stores/GeneralStore';
 
-export default defineComponent({
-  name: 'Person',
-  components: {
-    ImageTile,
-    PageHeader,
-    DetailsTitle,
-    Images,
-    PersonCards,
-    Links,
+const id = usePage().props.route_parameters.id;
+const title = ref('');
+const selectedTab = ref('movies');
+
+const detailStore = DetailsStore();
+const generalStore = GeneralStore();
+const languageStore = LanguageStore();
+const listStore = ListStore();
+
+const { mobile } = useDisplay();
+
+const tabs = [
+  {
+    title: 'movies',
+    icon: 'mdi-movie-open',
+    val: 'movies',
   },
-  data () {
-    return {
-      id: this.$page.props.route_parameters.id,
-      title: '',
-      detailStore: DetailsStore(),
-      languageStore: LanguageStore(),
-      favoriteStore: FavoriteStore(),
-      watchedStore: WatchedStore(),
-      selectedTab: 'movies',
-      tabs: [
-        {
-          title: 'movies',
-          icon: 'mdi-movie-open',
-          val: 'movies',
-        },
-        {
-          title: 'series',
-          icon: 'mdi-television-classic',
-          val: 'series',
-        },
-        {
-          title: 'images',
-          icon: 'mdi-image-multiple',
-          val: 'images',
-        },
-      ],
-    };
+  {
+    title: 'series',
+    icon: 'mdi-television-classic',
+    val: 'series',
   },
-  computed: {
-    data () {
-      return this.detailStore.data;
-    },
-    translate () {
-      return this.languageStore.translate;
-    },
-    user () {
-      return usePage().props.auth.user;
-    },
-    refreshFav () {
-      return this.favoriteStore.refresh;
-    },
-    refreshWat () {
-      return this.watchedStore.refresh;
-    },
-    mobile () {
-      return this.$vuetify.display.mobile;
-    },
+  {
+    title: 'images',
+    icon: 'mdi-image-multiple',
+    val: 'images',
   },
-  methods: {
-    getDetails () {
-      this.detailStore.getDetails(`/person/${this.id}`);
-      this.detailStore.getLinks(`/person/${this.id}/external_ids`);
-      this.detailStore.getPersonMovies(this.id);
-      this.detailStore.getPersonSeries(this.id);
-      this.detailStore.getImages(this.id);
-      this.getFavorites();
-      this.getWatched();
-    },
-    getDate (date) {
-      return new Date(date).toLocaleDateString(this.languageStore.tmdb, {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
-    },
-    getAge (dateString) {
-      const today = new Date();
-      const birthDate = new Date(dateString);
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      return age;
-    },
-    show (value) {
-      this.selectedTab = value;
-    },
-    getFavorites () {
-      if (this.user) {
-        this.favoriteStore.getFavorites(this.user.id);
-      }
-    },
-    getWatched () {
-      if (this.user) {
-        this.watchedStore.getWatched(this.user.id);
-      }
-    },
-  },
-  watch: {
-    data (val) {
-      if (val) {
-        document.title = `${val.name} - Anegy`;
-      }
-    },
-    translate () {
-      this.getDetails();
-    },
-    refreshFav () {
-      this.getFavorites();
-    },
-    refreshWat () {
-      this.getWatched();
-    },
-  },
-  mounted () {
-    this.getDetails();
-  },
+];
+
+const data = computed(() => detailStore.data);
+const translate = computed(() => languageStore.translate);
+const user = computed(() => usePage().props.auth.user);
+const refreshFav = computed(() => listStore.favorites.refresh);
+const refreshWat = computed(() => listStore.watched.refresh);
+
+const getFavorites = () => {
+  if (user.value) {
+    listStore.getAll('favorites', user.value.id);
+  }
+};
+
+const getWatched = () => {
+  if (user.value) {
+    listStore.getAll('watched', user.value.id);
+  }
+};
+
+const getDetails = () => {
+  detailStore.getDetails(`/person/${id}`);
+  detailStore.getLinks(`/person/${id}/external_ids`);
+  detailStore.getPersonMovies(id);
+  detailStore.getPersonSeries(id);
+  detailStore.getImages(id);
+  getFavorites();
+  getWatched();
+};
+
+const getAge = dateString => {
+  const today = new Date();
+  const birthDate = new Date(dateString);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+};
+
+const show = value => {
+  selectedTab.value = value;
+};
+
+watch(data, val => {
+  if (val) {
+    document.title = `${val.name} - Anegy`;
+  }
+});
+
+watch(translate, () => {
+  getDetails();
+});
+
+watch(refreshFav, () => {
+  getFavorites();
+});
+
+watch(refreshWat, () => {
+  getWatched();
+});
+
+onMounted(() => {
+  getDetails();
 });
 </script>

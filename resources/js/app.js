@@ -1,5 +1,4 @@
 import './bootstrap';
-import '../css/app.css';
 import 'vue-toastification/dist/index.css';
 import 'vuetify/dist/vuetify.min.css';
 

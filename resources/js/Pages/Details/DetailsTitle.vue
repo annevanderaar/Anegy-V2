@@ -10,13 +10,13 @@
 
     <div>
       <v-btn
-        v-if="favoriteStore.favorites.includes(String(data.id))"
+        v-if="isInList('favorites', data.id)"
         class="ml-1"
         variant="text"
         icon="mdi-heart"
         color="secondary"
         size="x-large"
-        @click="favoriteStore.deleteFavorite(user.id, data.id)"
+        @click="listStore.delete('favorites', user.id, data.id)"
       />
 
       <v-btn
@@ -26,43 +26,76 @@
         icon="mdi-heart-outline"
         color="secondary"
         size="x-large"
-        @click="createFavorite(data.id, data.video, data.known_for_department, data.first_air_date)"
+        @click="createListItem('favorites')"
+      />
+
+      <v-btn
+        v-if="isInList('watched', data.id)"
+        class="ml-1"
+        variant="text"
+        icon="mdi-check-bold"
+        color="accent"
+        size="x-large"
+        @click="listStore.delete('watched', user.id, data.id)"
+      />
+
+      <v-btn
+        v-else
+        class="ml-1"
+        variant="text"
+        icon="mdi-check-outline"
+        color="accent"
+        size="x-large"
+        @click="createListItem('watched')"
       />
     </div>
   </v-row>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { useToast } from 'vue-toastification';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
+import { useI18n } from 'vue-i18n';
+import { ListStore } from '@/Stores/ListStore';
 
-export default defineComponent({
-  props: {
-    data: {
-      type: Object,
-      required: true,
-    },
-  },
-  data () {
-    return {
-      favoriteStore: FavoriteStore(),
-    };
-  },
-  computed: {
-    user () {
-      return usePage().props.auth.user;
-    },
-  },
-  methods: {
-    createFavorite (msId, video, known, air) {
-      if (this.user) {
-        this.favoriteStore.createFavorite(this.user.id, msId, video, known, air);
-        return;
-      }
-      useToast().warning(this.$t('favorites.need_account'));
-    },
+const props = defineProps({
+  data: {
+    type: Object,
+    required: true,
   },
 });
+
+const listStore = ListStore();
+const toast = useToast();
+const { t } = useI18n();
+
+const user = computed(() => usePage().props.auth.user);
+
+const isInList = (kind, id) => {
+  const ids = listStore[kind].ids;
+
+  return ids?.includes(String(id)) || ids?.includes(id);
+};
+
+const createListItem = kind => {
+  if (user.value) {
+    listStore.create(
+      kind,
+      user.value.id,
+      props.data.id,
+      props.data.video,
+      props.data.known_for_department,
+      props.data.first_air_date,
+    );
+
+    return;
+  }
+
+  const messageKey = kind === 'favorites'
+    ? 'favorites.need_account'
+    : 'watched.need_account';
+
+  toast.warning(t(messageKey));
+};
 </script>

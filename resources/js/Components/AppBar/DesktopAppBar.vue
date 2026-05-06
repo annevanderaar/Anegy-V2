@@ -1,37 +1,34 @@
 <template>
-  <v-app-bar
-    color="secondary"
-    clipped-left
-  >
+  <v-app-bar color="secondary" clipped-left>
     <v-tooltip :text="$t('generator.title')" location="bottom">
-      <template #activator="{ props }">
+      <template #activator="{ props: tooltipProps }">
         <IconButton
-          v-bind="props"
+          v-bind="tooltipProps"
           :href="route('generator')"
           icon="mdi-generator-portable"
-          @click="resetPage"
+          @click="$emit('reset-page')"
         />
       </template>
     </v-tooltip>
 
     <v-tooltip :text="$t('appbar.movies_discover')" location="bottom">
-      <template #activator="{ props }">
+      <template #activator="{ props: tooltipProps }">
         <IconButton
-          v-bind="props"
+          v-bind="tooltipProps"
           :href="route('movies.discover')"
           icon="mdi-movie-open"
-          @click="resetPage"
+          @click="$emit('reset-page')"
         />
       </template>
     </v-tooltip>
 
     <v-tooltip :text="$t('appbar.series_discover')" location="bottom">
-      <template #activator="{ props }">
+      <template #activator="{ props: tooltipProps }">
         <IconButton
-          v-bind="props"
+          v-bind="tooltipProps"
           :href="route('series.discover')"
           icon="mdi-television-classic"
-          @click="resetPage"
+          @click="$emit('reset-page')"
         />
       </template>
     </v-tooltip>
@@ -39,7 +36,7 @@
     <IconButton
       v-if="showSearch"
       icon="mdi-magnify"
-      @click="showField = !showField"
+      @click="$emit('update:showField', !showField)"
     />
 
     <v-btn
@@ -50,12 +47,11 @@
 
     <v-text-field
       v-if="showField"
-      ref="textField"
       v-model="searchStore.search"
       :label="$t('appbar.search')"
       variant="solo"
       density="compact"
-      class="mt-6 text-field"
+      class="mt-6 c-text-field"
       autofocus
     />
 
@@ -66,7 +62,7 @@
       variant="plain"
       class="ms-6"
       icon=""
-      @click="resetPage"
+      @click="$emit('reset-page')"
     >
       <v-img
         alt="Anegy logo"
@@ -80,15 +76,12 @@
 
     <v-divider class="border-opacity-0"/>
 
-    <v-btn
-      icon=""
-      disabled
-    />
+    <v-btn icon="" disabled/>
 
     <v-btn
       append-icon="mdi-earth"
       class="text-white"
-      @click="translate"
+      @click="$emit('translate')"
     >
       {{ languageStore.i18n }}
     </v-btn>
@@ -101,10 +94,10 @@
 
     <div class="d-flex justify-space-around">
       <v-menu>
-        <template #activator="{ props }">
+        <template #activator="{ props: menuProps }">
           <v-btn
             v-if="user"
-            v-bind="props"
+            v-bind="menuProps"
             icon="mdi-account"
             variant="text"
           >
@@ -126,10 +119,7 @@
             {{ $t(item.name) }}
           </v-list-item>
 
-          <v-list-item
-            v-if="user"
-            @click="logout"
-          >
+          <v-list-item v-if="user" @click="$emit('logout')">
             <v-list-item-title>
               <v-icon
                 icon="mdi-logout"
@@ -146,132 +136,55 @@
 
     <IconButton
       :icon="!dark ? 'mdi-moon-waning-crescent' : 'mdi-weather-sunny'"
-      @click="darkMode"
+      @click="$emit('dark-mode')"
     />
   </v-app-bar>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-import { usePage, router } from '@inertiajs/vue3';
-import { useTheme } from 'vuetify';
+<script setup>
 import IconButton from '@/Components/IconButton.vue';
-import { DataStore } from '@/Stores/DataStore';
+import route from 'ziggy-js';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { SearchStore } from '@/Stores/SearchStore';
-import route from 'ziggy-js';
 
-export default defineComponent({
-  name: 'DesktopAppBar',
-  components: {
-    IconButton,
+defineProps({
+  showField: {
+    type: Boolean,
+    required: true,
   },
-  data () {
-    return {
-      showField: false,
-      dataStore: DataStore(),
-      searchStore: SearchStore(),
-      languageStore: LanguageStore(),
-      theme: useTheme(),
-      items: [
-        { route: route('dashboard'), name: 'auth.dashboard.title', icon: 'mdi-view-dashboard' },
-        { route: route('favorites'), name: 'auth.dashboard.favorites', icon: 'mdi-book-heart' },
-        { route: route('watched'), name: 'auth.dashboard.watched', icon: 'mdi-book-check' },
-        { route: route('profile.edit'), name: 'auth.dashboard.edit_profile', icon: 'mdi-account-edit' },
-      ],
-    };
+  showSearch: {
+    type: Boolean,
+    required: true,
   },
-  computed: {
-    showSearch () {
-      return (route().current('home') ||
-        route().current('movies.discover') ||
-        route().current('movies.trending') ||
-        route().current('movies.popular') ||
-        route().current('movies.playing') ||
-        route().current('movies.top-rated') ||
-        route().current('movies.upcoming') ||
-        route().current('series.discover') ||
-        route().current('series.trending') ||
-        route().current('series.popular') ||
-        route().current('series.playing') ||
-        route().current('series.top-rated') ||
-        route().current('series.upcoming')
-      );
-    },
-    dark () {
-      return this.theme.global.name === 'darkTheme';
-    },
-    search () {
-      return this.searchStore.search;
-    },
-    user () {
-      return usePage().props.auth.user;
-    },
+  dark: {
+    type: Boolean,
+    required: true,
   },
-  methods: {
-    route,
-    darkMode () {
-      this.theme.global.name = this.dark ? 'lightTheme' : 'darkTheme';
-      localStorage.setItem('dark_theme', String(this.theme.global.name));
-    },
-    translate () {
-      this.languageStore.i18n = this.languageStore.i18n === 'en' ? 'nl' : 'en';
-      localStorage.setItem('vue_i18n_locale', this.languageStore.i18n);
-      this.$i18n.locale = this.languageStore.i18n;
-
-      if (this.languageStore.i18n === 'en') {
-        this.languageStore.tmdb = 'en-US';
-        localStorage.setItem('language', 'en-US');
-      } else if (this.languageStore.i18n === 'nl') {
-        this.languageStore.tmdb = 'nl-NL';
-        localStorage.setItem('language', 'nl-NL');
-      }
-
-      this.languageStore.translate = !this.languageStore.translate;
-    },
-    resetPage () {
-      localStorage.currentPage = 1;
-    },
-    logout () {
-      router.post(route('logout'));
-      setTimeout(() => {
-        window.location.href = route('home');
-      }, 200);
-    },
+  user: {
+    type: Object,
+    required: false,
+    default: null,
   },
-  watch: {
-    showField (val) {
-      if (!val) {
-        this.searchStore.search = '';
-      }
-    },
-    search (val) {
-      if (!val) {
-        this.dataStore.getDiscover();
-        return;
-      }
-
-      this.searchStore.searching = !!val;
-
-      if (route().current('movies.*')) {
-        this.searchStore.url = '/search/movie?';
-      } else if (route().current('series.*')) {
-        this.searchStore.url = '/search/tv?';
-      } else if (route().current('home')) {
-        this.searchStore.url = '/search/multi?';
-      }
-
-      this.searchStore.getSearch();
-    },
+  items: {
+    type: Array,
+    required: true,
   },
 });
+
+defineEmits([
+  'update:showField',
+  'reset-page',
+  'logout',
+  'translate',
+  'dark-mode',
+]);
+
+const searchStore = SearchStore();
+const languageStore = LanguageStore();
 </script>
 
 <style scoped>
-.text-field {
-  width: 200px;
-  z-index: 9999;
-  position: absolute;
+.c-text-field {
   margin-left: 205px;
 }
 </style>

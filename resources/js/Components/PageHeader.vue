@@ -4,7 +4,7 @@
   </Head>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { Head } from '@inertiajs/vue3';
 
 defineProps({

@@ -103,8 +103,8 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed, onMounted, watch } from 'vue';
 import VueMultiselect from 'vue-multiselect';
 import Cards from '@/Components/Cards.vue';
 import PageHeader from '@/Components/PageHeader.vue';
@@ -112,42 +112,28 @@ import { FilterStore } from '@/Stores/FilterStore';
 import { GeneratorStore } from '@/Stores/GeneratorStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 
-export default defineComponent({
-  name: 'Generator',
-  components: {
-    PageHeader,
-    Cards,
-    VueMultiselect,
-  },
-  data () {
-    return {
-      generatorStore: GeneratorStore(),
-      filterStore: FilterStore(),
-      languageStore: LanguageStore(),
-    };
-  },
-  computed: {
-    translate () {
-      return this.languageStore.translate;
-    },
-  },
-  methods: {
-    getGenres () {
-      if (this.generatorStore.choice === 0) {
-        return this.filterStore.movieGenres;
-      }
+const generatorStore = GeneratorStore();
+const filterStore = FilterStore();
+const languageStore = LanguageStore();
 
-      return this.filterStore.serieGenres;
-    },
-  },
-  watch: {
-    translate () {
-      this.generatorStore.getResult();
-    },
-  },
-  mounted () {
-    this.generatorStore.result = {};
-  },
+const translate = computed(() => {
+  return languageStore.translate;
+});
+
+const getGenres = () => {
+  if (generatorStore.choice === 0) {
+    return filterStore.movieGenres;
+  }
+
+  return filterStore.serieGenres;
+};
+
+watch(translate, () => {
+  generatorStore.getResult();
+});
+
+onMounted(() => {
+  generatorStore.result = {};
 });
 </script>
 
@@ -158,8 +144,27 @@ export default defineComponent({
   min-width: 250px;
 }
 
+.multiselect__tags,
+.multiselect__single,
+.multiselect__input,
+.multiselect__content-wrapper {
+  background: rgb(var(--v-theme-primary)) !important;
+  color: rgb(var(--v-theme-on-primary)) !important;
+  border-color: rgb(var(--v-theme-accent)) !important;
+}
+
+.multiselect__placeholder,
+.multiselect__input::placeholder {
+  color: rgb(var(--v-theme-on-primary)) !important;
+  opacity: 0.7;
+}
+
 .multiselect__option--highlight:not(.multiselect__option--selected),
 .multiselect__option--highlight:not(.multiselect__option--selected)::after {
   background: rgb(var(--v-theme-accent)) !important;
+}
+
+.multiselect__select::before {
+  border-color: rgb(var(--v-theme-on-primary)) transparent transparent transparent !important;
 }
 </style>

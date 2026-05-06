@@ -36,7 +36,7 @@
   </section>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import InputError from '@/Components/Breeze/InputError.vue';

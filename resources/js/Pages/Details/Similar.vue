@@ -4,19 +4,13 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
 import Cards from '@/Components/Cards.vue';
 
-export default defineComponent({
-  components: {
-    Cards,
-  },
-  props: {
-    similar: {
-      type: Array,
-      required: true,
-    },
+defineProps({
+  similar: {
+    type: Array,
+    required: true,
   },
 });
 </script>

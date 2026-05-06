@@ -13,6 +13,7 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'no-unused-expressions': 'off',
     'arrow-parens': [1, 'as-needed'],
     'no-console': 'off',
@@ -21,7 +22,7 @@ module.exports = {
     'max-len': [
       'error',
       {
-        code: 120,
+        code: 150,
         tabWidth: 2,
       },
     ],

@@ -15,15 +15,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  props: {
-    images: {
-      type: Object,
-      required: true,
-    },
+<script setup>
+defineProps({
+  images: {
+    type: Object,
+    required: true,
   },
 });
 </script>

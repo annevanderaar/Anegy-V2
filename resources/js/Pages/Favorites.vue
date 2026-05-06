@@ -9,71 +9,65 @@
     {{ $t('favorites.all') }}
   </h3>
 
-  <Cards :results="favoriteStore.data"/>
+  <Cards :results="listStore.favorites.data"/>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed, getCurrentInstance, onMounted, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import Cards from '@/Components/Cards.vue';
 import PageHeader from '@/Components/PageHeader.vue';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
+import { ListStore } from '@/Stores/ListStore';
 
-export default defineComponent({
-  name: 'Favorites',
-  components: {
-    PageHeader,
-    Cards,
-  },
-  data () {
-    return {
-      favoriteStore: FavoriteStore(),
-      languageStore: LanguageStore(),
-      watchedStore: WatchedStore(),
-    };
-  },
-  computed: {
-    user () {
-      return usePage().props.auth.user;
-    },
-    refreshFav () {
-      return this.favoriteStore.refresh;
-    },
-    refreshWat () {
-      return this.watchedStore.refresh;
-    },
-    translate () {
-      return this.languageStore.translate;
-    },
-  },
-  methods: {
-    title () {
-      return this.$t('auth.dashboard.favorites');
-    },
-    getFavorites () {
-      this.favoriteStore.getFavorites(this.user.id);
-    },
-    getWatched () {
-      this.watchedStore.getWatched(this.user.id);
-    },
-  },
-  watch: {
-    refreshFav () {
-      this.getFavorites();
-    },
-    refreshWat () {
-      this.getWatched();
-    },
-    translate () {
-      this.getFavorites();
-      this.getWatched();
-    },
-  },
-  mounted () {
-    this.getFavorites();
-    this.getWatched();
-  },
+const instance = getCurrentInstance();
+
+const languageStore = LanguageStore();
+const listStore = ListStore();
+
+const user = computed(() => {
+  return usePage().props.auth.user;
+});
+
+const refreshFav = computed(() => {
+  return listStore.favorites.refresh;
+});
+
+const refreshWat = computed(() => {
+  return listStore.watched.refresh;
+});
+
+const translate = computed(() => {
+  return languageStore.translate;
+});
+
+const title = () => {
+  return instance.proxy.$t('auth.dashboard.favorites');
+};
+
+const getFavorites = () => {
+  listStore.getAll('favorites', user.value.id);
+};
+
+const getWatched = () => {
+  listStore.getAll('watched', user.value.id);
+};
+
+watch(refreshFav, () => {
+  getFavorites();
+});
+
+watch(refreshWat, () => {
+  getWatched();
+});
+
+watch(translate, () => {
+  getFavorites();
+  getWatched();
+});
+
+onMounted(() => {
+  getFavorites();
+  getWatched();
 });
 </script>

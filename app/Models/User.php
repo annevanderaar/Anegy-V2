@@ -52,4 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Favorite::class);
     }
 
+    /**
+     * @return HasMany<Watched>
+     */
+    public function watched(): HasMany
+    {
+        return $this->hasMany(Watched::class);
+    }
 }

@@ -54,7 +54,7 @@
   </v-row>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { DetailsStore } from '@/Stores/DetailsStore';
 
 const detailStore = DetailsStore();

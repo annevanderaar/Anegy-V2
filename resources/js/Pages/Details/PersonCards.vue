@@ -23,41 +23,33 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-import Cards from '../../Components/Cards.vue';
+<script setup>
+import { ref } from 'vue';
+import Cards from '@/Components/Cards.vue';
 
-export default defineComponent({
-  components: {
-    Cards,
+defineProps({
+  personMovies: {
+    type: Object,
+    required: false,
+    default: () => {},
   },
-  props: {
-    personMovies: {
-      type: Object,
-      required: false,
-      default: () => {},
-    },
-    personSeries: {
-      type: Object,
-      required: false,
-      default: () => {},
-    },
+  personSeries: {
+    type: Object,
+    required: false,
+    default: () => {},
   },
-  data () {
-    return {
-      selectedValue: 'cast',
-      value: 0,
-    };
-  },
-  watch: {
-    value (val) {
-      if (val === 0) {
-        this.selectedValue = 'cast';
-      }
-      if (val === 1) {
-        this.selectedValue = 'crew';
-      }
-    },
-  },
+});
+
+const selectedValue = ref('cast');
+const value = ref(0);
+
+watch(value, val => {
+  if (val === 0) {
+    selectedValue.value = 'cast';
+  }
+
+  if (val === 1) {
+    selectedValue.value = 'crew';
+  }
 });
 </script>

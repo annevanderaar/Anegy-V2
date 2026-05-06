@@ -16,19 +16,13 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
 import Cards from '@/Components/Cards.vue';
 
-export default defineComponent({
-  components: {
-    Cards,
-  },
-  props: {
-    collection: {
-      type: Object,
-      required: true,
-    },
+defineProps({
+  collection: {
+    type: Object,
+    required: true,
   },
 });
 </script>

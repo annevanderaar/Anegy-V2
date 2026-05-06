@@ -18,13 +18,7 @@
           {{ season.episode_count }}
           {{ season.episode_count > 1 ? "Episodes" : "Episode" }}
           <br>
-          {{
-            new Date(season.air_date).toLocaleDateString("nl-NL", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })
-          }}
+          {{ generalStore.getDate(season.air_date) }}
         </v-card-text>
       </v-card>
     </div>
@@ -37,7 +31,7 @@
         class="cards"
       >
         <v-card-title>
-          {{ $t('details.seasons.episode') }}{{ episode.episode_number }} {{ episode.name }}
+          {{ $t('details.seasons.episode') }} {{ episode.episode_number }} {{ episode.name }}
         </v-card-title>
 
         <v-card-text>{{ episode.overview }}</v-card-text>
@@ -46,27 +40,26 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
 import { DetailsStore } from '@/Stores/DetailsStore';
+import { GeneralStore } from '@/Stores/GeneralStore';
+import { usePage } from '@inertiajs/vue3';
 
-export default defineComponent({
-  props: {
-    seasons: {
-      type: Array,
-      required: true,
-    },
-  },
-  data () {
-    return {
-      detailStore: DetailsStore(),
-    };
-  },
-  methods: {
-    showEpisodes (season) {
-      this.detailStore.getSeasonDetails(`/tv/${this.$page.props.route_parameters.id}/season/${season}`);
-      window.scrollTo(0, document.body.scrollHeight);
-    },
+defineProps({
+  seasons: {
+    type: Array,
+    required: true,
   },
 });
+
+const page = usePage();
+const detailStore = DetailsStore();
+const generalStore = GeneralStore();
+
+const showEpisodes = season => {
+  detailStore.getSeasonDetails(
+    `/tv/${page.props.route_parameters.id}/season/${season}`,
+  );
+  window.scrollTo(0, document.body.scrollHeight);
+};
 </script>

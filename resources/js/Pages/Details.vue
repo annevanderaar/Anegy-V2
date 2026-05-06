@@ -17,7 +17,7 @@
         <h4>{{ $t('cards.release_date') }}: </h4>
 
         <p class="ml-2">
-          {{ getDate(data.release_date) }}
+          {{ generalStore.getDate(data.release_date) }}
           ({{ data.status }})
         </p>
       </v-row>
@@ -26,7 +26,7 @@
         <h4>{{ $t('cards.first_air_date') }}:</h4>
 
         <p class="ml-2">
-          {{ getDate(data.first_air_date) }}
+          {{ generalStore.getDate(data.first_air_date) }}
           ({{ data.status }})
         </p>
       </v-row>
@@ -35,7 +35,7 @@
         <h4>{{ $t('cards.last_air_date') }}:</h4>
 
         <p class="ml-2">
-          {{ getDate(data.last_air_date) }}
+          {{ generalStore.getDate(data.last_air_date) }}
         </p>
       </v-row>
 
@@ -160,7 +160,7 @@
         </v-chip>
 
         <v-chip
-          v-for="item in this.iLinks"
+          v-for="item in iLinks"
           :key="item.name"
           :href="item.to"
           class="btnText"
@@ -175,7 +175,7 @@
         <h4>{{ $t('details.watch_nl') }}:</h4>
 
         <v-chip
-          v-for="item in this.iLinks"
+          v-for="item in iLinks"
           :key="item.name"
           :href="item.to"
           class="btnText"
@@ -206,14 +206,16 @@
         </v-tab>
       </v-tabs>
 
-      <Cast
+      <Credits
         v-if="selectedTab === 'cast'"
         :credits="detailStore.credits"
+        type="cast"
       />
 
-      <Crew
+      <Credits
         v-else-if="selectedTab === 'crew'"
         :credits="detailStore.credits"
+        type="crew"
       />
 
       <Collection
@@ -244,209 +246,205 @@
   </v-row>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed, onMounted, ref, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { useDisplay } from 'vuetify';
 import Links from '@/Components/Links.vue';
 import PageHeader from '@/Components/PageHeader.vue';
-import Cast from '@/Pages/Details/Cast.vue';
 import Collection from '@/Pages/Details/Collection.vue';
-import Crew from '@/Pages/Details/Crew.vue';
 import DetailsTitle from '@/Pages/Details/DetailsTitle.vue';
 import ImageTile from '@/Pages/Details/ImageTile.vue';
 import Reviews from '@/Pages/Details/Reviews.vue';
 import Seasons from '@/Pages/Details/Seasons.vue';
 import Videos from '@/Pages/Details/Videos.vue';
+import Similar from '@/Pages/Details/Similar.vue';
+import Credits from '@/Pages/Details/Credits.vue';
 import { DetailsStore } from '@/Stores/DetailsStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
-import Similar from '@/Pages/Details/Similar.vue';
+import { ListStore } from '@/Stores/ListStore';
+import { GeneralStore } from '@/Stores/GeneralStore';
 import route from 'ziggy-js';
 
-export default defineComponent({
-  name: 'Details',
-  components: {
-    ImageTile,
-    PageHeader,
-    DetailsTitle,
-    Links,
-    Similar,
-    Reviews,
-    Videos,
-    Cast,
-    Crew,
-    Collection,
-    Seasons,
+const id = usePage().props.route_parameters.id;
+const title = ref('');
+const selectedTab = ref('cast');
+
+const detailStore = DetailsStore();
+const generalStore = GeneralStore();
+const languageStore = LanguageStore();
+const listStore = ListStore();
+
+const { mobile } = useDisplay();
+
+const tabs = ref([
+  {
+    title: 'details.cast.title',
+    icon: 'mdi-account-box-multiple',
+    val: 'cast',
   },
-  data () {
-    return {
-      id: this.$page.props.route_parameters.id,
-      title: '',
-      detailStore: DetailsStore(),
-      languageStore: LanguageStore(),
-      favoriteStore: FavoriteStore(),
-      watchedStore: WatchedStore(),
-      selectedTab: 'cast',
-      tabs: [
-        {
-          title: 'details.cast.title',
-          icon: 'mdi-account-box-multiple',
-          val: 'cast',
-        },
-        {
-          title: 'details.crew',
-          icon: 'mdi-account-group',
-          val: 'crew',
-        },
-        {
-          title: 'details.seasons.title',
-          icon: 'mdi-cards-variant',
-          val: 'seasons',
-        },
-        {
-          title: 'details.collection.title',
-          icon: 'mdi-bookmark-box-multiple',
-          val: 'collection',
-        },
-        {
-          title: 'details.videos.title',
-          icon: 'mdi-filmstrip-box-multiple',
-          val: 'videos',
-        },
-        {
-          title: 'details.reviews.title',
-          icon: 'mdi-message-text',
-          val: 'reviews',
-        },
-        {
-          title: 'details.similar',
-          icon: 'mdi-approximately-equal-box',
-          val: 'similar',
-        },
-      ],
-      iLinks: [
-        {
-          name: '123Movies',
-          to: 'https://0123movie.com.mx/',
-        },
-        {
-          name: 'Watch Series',
-          to: 'https://ww.watchseriesfree.co/',
-        },
-        {
-          name: 'Putlockers',
-          to: 'https://www.putlockers.tv/',
-        },
-      ],
-    };
+  {
+    title: 'details.crew',
+    icon: 'mdi-account-group',
+    val: 'crew',
   },
-  computed: {
-    data () {
-      return this.detailStore.data;
-    },
-    current () {
-      return route().current('movies.*');
-    },
-    translate () {
-      return this.languageStore.translate;
-    },
-    user () {
-      return usePage().props.auth.user;
-    },
-    refreshFav () {
-      return this.favoriteStore.refresh;
-    },
-    refreshWat () {
-      return this.watchedStore.refresh;
-    },
-    mobile () {
-      return this.$vuetify.display.mobile;
-    },
+  {
+    title: 'details.seasons.title',
+    icon: 'mdi-cards-variant',
+    val: 'seasons',
   },
-  methods: {
-    getDetails (val) {
-      this.detailStore.getDetails(`/${val}/${this.id}`);
-      this.detailStore.getLinks(`/${val}/${this.id}/external_ids`);
-      this.detailStore.getProviders(`/${val}/${this.id}/watch/providers`);
-      this.detailStore.getCredits(`/${val}/${this.id}/credits`);
-      this.detailStore.getVideos(`/${val}/${this.id}/videos`);
-      this.detailStore.getReviews(`/${val}/${this.id}/reviews`);
-      this.detailStore.getSimilar(`/${val}/${this.id}/similar`);
-      this.getFavorites();
-      this.getWatched();
-    },
-    getTabs () {
-      if (this.current) {
-        this.tabs.splice(2, 1);
-        return;
-      }
-      this.tabs.splice(3, 1);
-    },
-    getDate (date) {
-      return new Date(date).toLocaleDateString(this.languageStore.tmdb, {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
-    },
-    getYear (date) {
-      return new Date(date).toLocaleDateString(this.languageStore.tmdb, {
-        year: 'numeric',
-      });
-    },
-    getColor (average) {
-      if (average >= 7.5) {
-        return 'green';
-      } else if (average >= 5) {
-        return 'orange';
-      } else {
-        return 'red';
-      }
-    },
-    localString (price) {
-      if (price) {
-        return parseInt(price).toLocaleString();
-      }
-      return '-';
-    },
-    show (value) {
-      this.selectedTab = value;
-    },
-    getFavorites () {
-      if (this.user) {
-        this.favoriteStore.getFavorites(this.user.id);
-      }
-    },
-    getWatched () {
-      if (this.user) {
-        this.watchedStore.getWatched(this.user.id);
-      }
-    },
+  {
+    title: 'details.collection.title',
+    icon: 'mdi-bookmark-box-multiple',
+    val: 'collection',
   },
-  watch: {
-    data (val) {
-      if (val) {
-        if (this.current) {
-          document.title = `${val.title} ${this.getYear(val.release_date)} - Anegy`;
-        } else {
-          document.title = `${val.name} ${this.getYear(val.first_air_date)} - Anegy`;
-        }
-      }
-    },
-    translate () {
-      this.getDetails(this.current ? 'movie' : 'tv');
-    },
-    refreshFav () {
-      this.getFavorites();
-    },
-    refreshWat () {
-      this.getWatched();
-    },
+  {
+    title: 'details.videos.title',
+    icon: 'mdi-filmstrip-box-multiple',
+    val: 'videos',
   },
-  mounted () {
-    this.getTabs();
-    this.getDetails(this.current ? 'movie' : 'tv');
+  {
+    title: 'details.reviews.title',
+    icon: 'mdi-message-text',
+    val: 'reviews',
   },
+  {
+    title: 'details.similar',
+    icon: 'mdi-approximately-equal-box',
+    val: 'similar',
+  },
+]);
+
+const iLinks = [
+  {
+    name: '123Movies',
+    to: 'https://ww8.123moviesfree.net/',
+  },
+  {
+    name: 'Watch Series',
+    to: 'https://ww.watchseriesfree.co/',
+  },
+  {
+    name: 'Putlockers',
+    to: 'https://putlocker.best/',
+  },
+  {
+    name: 'Cineby',
+    to: 'https://www.cineby.sc/',
+  },
+];
+
+const data = computed(() => {
+  return detailStore.data;
+});
+
+const current = computed(() => {
+  return route().current('movies.*');
+});
+
+const translate = computed(() => {
+  return languageStore.translate;
+});
+
+const user = computed(() => {
+  return usePage().props.auth.user;
+});
+
+const refreshFav = computed(() => {
+  return listStore.favorites.refresh;
+});
+
+const refreshWat = computed(() => {
+  return listStore.watched.refresh;
+});
+
+const getFavorites = () => {
+  if (user.value) {
+    listStore.getAll('favorites', user.value.id);
+  }
+};
+
+const getWatched = () => {
+  if (user.value) {
+    listStore.getAll('watched', user.value.id);
+  }
+};
+
+const getDetails = val => {
+  detailStore.getDetails(`/${val}/${id}`);
+  detailStore.getLinks(`/${val}/${id}/external_ids`);
+  detailStore.getProviders(`/${val}/${id}/watch/providers`);
+  detailStore.getCredits(`/${val}/${id}/credits`);
+  detailStore.getVideos(`/${val}/${id}/videos`);
+  detailStore.getReviews(`/${val}/${id}/reviews`);
+  detailStore.getSimilar(`/${val}/${id}/similar`);
+  getFavorites();
+  getWatched();
+};
+
+const getTabs = () => {
+  if (current.value) {
+    tabs.value.splice(2, 1);
+    return;
+  }
+
+  tabs.value.splice(3, 1);
+};
+
+const getYear = date => {
+  return new Date(date).toLocaleDateString(languageStore.tmdb, {
+    year: 'numeric',
+  });
+};
+
+const getColor = average => {
+  if (average >= 7.5) {
+    return 'green';
+  }
+
+  if (average >= 5) {
+    return 'orange';
+  }
+
+  return 'red';
+};
+
+const localString = price => {
+  if (price) {
+    return parseInt(price).toLocaleString();
+  }
+
+  return '-';
+};
+
+const show = value => {
+  selectedTab.value = value;
+};
+
+watch(data, val => {
+  if (val) {
+    if (current.value) {
+      document.title = `${val.title} ${getYear(val.release_date)} - Anegy`;
+    } else {
+      document.title = `${val.name} ${getYear(val.first_air_date)} - Anegy`;
+    }
+  }
+});
+
+watch(translate, () => {
+  getDetails(current.value ? 'movie' : 'tv');
+});
+
+watch(refreshFav, () => {
+  getFavorites();
+});
+
+watch(refreshWat, () => {
+  getWatched();
+});
+
+onMounted(() => {
+  getTabs();
+  getDetails(current.value ? 'movie' : 'tv');
 });
 </script>

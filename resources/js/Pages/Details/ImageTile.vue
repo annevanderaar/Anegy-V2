@@ -14,37 +14,32 @@
   </v-col>
 </template>
 
-<script>
-export default {
-  name: 'ImageTile',
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-    posterPath: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    profilePath: {
-      type: String,
-      required: false,
-      default: null,
-    },
+<script setup>
+import { useDisplay } from 'vuetify';
+
+defineProps({
+  title: {
+    type: String,
+    required: true,
   },
-  computed: {
-    mobile () {
-      return this.$vuetify.display.mobile;
-    },
+  posterPath: {
+    type: String,
+    required: false,
+    default: null,
   },
-  methods: {
-    getUrl (path) {
-      if (!path) {
-        return 'http://via.placeholder.com/1080x1580';
-      }
-      return `https://image.tmdb.org/t/p/w500${path}`;
-    },
+  profilePath: {
+    type: String,
+    required: false,
+    default: null,
   },
+});
+
+const { mobile } = useDisplay();
+
+const getUrl = path => {
+  if (!path) {
+    return 'http://via.placeholder.com/1080x1580';
+  }
+  return `https://image.tmdb.org/t/p/w500${path}`;
 };
 </script>

@@ -37,27 +37,21 @@
       <v-card-text>{{ review.content }}</v-card-text>
 
       <v-card-subtitle>
-        {{
-          new Date(review.created_at).toLocaleDateString("nl-NL", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }}
+        {{ generalStore.getDate(review.created_at) }}
       </v-card-subtitle>
     </v-card>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup>
+import { GeneralStore } from '@/Stores/GeneralStore';
 
-export default defineComponent({
-  props: {
-    reviews: {
-      type: Array,
-      required: true,
-    },
+defineProps({
+  reviews: {
+    type: Array,
+    required: true,
   },
 });
+
+const generalStore = GeneralStore();
 </script>

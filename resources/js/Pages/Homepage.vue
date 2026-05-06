@@ -16,100 +16,99 @@
   />
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { computed, onMounted, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { useDisplay } from 'vuetify';
 import Cards from '@/Components/Cards.vue';
 import PageHeader from '@/Components/PageHeader.vue';
 import { DataStore } from '@/Stores/DataStore';
-import { FavoriteStore } from '@/Stores/FavoriteStore';
 import { LanguageStore } from '@/Stores/LanguageStore';
 import { SearchStore } from '@/Stores/SearchStore';
-import { WatchedStore } from '@/Stores/WatchedStore';
+import { ListStore } from '@/Stores/ListStore';
 
-export default defineComponent({
-  name: 'Homepage',
-  components: {
-    PageHeader,
-    Cards,
-  },
-  data () {
-    return {
-      languageStore: LanguageStore(),
-      dataStore: DataStore(),
-      searchStore: SearchStore(),
-      favoriteStore: FavoriteStore(),
-      watchedStore: WatchedStore(),
-    };
-  },
-  computed: {
-    data () {
-      return this.dataStore.data;
-    },
-    page () {
-      return this.dataStore.page;
-    },
-    translate () {
-      return this.languageStore.translate;
-    },
-    user () {
-      return usePage().props.auth.user;
-    },
-    refreshFav () {
-      return this.favoriteStore.refresh;
-    },
-    refreshWat () {
-      return this.watchedStore.refresh;
-    },
-    mobile () {
-      return this.$vuetify.display.mobile;
-    },
-  },
-  methods: {
-    scroll () {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    },
-    getFavorites () {
-      if (this.user) {
-        this.favoriteStore.getFavorites(this.user.id);
-      }
-    },
-    getWatched () {
-      if (this.user) {
-        this.watchedStore.getWatched(this.user.id);
-      }
-    },
-  },
-  watch: {
-    page (val) {
-      localStorage.currentPage = val;
-      if (this.searchStore.searching) {
-        this.searchStore.searchPage = val;
-        this.searchStore.getSearch();
-      } else {
-        this.dataStore.page = val;
-        this.dataStore.getDiscover();
-      }
-      this.scroll();
-    },
-    translate () {
-      this.dataStore.getDiscover();
-    },
-    refreshFav () {
-      this.getFavorites();
-    },
-    refreshWat () {
-      this.getWatched();
-    },
-  },
-  mounted () {
-    if (localStorage.currentPage) {
-      this.dataStore.page = parseInt(localStorage.currentPage);
-    }
-    this.dataStore.url = '/trending/all/day?';
-    this.dataStore.getDiscover();
-    this.getFavorites();
-    this.getWatched();
-  },
+const { mobile } = useDisplay();
+
+const languageStore = LanguageStore();
+const dataStore = DataStore();
+const searchStore = SearchStore();
+const listStore = ListStore();
+
+const data = computed(() => {
+  return dataStore.data;
+});
+
+const page = computed(() => {
+  return dataStore.page;
+});
+
+const translate = computed(() => {
+  return languageStore.translate;
+});
+
+const user = computed(() => {
+  return usePage().props.auth.user;
+});
+
+const refreshFav = computed(() => {
+  return listStore.favorites.refresh;
+});
+
+const refreshWat = computed(() => {
+  return listStore.watched.refresh;
+});
+
+const scroll = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const getFavorites = () => {
+  if (user.value) {
+    listStore.getAll('favorites', user.value.id);
+  }
+};
+
+const getWatched = () => {
+  if (user.value) {
+    listStore.getAll('watched', user.value.id);
+  }
+};
+
+watch(page, val => {
+  localStorage.currentPage = val;
+
+  if (searchStore.searching) {
+    searchStore.searchPage = val;
+    searchStore.getSearch();
+  } else {
+    dataStore.page = val;
+    dataStore.getDiscover();
+  }
+
+  scroll();
+});
+
+watch(translate, () => {
+  dataStore.getDiscover();
+});
+
+watch(refreshFav, () => {
+  getFavorites();
+});
+
+watch(refreshWat, () => {
+  getWatched();
+});
+
+onMounted(() => {
+  if (localStorage.currentPage) {
+    dataStore.page = parseInt(localStorage.currentPage);
+  }
+
+  dataStore.url = '/trending/all/day?';
+  dataStore.getDiscover();
+
+  getFavorites();
+  getWatched();
 });
 </script>

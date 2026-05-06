@@ -2,7 +2,7 @@
   <section>
     <v-navigation-drawer
       v-model="filterStore.drawer"
-      style="width: 300px"
+      :width="300"
       temporary
     >
       <v-container>

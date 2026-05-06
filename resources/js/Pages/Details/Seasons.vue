@@ -8,7 +8,7 @@
         class="cards"
         @click="showEpisodes(season.season_number)"
       >
-        <v-img :src="`https://image.tmdb.org/t/p/w500${season.poster_path}`"/>
+        <v-img :src="`https://image.tmdb.org/t/p/w500${season.poster_path}`" class="w-100"/>
 
         <v-card-title class="text-center">
           Season {{ season.season_number }}

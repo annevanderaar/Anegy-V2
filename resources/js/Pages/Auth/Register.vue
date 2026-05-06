@@ -54,7 +54,7 @@
       <InputError :message="form.errors.email"/>
     </div>
 
-    <div class="mt-2">
+    <div>
       <v-text-field
         id="password"
         v-model="form.password"
@@ -70,7 +70,7 @@
       <InputError :message="form.errors.password"/>
     </div>
 
-    <div class="mt-2">
+    <div>
       <v-text-field
         id="password_confirmation"
         v-model="form.password_confirmation"

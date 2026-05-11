@@ -37,7 +37,6 @@ const darkTheme = {
 };
 
 const toastOptions = {
-  // You can set your default options here
   position: POSITION.TOP_CENTER,
 };
 
